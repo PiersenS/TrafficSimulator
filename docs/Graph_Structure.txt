@@ -9,5 +9,15 @@ Graph Functionality
 - Nodes represent Intersections
 
 
-Should the graph be a header file or cpp file?
-- Header file would be useful for implementing multiple maps
+Reasons to use a header file for Graph:
+    - implementing multiple graphs
+    - abstraction for adjacency matrix, nodes, etc.
+
+Adjacency Matrix:
+- stored amongst nodes
+- each node stores its neighbors
+    - this makes graph recursive
+
+
+
+***Use Data Structures textbook for reference
