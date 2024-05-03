@@ -1,0 +1,13 @@
+Graph Functionality
+- weighted
+    - length
+    - speed limit
+- Directed
+    - Represents MVNU
+        - most roadways are 2-way
+        - entrance/exit are 1-way
+- Nodes represent Intersections
+
+
+Should the graph be a header file or cpp file?
+- Header file would be useful for implementing multiple maps
