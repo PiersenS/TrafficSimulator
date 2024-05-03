@@ -1,0 +1,22 @@
+/* Vertex.h
+*  Represents roadway intersections
+*/
+
+#ifndef Vertex_H
+#define Vertex_H
+
+#include "Edge.h"
+#include <vector>
+using namespace std;
+
+class Vertex {
+private:
+    vector<Edge> edgeList;
+public:
+    Vertex();                       // constructor
+    int operator*();                // returns element associated with vertex - idk about return type yet
+    vector<Edge> incidentEdges();   // returns edge list of vertex
+    bool isAdjacentTo(Vertex v);    // true if Vertex is adjacent to v
+};
+
+#endif

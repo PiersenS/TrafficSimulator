@@ -21,3 +21,5 @@ Adjacency Matrix:
 
 
 ***Use Data Structures textbook for reference
+Graph, Vertex, and Edge classes were implemented with
+    the recommend functions from "Data Structures and Algorithms in C++"
