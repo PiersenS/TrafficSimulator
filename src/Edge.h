@@ -5,7 +5,7 @@
 #ifndef Edge_H
 #define Edge_H
 
-#include "Vertex.h"
+#include "Vertex.cpp"
 #include <vector>
 
 using namespace std;

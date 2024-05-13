@@ -6,5 +6,5 @@ CFLAGS= -g -std=c++11
 
 all: Graph.o
 
-Graph.o: Graph.cpp Graph.h
+Graph.o: Vertex.h Edge.h Graph.cpp Graph.h
 	$(CC) $(CFLAGS) -c Graph.cpp

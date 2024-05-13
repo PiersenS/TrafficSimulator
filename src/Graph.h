@@ -1,8 +1,8 @@
 #ifndef Graph_H
 #define Graph_H
 
-#include "Vertex.h"
-#include "Edge.h"
+#include "Vertex.cpp"
+#include "Edge.cpp"
 #include <string>
 #include <vector>
 using namespace std;
