@@ -9,6 +9,8 @@
 #include <vector>
 using namespace std;
 
+class Edge;
+
 class Vertex {
 private:
     vector<Edge> edgeList;

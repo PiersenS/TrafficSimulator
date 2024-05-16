@@ -10,6 +10,8 @@
 
 using namespace std;
 
+class Vertex;
+
 class Edge {
 private:
     Vertex* origin;
