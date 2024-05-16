@@ -7,7 +7,12 @@
 using namespace std;
 
 Graph::Graph() {
-    
+    /* Generate:
+    *   edges
+    *   vertices
+    *   edge list
+    *   adjacency list
+    */
 }
 
 vector<Vertex> Graph::getVertices() {

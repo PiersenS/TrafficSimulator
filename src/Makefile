@@ -1,10 +1,16 @@
 CC= g++
 CFLAGS= -g -std=c++11
 
-#lookupserver: 	lookupserver.o fifo.o Bible.o Ref.o Verse.o
-#	$(CC) $(CFLAGS) -o lookupserver fifo.o Ref.o Verse.o Bible.o lookupserver.o
+all: Graph
 
-all: Graph.o
+Graph: Graph.o Edge.o Vertex.o
+	$(CC) $(CFLAGS) -o Graph Edge.o Vertex.o Graph.o
 
-Graph.o: Vertex.h Edge.h Graph.cpp Graph.h
+Edge.o: Vertex.h Edge.h Edge.cpp
+	$(CC) $(CFLAGS) -c Edge.cpp
+
+Vertex.o: Edge.h Vertex.h Vertex.cpp
+	$(CC) $(CFLAGS) -c Vertex.cpp
+
+Graph.o: Vertex.h Edge.h Graph.h Graph.cpp
 	$(CC) $(CFLAGS) -c Graph.cpp

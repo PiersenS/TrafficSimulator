@@ -5,12 +5,15 @@
 #ifndef Edge_H
 #define Edge_H
 
-#include "Vertex.cpp"
+#include "Vertex.h"
 #include <vector>
 
 using namespace std;
 
 class Edge {
+private:
+    Vertex* origin;
+    Vertex* dest; // destination
 public: 
     Edge();                         // constructor
     int operator*();                // returns element associated with edge - idk about return type yet

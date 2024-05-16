@@ -1,4 +1,5 @@
 #include "Edge.h"
+#include "Vertex.h"
 
 Edge::Edge() {
     //idk
