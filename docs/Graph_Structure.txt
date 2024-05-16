@@ -1,0 +1,25 @@
+Graph Functionality
+- weighted
+    - length
+    - speed limit
+- Directed
+    - Represents MVNU
+        - most roadways are 2-way
+        - entrance/exit are 1-way
+- Nodes represent Intersections
+
+
+Reasons to use a header file for Graph:
+    - implementing multiple graphs
+    - abstraction for adjacency matrix, nodes, etc.
+
+Adjacency Matrix:
+- stored amongst nodes
+- each node stores its neighbors
+    - this makes graph recursive
+
+
+
+***Use Data Structures textbook for reference
+Graph, Vertex, and Edge classes were implemented with
+    the recommend functions from "Data Structures and Algorithms in C++"
