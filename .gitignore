@@ -1,3 +1,5 @@
+.vscode
+
 Graph.o
 Vertex.o
 Edge.o
