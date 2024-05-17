@@ -13,7 +13,8 @@ class Edge;
 
 class Vertex {
 private:
-    vector<Edge> edgeList;
+    vector<Edge> edges;
+    int junction; // Vertex number - junction numbers
 public:
     Vertex();                       // constructor
     int operator*();                // returns element associated with vertex - idk about return type yet

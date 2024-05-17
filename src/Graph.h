@@ -9,8 +9,8 @@ using namespace std;
 
 class Graph {
 private:
-    vector<Vertex> vertices;
-    vector<Edge> edges;
+    vector<Vertex> vertexList;
+    vector<Edge> edgeList;
 public:
     Graph();
     vector<Vertex> getVertices();
