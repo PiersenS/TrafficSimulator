@@ -18,10 +18,7 @@ string Edge::operator*() {
 }
 
 bool Edge::operator==(const Edge e) {
-    if (this->name == e.name) {
-        return true;
-    }
-    return false;
+    return this->name == e.name;
 }
 
 vector<Vertex> Edge::endVertices() {
@@ -32,7 +29,7 @@ Vertex Edge::opposite(Vertex v) {
     // returns Vertex on opposite end of v
     if (isIncidentOn(v)) {
         // compare junctions, not objects
-        if (*v == **origin) {
+        if (v == *origin) {
             return *dest;
         }
         else {
@@ -47,7 +44,7 @@ bool Edge::isAdjacentTo(Edge e) {
     // (2) see if they have one of the same end vertices
     vector<Vertex> otherEnds = e.endVertices();
     for (Vertex v : otherEnds) {
-        if (*v == **origin || *v == **dest) {
+        if (v == *origin || v == *dest) {
             return true;
         }
     }
@@ -55,5 +52,7 @@ bool Edge::isAdjacentTo(Edge e) {
 }
 
 bool Edge::isIncidentOn(Vertex v) {
-    // ---
+    // true if v == origin or dest
+    vector<Edge> ie = v.incidentEdges();
+    return find(ie.begin(), ie.end(), v) != ie.end();
 }

@@ -18,6 +18,7 @@ private:
 public:
     Vertex();                       // constructor
     int operator*();                // returns element associated with vertex - idk about return type yet
+    bool operator==(Vertex v);
     vector<Edge> incidentEdges();   // returns edge list of vertex
     bool isAdjacentTo(Vertex v);    // true if Vertex is adjacent to v
 };

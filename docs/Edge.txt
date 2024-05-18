@@ -1,0 +1,16 @@
+.------------------------.
+|        Edge.txt        |
+| Functionalities to add |
+'------------------------'
+
+End Vertices:
+    - overloaded constructors
+        (1) takes string name
+        (2) takes name & two end vertices (origin & dest)
+    - setEnd() or setEndVertices()
+
+
+** maybe don't worry about removing end vertices yet
+    - primarily dealing with MVNU map
+        - one static map, likely built with some sort of main function
+

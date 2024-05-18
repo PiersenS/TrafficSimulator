@@ -20,6 +20,10 @@ int Vertex::operator*() {
     return junction;
 }
 
+bool Vertex::operator==(Vertex v) {
+    return this->junction == v.junction;
+}
+
 vector<Edge> Vertex::incidentEdges() {
     return edges;
 }
