@@ -1,6 +1,8 @@
 CC= g++
 CFLAGS= -g -std=c++11
 
+
+
 all: Graph
 
 Graph: Graph.o Edge.o Vertex.o

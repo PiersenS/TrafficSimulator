@@ -30,8 +30,9 @@ bool Vertex::isAdjacentTo(Vertex v){
     * return true if found in Vertex v's incident edges
     *   else return false
     */
+    vector<Edge>::iterator iter;
     for (Edge e : edges) {
-        vector<Edge>::iterator iter = find(v.edges.begin(), v.edges.end(), e);
+        iter = find(v.edges.begin(), v.edges.end(), e);
         if (iter != v.edges.end()) {
             return true;
         }
