@@ -11,6 +11,9 @@ class Graph {
 private:
     vector<Vertex> vertexList;
     vector<Edge> edgeList;
+    vector<vector<bool>> adjMatrix;
+    
+    void updateJunctions(int n);
 public:
     Graph();
     vector<Vertex> getVertices();

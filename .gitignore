@@ -1,6 +1,6 @@
 .vscode/
-settings.json
 
 Graph.o
 Vertex.o
 Edge.o
+.vscode/settings.json

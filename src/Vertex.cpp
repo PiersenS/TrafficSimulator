@@ -43,3 +43,12 @@ bool Vertex::isAdjacentTo(Vertex v){
     }
     return false;
 }
+
+void Vertex::setJunction(int num) {
+    /* Used to reassign junction number
+    *  when a vertex is removed, it is removed from the adjacency matrix
+    *   to keep adj. matrix balanced, junct nums must be adjusted
+    *   for all vertices with junct nums higher than the one being removed.
+    */
+   this->junction = num;
+}

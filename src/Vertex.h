@@ -21,6 +21,7 @@ public:
     bool operator==(Vertex v);
     vector<Edge> incidentEdges();   // returns edge list of vertex
     bool isAdjacentTo(Vertex v);    // true if Vertex is adjacent to v
+    void setJunction(int num);
 };
 
 #endif
