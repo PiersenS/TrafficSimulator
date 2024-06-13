@@ -54,5 +54,9 @@ bool Edge::isAdjacentTo(Edge e) {
 bool Edge::isIncidentOn(Vertex v) {
     // true if v == origin or dest
     vector<Edge> ie = v.incidentEdges();
-    return find(ie.begin(), ie.end(), v) != ie.end();
+    for (Edge e : ie) {
+        if (v == *e.origin || v == *e.dest)
+        return true;
+    }
+    return false;
 }
