@@ -1,5 +1,5 @@
 /* 
-* Source for Graph.h
+* Implementation of Graph.h
 */
 
 #include "Graph.h"
@@ -16,11 +16,19 @@ Graph::Graph() {
     */
 }
 
+Graph::Graph(vector<vector<Edge>> matrix) {
+    this->adjMatrix = matrix;
+}
+
 vector<Vertex> Graph::getVertices() {
     return this->vertexList;
 }
 vector<Edge> Graph::getEdges() {
     return this->edgeList;
+}
+
+void Graph::setMatrix(vector<vector<Edge>> matrix) {
+    this->adjMatrix = matrix;
 }
     
 void Graph::insertVertex(Vertex v) {
@@ -30,7 +38,7 @@ void Graph::insertEdge(Edge e, Vertex origin, Vertex dest) {
     /* Maybe do some error checking
     *  see if origin and dest are in vertexList
     */
-
+   
 }
 
 void Graph::removeVertex(Vertex v) {

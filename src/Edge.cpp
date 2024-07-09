@@ -36,6 +36,7 @@ Vertex Edge::opposite(Vertex v) {
             return *origin;
         }
     }
+    return Vertex();
 }
 
 bool Edge::isAdjacentTo(Edge e) {
