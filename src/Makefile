@@ -1,22 +1,29 @@
-CC= g++
-CFLAGS= -g -std=c++11
+# Compiler
+CC = g++
 
+# Compiler flags
+CFLAGS = -g -std=c++11
 
+# Executable name
+EXEC = Graph
 
-all: Graph
+# Find all .cpp files and generate .o file names
+SRCS = $(wildcard *.cpp)
+OBJS = $(SRCS:.cpp=.o)
 
-Graph: Graph.o Edge.o Vertex.o
-	$(CC) $(CFLAGS) -o Graph Edge.o Vertex.o Graph.o
+# Default target
+all: $(EXEC)
 
-Edge.o: Edge.cpp Edge.h Vertex.h
-	$(CC) $(CFLAGS) -c Edge.cpp
+# Link object files to create the executable
+$(EXEC): $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $^
 
-Vertex.o: Vertex.cpp Vertex.h Edge.h
-	$(CC) $(CFLAGS) -c Vertex.cpp
+# Compile .cpp files to .o files
+%.o: %.cpp
+	$(CC) $(CFLAGS) -c $< -o $@
 
-Graph.o: Graph.cpp Graph.h Vertex.h Edge.h
-	$(CC) $(CFLAGS) -c Graph.cpp
+# Clean up object files and the executable
+clean:
+	rm -f $(OBJS) $(EXEC)
 
-
-clean: 
-	rm *.o
+.PHONY: all clean

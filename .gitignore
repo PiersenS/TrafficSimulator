@@ -1,5 +1,7 @@
 .vscode/
 
+Graph
+main.o
 Graph.o
 Vertex.o
 Edge.o
