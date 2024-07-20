@@ -12,7 +12,7 @@
 
 using namespace std;
 
-vector<vector<Edge>> loadMap(string map);
+vector<vector<Vertex>> loadMap(string map);
 
 int main() {
     /*  Steps:
@@ -33,18 +33,20 @@ int main() {
     return 0;
 } // end of main
 
-vector<vector<Edge>> loadMap(string map) {
+vector<vector<Vertex>> loadMap(string map) {
     using namespace csv;
     // read in file
     string path = "maps/" + map + ".csv"; // not sure if I'm going to use JSON or not
     cout << "Loading Map: " << path << endl;
     
+    // TODO: create outer vector
+    Vertex v;
     CSVReader reader(path);
     for (CSVRow& row : reader) {
         for (CSVField& field : row) {
-            
+            // TODO: create Vertex object and push onto inner vectors 
         }
     }
 
-    return vector<vector<Edge>>();
+    return vector<vector<Vertex>>();
 }
