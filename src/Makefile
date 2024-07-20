@@ -2,7 +2,7 @@
 CC = g++
 
 # Compiler flags
-CFLAGS = -g -std=c++11
+CFLAGS = -g -std=c++11 -I../lib
 
 # Executable name
 EXEC = Graph

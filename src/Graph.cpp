@@ -16,7 +16,7 @@ Graph::Graph() {
     */
 }
 
-Graph::Graph(vector<vector<Edge>> matrix) {
+Graph::Graph(vector<vector<Vertex>> matrix) {
     this->adjMatrix = matrix;
 }
 
@@ -27,7 +27,7 @@ vector<Edge> Graph::getEdges() {
     return this->edgeList;
 }
 
-void Graph::setMatrix(vector<vector<Edge>> matrix) {
+void Graph::setMatrix(vector<vector<Vertex>> matrix) {
     this->adjMatrix = matrix;
 }
     

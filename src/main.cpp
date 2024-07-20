@@ -4,7 +4,11 @@
 */
 
 #include <iostream>
+#include <fstream> // filestream
+#include <sstream> // string stream
+#include <string>
 #include "Graph.h"
+#include "../lib/csv.hpp"
 
 using namespace std;
 
@@ -20,15 +24,27 @@ int main() {
     */
 
     cout << "Traffic Simulator started." << endl;
-
-    Graph graph(loadMap("k4"));
+    try {
+        Graph graph(loadMap("k4"));
+    } catch (runtime_error e) {
+        cerr << e.what() << endl;
+    }
 
     return 0;
 } // end of main
 
 vector<vector<Edge>> loadMap(string map) {
+    using namespace csv;
     // read in file
     string path = "maps/" + map + ".csv"; // not sure if I'm going to use JSON or not
     cout << "Loading Map: " << path << endl;
+    
+    CSVReader reader(path);
+    for (CSVRow& row : reader) {
+        for (CSVField& field : row) {
+            
+        }
+    }
+
     return vector<vector<Edge>>();
 }
