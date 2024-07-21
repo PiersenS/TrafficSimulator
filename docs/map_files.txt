@@ -1,0 +1,32 @@
+First Line: N number of vertices 
+Next N lines: names of each vertex
+Remaining lines: adjacent vertices and weights
+
+Example:
+4
+a
+b
+c
+d
+a b 1
+a c 3
+b d 2
+...
+
+
+
+New Idea:
+First Line: N number of vertices 
+Next N lines: names of each vertex
+Remaining lines: adjacency matrix
+
+Example:
+4
+a
+b
+c
+d
+0 1 3 0
+0 0 0 0
+0 0 0 0
+0 2 0 0

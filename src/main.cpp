@@ -8,11 +8,11 @@
 #include <sstream> // string stream
 #include <string>
 #include "Graph.h"
-#include "../lib/csv.hpp"
+// #include "../lib/csv.hpp"
 
 using namespace std;
 
-vector<vector<Vertex>> loadMap(string map);
+vector<vector<int>> loadMap(string map, vector<Vertex>& vertices, vector<Edge>& edges);
 
 int main() {
     /*  Steps:
@@ -24,8 +24,10 @@ int main() {
     */
 
     cout << "Traffic Simulator started." << endl;
+    vector<Vertex> vertices;
+    vector<Edge> edges;
     try {
-        Graph graph(loadMap("k4"));
+        Graph graph(loadMap("k4", vertices, edges));
     } catch (runtime_error e) {
         cerr << e.what() << endl;
     }
@@ -33,20 +35,28 @@ int main() {
     return 0;
 } // end of main
 
-vector<vector<Vertex>> loadMap(string map) {
-    using namespace csv;
+vector<vector<int>> loadMap(string map, vector<Vertex>& vertices, vector<Edge>& edges) {
     // read in file
     string path = "maps/" + map + ".csv"; // not sure if I'm going to use JSON or not
     cout << "Loading Map: " << path << endl;
     
     // TODO: create outer vector
-    Vertex v;
-    CSVReader reader(path);
-    for (CSVRow& row : reader) {
-        for (CSVField& field : row) {
-            // TODO: create Vertex object and push onto inner vectors 
+    vector<vector<int>> matrix;
+    Vertex* v;
+
+    ifstream ifs;
+    string line;
+    int numVertices, edgeLength;
+    getline(ifs, line);         // first line - number of vertices
+    numVertices = stoi(line);
+
+    for (int i = 0; i < numVertices; i++) {
+        for (int j = 0; j < numVertices; j++) {
+            ifs >> edgeLength;
+            matrix.at(i).at(j) = edgeLength;
         }
     }
+    
 
-    return vector<vector<Vertex>>();
+    return matrix;
 }

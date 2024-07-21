@@ -16,7 +16,7 @@ Graph::Graph() {
     */
 }
 
-Graph::Graph(vector<vector<Vertex>> matrix) {
+Graph::Graph(vector<vector<int>> matrix) {
     this->adjMatrix = matrix;
 }
 
@@ -27,7 +27,7 @@ vector<Edge> Graph::getEdges() {
     return this->edgeList;
 }
 
-void Graph::setMatrix(vector<vector<Vertex>> matrix) {
+void Graph::setMatrix(vector<vector<int>> matrix) {
     this->adjMatrix = matrix;
 }
     
@@ -72,4 +72,9 @@ void Graph::updateJunctions(int n) {
             
         }
     }
+}
+
+void Graph::loadMap(string map) {
+    string path = "maps/" + map + ".csv"; // not sure if I'm going to use JSON or not
+    cout << "Loading Map: " << path << endl;
 }
