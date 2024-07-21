@@ -131,12 +131,12 @@ void Graph::loadMap(string map) {
 
 void Graph::loadMap(string map) {
     using namespace csv;
-    string path = "maps/" + map + ".csv"; // not sure if I'm going to use JSON or not
+    string path = "maps/" + map + ".csv";
     cout << "Loading Map: " << path << endl;
 
     CSVReader reader(path);
-    for (CSVRow& row : reader) {        // for each row
-        for (CSVField& field : row) {   // for each column
+    for (CSVRow row : reader) {        // for each row
+        for (CSVField field : row) {   // for each column
             
         }
     }
