@@ -4,6 +4,7 @@
 
 #include "Graph.h"
 #include <algorithm>
+#include <iostream>
 
 using namespace std;
 
@@ -77,4 +78,7 @@ void Graph::updateJunctions(int n) {
 void Graph::loadMap(string map) {
     string path = "maps/" + map + ".csv"; // not sure if I'm going to use JSON or not
     cout << "Loading Map: " << path << endl;
+
+    
+
 }
