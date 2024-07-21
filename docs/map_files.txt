@@ -13,7 +13,7 @@ a c 3
 b d 2
 ...
 
-
+-------------------------------------------------------------------------------------------------
 
 New Idea:
 First Line: N number of vertices 
@@ -30,3 +30,29 @@ d
 0 0 0 0
 0 0 0 0
 0 2 0 0
+
+-------------------------------------------------------------------------------------------------
+
+New Idea:
+First Line: N number of vertices
+Second Line: M number of Edges
+Next M lines: names of each Edge and its weight (length)
+Remaining lines: adjacency matrix
+
+- the change here is that the Edge names are given.
+- Vertices won't be named, but will have Junction numbers (integers)
+- Edges will be named to simulate road names.
+
+-------------------------------------------------------------------------------------------------
+
+New Idea:
+First line: N number of vertices
+Second line: M number of Edges
+Next M lines: EdgeName,originJunction,destinationJuntion,length
+
+Example:
+3
+2
+Main Street,1,2,10
+Second Street,2,3,5
+Third Street,1,3,15

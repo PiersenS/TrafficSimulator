@@ -28,7 +28,7 @@ private:
     
     void updateJunctions(int n);
 public:
-    Graph();
+    Graph(string map);
     Graph(vector<vector<int>> matrix);
     vector<Vertex> getVertices();
     vector<Edge> getEdges();

@@ -1,8 +1,11 @@
 4
-a
-b
-c
-d
+6
+alpha 1
+bravo 1
+charlie 1
+delta 1
+echo 1
+foxtrot 1
 0 1 1 1
 1 0 1 1
 1 1 0 1

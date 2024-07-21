@@ -5,16 +5,14 @@
 #include "Graph.h"
 #include <algorithm>
 #include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
 
 using namespace std;
 
-Graph::Graph() {
-    /* Generate:
-    *   edges
-    *   vertices
-    *   edge list
-    *   adjacency list
-    */
+Graph::Graph(string map) {
+    loadMap(map);
 }
 
 Graph::Graph(vector<vector<int>> matrix) {
@@ -45,8 +43,8 @@ void Graph::insertEdge(Edge e, Vertex origin, Vertex dest) {
 void Graph::removeVertex(Vertex v) {
     vector<Vertex>::iterator pos = find(vertexList.begin(), vertexList.end(), v);
     vertexList.erase(pos);
-    // udpate adjacency matrix 
-    // (1) erase vertexNum from adj. matrix. 
+    // udpate adjacency matrix
+    // (1) erase vertexNum from adj. matrix.
 
     // (2) update all higher vertices with setJunction
     updateJunctions(*v);
@@ -59,7 +57,7 @@ void Graph::removeEdge(Edge e) {
 }
 
 
-// TODO: 
+// TODO:
 // I wrote updateJunctions when I was tired. 
 // pls re-check logic
 void Graph::updateJunctions(int n) {
@@ -74,11 +72,55 @@ void Graph::updateJunctions(int n) {
         }
     }
 }
-
+// on second thought....maybe use csv-parser library
 void Graph::loadMap(string map) {
     string path = "maps/" + map + ".csv"; // not sure if I'm going to use JSON or not
     cout << "Loading Map: " << path << endl;
 
-    
+    // IO
+    ifstream ifs(path);
+    if (!ifs) {
+        throw runtime_error("Unable to open map file.");
+    }
+    string line;
+    // Loop variables
+    int numVertices, numEdges, edgeLength;
+    Vertex* v;
 
+    // read first line
+    getline(ifs, line);
+    numVertices = stoi(line);
+    // read names of vertices
+    for (int i = 1; i <= numVertices; i++) {
+        getline(ifs, line);
+        v = new Vertex();
+        v->setJunction(i);
+        vertexList.push_back(*v);
+    }
+
+    // get number of Edges
+    getline(ifs, line);
+    numEdges = stoi(line);
+    Edge* e;
+    stringstream ss;
+    string edgeName, length;
+    for (int i = 0; i < numEdges; i++) {
+        getline(ifs, line); // get next line from file
+        ss.str(line);
+        // split line into edgeName and length
+        getline(ss, edgeName, ' ');
+        getline(ss, length, ' ');
+        
+        e = new Edge(edgeName, stod(length));
+        
+    }
+
+    for (int i = 0; i < numVertices; i++) {
+        for (int j = 0; j < numVertices; j++) {
+            ifs >> edgeLength;
+            this->adjMatrix.at(i).at(j) = edgeLength;
+
+            
+        }
+    }
 }

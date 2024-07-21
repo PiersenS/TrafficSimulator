@@ -13,6 +13,11 @@ Edge::Edge(string name) {
     this->name = name;
 }
 
+Edge::Edge(string name, double length) {
+    this->name = name;
+    this->length = length;
+}
+
 string Edge::operator*() {
     return this->name;
 }
@@ -60,4 +65,23 @@ bool Edge::isIncidentOn(Vertex v) {
         return true;
     }
     return false;
+}
+
+bool Edge::isDirected() {
+    return directed;
+}
+
+void Edge::setOrigin(Vertex origin) {
+    this->origin = &origin;
+}
+
+void Edge::setDest(Vertex dest) {
+    this->dest = &dest;
+}
+void Edge::setName(string name) {
+    this->name = name;
+}
+
+void Edge::setDirected(bool directed) {
+    this->directed = directed;
 }
