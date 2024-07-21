@@ -48,11 +48,11 @@ Remaining lines: adjacency matrix
 New Idea:
 First line: N number of vertices
 Second line: M number of Edges
-Next M lines: EdgeName,originJunction,destinationJuntion,length
+Next M lines: EdgeName,originJunction,destinationJuntion,length,isDirected
 
 Example:
 3
 2
-Main Street,1,2,10
-Second Street,2,3,5
-Third Street,1,3,15
+Main Street,1,2,10,0
+Second Street,2,3,5,1
+Third Street,1,3,15,0

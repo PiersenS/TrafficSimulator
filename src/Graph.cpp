@@ -8,6 +8,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include "csv.hpp"
 
 using namespace std;
 
@@ -72,6 +73,7 @@ void Graph::updateJunctions(int n) {
         }
     }
 }
+/*
 // on second thought....maybe use csv-parser library
 void Graph::loadMap(string map) {
     string path = "maps/" + map + ".csv"; // not sure if I'm going to use JSON or not
@@ -107,12 +109,13 @@ void Graph::loadMap(string map) {
     for (int i = 0; i < numEdges; i++) {
         getline(ifs, line); // get next line from file
         ss.str(line);
-        // split line into edgeName and length
+        // split line into edgeName / on second thought....maybe use csv-parser libraryand length
         getline(ss, edgeName, ' ');
         getline(ss, length, ' ');
         
         e = new Edge(edgeName, stod(length));
-        
+        edgeList.push_back(*e);
+        // find a way to set origin and dest for each edge
     }
 
     for (int i = 0; i < numVertices; i++) {
@@ -120,6 +123,20 @@ void Graph::loadMap(string map) {
             ifs >> edgeLength;
             this->adjMatrix.at(i).at(j) = edgeLength;
 
+            
+        }
+    }
+}
+*/
+
+void Graph::loadMap(string map) {
+    using namespace csv;
+    string path = "maps/" + map + ".csv"; // not sure if I'm going to use JSON or not
+    cout << "Loading Map: " << path << endl;
+
+    CSVReader reader(path);
+    for (CSVRow& row : reader) {        // for each row
+        for (CSVField& field : row) {   // for each column
             
         }
     }
