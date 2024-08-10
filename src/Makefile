@@ -2,7 +2,13 @@
 CC = g++
 
 # Compiler flags
-CFLAGS = -g -std=c++11 -I../lib
+CFLAGS = -g -std=c++11 -I$(LIBS)
+
+# Linker flags
+LDFLAGS = -lsfml-graphics -lsfml-window -lsfml-system
+
+# Include directory
+LIBS = ../lib
 
 # Executable name
 EXEC = Graph
@@ -16,7 +22,7 @@ all: $(EXEC)
 
 # Link object files to create the executable
 $(EXEC): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $^
+	$(CC) -o $@ $^ $(LDFLAGS)
 
 # Compile .cpp files to .o files
 %.o: %.cpp
