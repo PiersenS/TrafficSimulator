@@ -1,0 +1,6 @@
+.------------------------.
+|       Vertex.txt       |
+| Functionalities to add |
+'------------------------'
+
+idk yet
