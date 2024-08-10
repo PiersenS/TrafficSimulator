@@ -23,8 +23,21 @@ int main() {
     sf::VideoMode mode(640, 480);
     sf::RenderWindow window(mode, title);
 
-    while (window.isOpen()) {
+    sf::Color collisionColor(255, 100, 100);
+    sf::Texture carTexture;
+    if (!carTexture.loadFromFile("assets/green_car.png")) {
+        cout << "Failed to Load Green Car." << endl;
+        cout << "Closing Window . . . " << endl;
+        window.close();
+    }
 
+    sf::Sprite car(carTexture);
+    //car.setTexture(carTexture);
+
+    while (window.isOpen()) {
+        window.clear();
+        window.draw(car);
+        window.display();
     }
 
     return 0;
