@@ -33,7 +33,7 @@ int main() {
 
     sf::Sprite car(carTexture);
     //car.setTexture(carTexture);
-
+    
     while (window.isOpen()) {
         window.clear();
         window.draw(car);
