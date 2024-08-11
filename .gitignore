@@ -5,4 +5,5 @@ main.o
 Graph.o
 Vertex.o
 Edge.o
-.vscode/settings.json
+
+run.sh
