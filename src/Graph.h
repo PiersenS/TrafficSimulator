@@ -42,5 +42,4 @@ public:
 
     void loadMap(string map);
 };
-
 #endif

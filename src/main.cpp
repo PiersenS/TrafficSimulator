@@ -8,6 +8,7 @@
 #include <sstream> // string stream
 #include <string>
 #include "Graph.h"
+#include "Car.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -23,6 +24,7 @@ int main() {
     sf::VideoMode mode(640, 480);
     sf::RenderWindow window(mode, title);
 
+    /*
     sf::Color collisionColor(255, 100, 100);
     sf::Texture carTexture;
     if (!carTexture.loadFromFile("assets/green_car.png")) {
@@ -34,11 +36,16 @@ int main() {
     sf::Sprite car(carTexture);
     //car.setTexture(carTexture);
     
+    
+
+    sf::Texture texture;
+    texture.loadFromFile("assets/green_car.png");
+    Car car(texture);
     while (window.isOpen()) {
         window.clear();
-        window.draw(car);
+        //window.draw(car);
         window.display();
     }
-
+    */
     return 0;
 } // end of main
