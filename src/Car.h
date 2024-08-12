@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 
-class Car {
+class Car : sf::Sprite {
 private:
     sf::Texture texture;
     // car textures - all but red
@@ -12,8 +12,8 @@ private:
 
 public:
     Car();
-    Car(Texture t);
-    void setTexture(Texture t);
+    Car(sf::Texture t);
+    void setTexture(sf::Texture t);
     sf::Texture getTexture();
 };
 #endif

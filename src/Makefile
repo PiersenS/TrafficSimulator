@@ -11,7 +11,7 @@ LDFLAGS = -lsfml-graphics -lsfml-window -lsfml-system
 LIBS = ../lib
 
 # Executable name
-EXEC = Graph
+EXEC = Simulator
 
 # Find all .cpp files and generate .o file names
 SRCS = $(wildcard *.cpp)

@@ -14,6 +14,11 @@
 
 using namespace std;
 
+void updateDelta();
+
+sf::Clock deltaClock;
+double delta;
+
 int main() {
     cout << "Traffic Simulator started." << endl;
     vector<Vertex> vertices;
@@ -24,7 +29,7 @@ int main() {
     sf::VideoMode mode(640, 480);
     sf::RenderWindow window(mode, title);
 
-    
+    /*
     sf::Color collisionColor(255, 100, 100);
     sf::Texture carTexture;
     if (!carTexture.loadFromFile("assets/green_car.png")) {
@@ -35,14 +40,19 @@ int main() {
 
     sf::Sprite car(carTexture);
     car.setTexture(carTexture);
+    */
     
     
-    /*
     sf::Texture texture;
     texture.loadFromFile("assets/green_car.png");
-    Car car(texture);
-    */
+    //Car car(texture);
+    sf::Sprite car(texture);
+    sf::Clock deltaClock;
     while (window.isOpen()) {
+        updateDelta();
+
+        car.move(delta, 0);
+
         window.clear();
         window.draw(car);
         window.display();
@@ -50,3 +60,7 @@ int main() {
     
     return 0;
 } // end of main
+
+void updateDelta() {
+    delta = deltaClock.restart().asMilliseconds();
+}
