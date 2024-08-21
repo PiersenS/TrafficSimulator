@@ -21,7 +21,7 @@ Car::Car() {
     int numChoice = carNumberDist(rand_dev);
 
     Texture texture;
-    texture.loadFromFile("../assets/car_" + colorChoice + "_" + to_string(numChoice) + ".png");
+    texture.loadFromFile("../assets/Cars/car_" + colorChoice + "_" + to_string(numChoice) + ".png");
     
     this->setTexture(texture);
 }
