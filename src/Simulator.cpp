@@ -24,28 +24,21 @@ int main() {
     vector<Vertex> vertices;
     vector<Edge> edges;
     Graph graph("k4");
+    
+    sf::Texture backgroundTexture;
+    backgroundTexture.loadFromFile("../maps/k4/k4.png");
 
     string title = "Traffic Simulator";
     sf::VideoMode mode(640, 480);
     sf::RenderWindow window(mode, title);
-
-    /*
-    sf::Color collisionColor(255, 100, 100);
-    sf::Texture carTexture;
-    if (!carTexture.loadFromFile("assets/green_car.png")) {
-        cout << "Failed to Load Green Car." << endl;
-        cout << "Closing Window . . . " << endl;
-        window.close();
-    }
-
-    sf::Sprite car(carTexture);
-    car.setTexture(carTexture);
-    */
-    
     
     sf::Texture texture;
-    texture.loadFromFile("assets/green_car.png");
-    //Car car(texture);
+    if (!texture.loadFromFile("../assets/green_car.png")) {
+        cout << "Failed to load green_car.png" << endl;
+        return 1;
+    }
+    
+    sf::Sprite background(backgroundTexture);
     sf::Sprite car(texture);
     sf::Clock deltaClock;
     while (window.isOpen()) {
@@ -54,6 +47,7 @@ int main() {
         car.move(delta, 0);
 
         window.clear();
+        window.draw(background);
         window.draw(car);
         window.display();
     }

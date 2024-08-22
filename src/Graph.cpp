@@ -129,10 +129,10 @@ void Graph::loadMap(string map) {
 }
 */
 
-void Graph::loadMap(string map) { 
+void Graph::loadMap(string map) {
     /*
     using namespace csv;
-    string path = "maps/" + map + ".csv";
+    string path = "maps/" + map + "/" + map + ".csv";
     cout << "Loading Map: " << path << endl;
 
     csv::CSVReader reader(path);
@@ -142,4 +142,5 @@ void Graph::loadMap(string map) {
         }
     }
     */
+
 }
