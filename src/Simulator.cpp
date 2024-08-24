@@ -15,21 +15,27 @@
 using namespace std;
 
 void updateDelta();
+void init(); // initializes simulator values
 
 sf::Clock deltaClock;
 double delta;
+
+float laneWidth;
 
 int main() {
     cout << "Traffic Simulator started." << endl;
     vector<Vertex> vertices;
     vector<Edge> edges;
     Graph graph("k4");
+
+    // init();
+    laneWidth = 100.0f;
     
     sf::Texture backgroundTexture;
     backgroundTexture.loadFromFile("../maps/k4/k4.png");
 
     string title = "Traffic Simulator";
-    sf::VideoMode mode(640, 480);
+    sf::VideoMode mode(710, 710);
     sf::RenderWindow window(mode, title);
     
     sf::Texture texture;
@@ -37,14 +43,29 @@ int main() {
         cout << "Failed to load green_car.png" << endl;
         return 1;
     }
-    
-    sf::Sprite background(backgroundTexture);
-    sf::Sprite car(texture);
-    sf::Clock deltaClock;
-    while (window.isOpen()) {
-        updateDelta();
 
-        car.move(delta, 0);
+    sf::Sprite background(backgroundTexture);
+    background.setPosition(0,0);
+
+    Car car;
+    car.setScaleFactor(laneWidth / car.getLocalBounds().width);
+
+    /* sf::Sprite car;
+    sf::Texture t;
+    t.loadFromFile("../assets/Cars/car_blue_small_1.png");
+    car.setTexture(t); */
+    
+    sf::Event event;
+    while (window.isOpen()) {
+        window.pollEvent(event);
+        if (event.type == sf::Event::Closed) {
+            window.close();
+        }
+        updateDelta();
+        sf::Vector2f pos = car.getPosition();
+        //cout << "Car position: (" << pos.x << ", " << pos.y << ")" << endl;
+
+        //car.move(delta * car.getSpeed(), 0);
 
         window.clear();
         window.draw(background);
@@ -56,5 +77,5 @@ int main() {
 } // end of main
 
 void updateDelta() {
-    delta = deltaClock.restart().asMilliseconds();
+    delta = deltaClock.restart().asSeconds();
 }
