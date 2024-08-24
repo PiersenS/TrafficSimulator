@@ -18,8 +18,8 @@ void updateDelta();
 void init(); // initializes simulator values
 
 sf::Clock deltaClock;
+sf::Vector2f startingPosition;
 double delta;
-
 float laneWidth;
 
 int main() {
@@ -28,8 +28,7 @@ int main() {
     vector<Edge> edges;
     Graph graph("k4");
 
-    // init();
-    laneWidth = 15.0;
+    init();
     
     sf::Texture backgroundTexture;
     backgroundTexture.loadFromFile("../maps/k4/k4.png");
@@ -38,18 +37,11 @@ int main() {
     sf::VideoMode mode(710, 710);
     sf::RenderWindow window(mode, title);
     
-    sf::Texture texture;
-    if (!texture.loadFromFile("../assets/green_car.png")) {
-        cout << "Failed to load green_car.png" << endl;
-        return 1;
-    }
-
     sf::Sprite background(backgroundTexture);
     background.setPosition(0,0);
 
     Car car;
     car.setScaleFactor(laneWidth / car.getLocalBounds().width);
-    //car.setScaleFactor(0.5);
     
     sf::Event event;
     while (window.isOpen()) {
@@ -74,4 +66,9 @@ int main() {
 
 void updateDelta() {
     delta = deltaClock.restart().asSeconds();
+}
+
+void init() {
+    startingPosition = sf::Vector2f(612, 80);
+    laneWidth = 15.0;
 }

@@ -9,8 +9,6 @@
 
 using namespace sf;
 
-//const std::string MyClass::myArray[3]
-// const std::string Car::textures[6] = {"pink", "orange", "green", "teal", "blue", "purple"};
 const std::string Car::textures[6] = {"black","blue","green","yellow"};
 
 Car::Car() {

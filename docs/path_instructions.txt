@@ -1,0 +1,6 @@
+Use XML file to represent steps;
+    - how to get from one intersection to another
+
+Search for XML tag of current intersection
+    - under that tag, find tag for destination intersection
+    - read instructions

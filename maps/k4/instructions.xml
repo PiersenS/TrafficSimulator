@@ -1,0 +1,39 @@
+<!-- Example format
+<Intersection>
+    <destination>
+        Instructions here:
+        num pixels to move &
+        turn (L or R) &
+        numPixels & ......
+    </destination>
+</Intersection>
+
+alpha
+bravo
+charlie
+delta
+echo
+foxtrot
+-->
+<Instructions>
+    <A>
+        <B></B>
+        <C></C>
+        <D></D>
+    </A>
+    <B>
+        <A></A>
+        <C></C>
+        <D></D>
+    </B>
+    <C>
+        <A></A>
+        <B></B>
+        <D></D>
+    </C>
+    <D>
+        <A></A>
+        <B></B>
+        <C></C>
+    </D>
+</Instructions>
