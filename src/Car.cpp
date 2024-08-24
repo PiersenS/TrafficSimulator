@@ -13,17 +13,29 @@ using namespace sf;
 // const std::string Car::textures[6] = {"pink", "orange", "green", "teal", "blue", "purple"};
 const std::string Car::textures[6] = {"black","blue","green","yellow"};
 
-Car::Car(sf::Texture& texture, sf::Vector2f pos, float dir) {
+Car::Car() {
     speed = 20;
-    direction = dir;
-    position = pos;
+    direction = 0.0;
+    position = sf::Vector2f(612, 80);
+    texture = randomCar();
 
     setTexture(texture);
     setRotation(direction);
-    setPosition(position); // replace with position variable
+    setPosition(position);
 }
 
-Texture& Car::randomCar() {
+Car::Car(sf::Texture t, sf::Vector2f pos, float dir) {
+    speed = 20;
+    direction = dir;
+    position = pos;
+    texture = t;
+
+    setTexture(texture);
+    setRotation(direction);
+    setPosition(position);
+}
+
+Texture Car::randomCar() {
     using namespace std;
 
     // apply random texture - random car color
@@ -34,9 +46,9 @@ Texture& Car::randomCar() {
     int numChoice = carNumberDist(rand_dev);
 
 
-    Texture *t;
-    t->loadFromFile("../assets/Cars/car_" + colorChoice + "_small_" + to_string(numChoice) + ".png");
-    return *t;
+    Texture t;
+    t.loadFromFile("../assets/Cars/car_" + colorChoice + "_small_" + to_string(numChoice) + ".png");
+    return t;
 }
 
 void Car::setScaleFactor(float factor) {

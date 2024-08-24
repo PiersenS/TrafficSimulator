@@ -29,7 +29,7 @@ int main() {
     Graph graph("k4");
 
     // init();
-    laneWidth = 100.0f;
+    laneWidth = 15.0;
     
     sf::Texture backgroundTexture;
     backgroundTexture.loadFromFile("../maps/k4/k4.png");
@@ -49,11 +49,7 @@ int main() {
 
     Car car;
     car.setScaleFactor(laneWidth / car.getLocalBounds().width);
-
-    /* sf::Sprite car;
-    sf::Texture t;
-    t.loadFromFile("../assets/Cars/car_blue_small_1.png");
-    car.setTexture(t); */
+    //car.setScaleFactor(0.5);
     
     sf::Event event;
     while (window.isOpen()) {
