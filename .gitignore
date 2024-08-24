@@ -1,5 +1,5 @@
 .vscode/
 
-Graph
+Simulator
 *.o
 run.sh
