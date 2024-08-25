@@ -61,3 +61,15 @@ Vector2f Car::getPosition() {
 float Car::getSpeed() {
     return speed;
 }
+
+Vertex Car::getCurrentVertex() {
+    return currentVertex;
+}
+
+void Car::setCurrentVertex(Vertex v) {
+    *currentVertex = v;
+}
+
+Vertex Car::getDestination() {
+    return destination;
+}
