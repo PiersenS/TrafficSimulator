@@ -24,7 +24,7 @@ double delta;
 float laneWidth;
 
 int main() {
-    cout << "Traffic Simulator started." << endl;
+    cout << "Traffic Simulator started!" << endl;
     vector<Vertex> vertices;
     vector<Edge> edges;
     Graph graph("k4");
@@ -48,6 +48,7 @@ int main() {
     while (window.isOpen()) {
         window.pollEvent(event);
         if (event.type == sf::Event::Closed) {
+            cout << "Traffic Simulator ending . . ." << endl;
             window.close();
         }
         updateDelta();

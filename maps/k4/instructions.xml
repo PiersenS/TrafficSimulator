@@ -17,21 +17,25 @@ foxtrot
 -->
 <Instructions>
     <A>
+        <start></start>
         <B></B>
         <C></C>
         <D></D>
     </A>
     <B>
+        <start></start>
         <A></A>
         <C></C>
         <D></D>
     </B>
     <C>
+        <start></start>
         <A></A>
         <B></B>
         <D></D>
     </C>
     <D>
+        <start></start>
         <A></A>
         <B></B>
         <C></C>
