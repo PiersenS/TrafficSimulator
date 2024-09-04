@@ -3,7 +3,7 @@
 #include <vector>
 #include <algorithm>
 
-using namespace std;
+using namespace ts;
 
 Edge::Edge() {
     name = "";

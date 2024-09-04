@@ -10,7 +10,7 @@
 #include <string>
 #include "csv.hpp"
 
-using namespace std;
+using namespace ts;
 
 Graph::Graph(string map) {
     loadMap(map);

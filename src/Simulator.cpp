@@ -13,6 +13,7 @@
 #include <SFML/Graphics.hpp>
 
 using namespace std;
+using namespace ts;
 
 void updateDelta();
 void init(); // initializes simulator values

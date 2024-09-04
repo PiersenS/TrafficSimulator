@@ -43,7 +43,6 @@ Texture Car::randomCar() {
     string colorChoice = textures[carColorDist(rand_dev)];
     int numChoice = carNumberDist(rand_dev);
 
-
     Texture t;
     t.loadFromFile("../assets/Cars/car_" + colorChoice + "_small_" + to_string(numChoice) + ".png");
     return t;
@@ -62,14 +61,14 @@ float Car::getSpeed() {
     return speed;
 }
 
-Vertex Car::getCurrentVertex() {
+ts::Vertex Car::getCurrentVertex() {
     return currentVertex;
 }
 
-void Car::setCurrentVertex(Vertex v) {
-    *currentVertex = v;
+void Car::setCurrentVertex(ts::Vertex v) {
+    currentVertex = v;
 }
 
-Vertex Car::getDestination() {
+ts::Vertex Car::getDestination() {
     return destination;
 }

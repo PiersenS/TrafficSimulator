@@ -4,7 +4,6 @@
 #include "Vertex.h"
 #include <SFML/Graphics.hpp>
 
-using GraphVertex = Graph::Vertex;
 
 class Car : public sf::Sprite {
 private:
@@ -15,8 +14,8 @@ private:
     sf::Vector2f position;
     sf::Texture texture;
 
-    Vertex currentVertex;
-    Vertex destination;
+    ts::Vertex currentVertex;
+    ts::Vertex destination;
 
     static sf::Texture randomCar();
 
@@ -27,12 +26,12 @@ public:
     sf::Vector2f getPosition();
     float getSpeed();
 
-    Vertex getCurrentVertex();
-    Vertex getDestination();
+    ts::Vertex getCurrentVertex();
+    ts::Vertex getDestination();
 
-    void setCurrentVertex(Vertex v);
-    void setDestination(Vertex v);
+    void setCurrentVertex(ts::Vertex v);
+    void setDestination(ts::Vertex v);
 
-    Vertex generateDestination(Vertex current);
+    ts::Vertex generateDestination(ts::Vertex current);
 };
 #endif

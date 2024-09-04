@@ -3,7 +3,7 @@
 #include <vector>
 #include <algorithm>
 
-using namespace std;
+using namespace ts;
 
 Vertex::Vertex() {
     // still don't know what's going to go here
