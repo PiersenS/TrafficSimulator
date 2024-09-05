@@ -23,8 +23,15 @@ foxtrot
         <D></D>
     </A>
     <B>
-        <start></start>
-        <A></A>
+        <start>620 388</start>
+        <A>
+            <main rotate="0">
+                forward main
+            </main>
+            <prime rotate="-90">
+                forward
+            </prime>
+        </A>
         <C></C>
         <D></D>
     </B>
@@ -41,3 +48,20 @@ foxtrot
         <C></C>
     </D>
 </Instructions>
+
+<!--
+
+New Idea:
+    Add collision zones on turns - like Godot Area2D
+    Collision triggers new state.
+    For k4 example, from B - A:
+        A collision to turn left puts car in state B prime - indicated by <prime> within CurrentEdge -> Destination
+            Example:
+                <B>
+                    <A>
+                        <prime>
+                        </prime>
+                    </A>
+                </B>
+
+-->

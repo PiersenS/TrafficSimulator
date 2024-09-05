@@ -33,5 +33,7 @@ public:
     void setDestination(ts::Vertex v);
 
     ts::Vertex generateDestination(ts::Vertex current);
+
+    void move(float x, float y);
 };
 #endif
