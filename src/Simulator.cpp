@@ -17,8 +17,11 @@ using namespace ts;
 
 void updateDelta();
 void init(); // initializes simulator values
+
+// TESTING FUNCTIONS
 void moveWithKeyboard(sf::Event::EventType et, Car& car);
 void moveSpriteWithKeyboard(sf::Event::EventType et, sf::Sprite& car);
+void drawBoundaries(sf::RenderWindow& windows);
 
 void moveBtoA(Car& car, bool turn);
 
@@ -76,7 +79,7 @@ int main() {
         window.clear();
         window.draw(background);
         window.draw(car);
-        window.draw(abCorner);
+        drawBoundaries(window);
         window.display();
     }
     
@@ -90,6 +93,9 @@ void updateDelta() {
 void init() {
     startingPosition = sf::Vector2f(612, 80);
     laneWidth = 15.0;
+
+    // function to create boundaries
+    // placeBoundaries();
 }
 
 void moveBtoA(Car& car, bool turn) {
@@ -150,4 +156,8 @@ void moveSpriteWithKeyboard(sf::Event::EventType et, sf::Sprite& car) {
             car.move(0, speed * delta);
         }
     }
+}
+
+void drawBoundaries(sf::RenderWindow& window) {
+    
 }
