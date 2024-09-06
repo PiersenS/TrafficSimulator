@@ -17,16 +17,17 @@ using namespace ts;
 
 void updateDelta();
 void init(); // initializes simulator values
+void placeBoundaries();
 
 // TESTING FUNCTIONS
 void moveWithKeyboard(sf::Event::EventType et, Car& car);
 void moveSpriteWithKeyboard(sf::Event::EventType et, sf::Sprite& car);
 void drawBoundaries(sf::RenderWindow& windows);
-
 void moveBtoA(Car& car, bool turn);
 
 sf::Clock deltaClock;
 sf::Vector2f startingPosition;
+std::map<string,sf::RectangleShape> boundaries;
 double delta;
 float laneWidth;
 
@@ -48,11 +49,6 @@ int main() {
     sf::Sprite background(backgroundTexture);
     background.setPosition(0,0);
 
-    sf::RectangleShape abCorner;
-    abCorner.setFillColor(sf::Color::Red);
-    abCorner.setSize(sf::Vector2f(20, 10));
-    abCorner.setPosition(610, 60);
-
     Car car;
     car.setScaleFactor(laneWidth / car.getLocalBounds().width);
     
@@ -70,11 +66,11 @@ int main() {
         
         cout << "Position: (" << car.getPosition().x << ", " << car.getPosition().y << ")" << endl;
 
-        if (car.getGlobalBounds().intersects(abCorner.getGlobalBounds())) {
-            turn = true;
-        }
+        // if (car.getGlobalBounds().intersects(abCorner.getGlobalBounds())) {
+        //     turn = true;
+        // }
 
-        moveBtoA(car, turn);
+        // moveBtoA(car, turn);
 
         window.clear();
         window.draw(background);
@@ -95,7 +91,7 @@ void init() {
     laneWidth = 15.0;
 
     // function to create boundaries
-    // placeBoundaries();
+    placeBoundaries();
 }
 
 void moveBtoA(Car& car, bool turn) {
@@ -159,5 +155,48 @@ void moveSpriteWithKeyboard(sf::Event::EventType et, sf::Sprite& car) {
 }
 
 void drawBoundaries(sf::RenderWindow& window) {
-    
+    map<string, sf::RectangleShape>::iterator iter = boundaries.begin();
+    while (iter != boundaries.end()) {
+        window.draw(iter->second);
+        iter++;
+    }
 }
+
+void placeBoundaries() {
+    using namespace sf;
+
+    RectangleShape A, B, C, D;
+
+    RectangleShape AB, AC, AD;
+    RectangleShape BA, BC, BD;
+    RectangleShape CA, CB, CD;
+    RectangleShape DA, DB, DC;
+
+    BA.setFillColor(Color::Black);
+    BA.setSize(Vector2f(20, 10));
+    BA.setPosition(610, 60);
+
+    boundaries["A"] = A;
+    boundaries["B"] = B;
+    boundaries["C"] = C;
+    boundaries["D"] = D;
+    boundaries["BA"] = BA;
+
+    // map<string, sf::RectangleShape>::iterator iter = boundaries.begin();
+    // while (iter != boundaries.end()) {
+    //     if (iter->first == "A")
+    // }
+}
+
+
+
+/*  NOTES:
+
+    Right now, bounding boxes are added to each Vertex (intersection).
+    However, the map is not being loaded into the Graph yet. 
+
+    Steps:
+    (1) Load k4 map into Graph
+    (2) Implement CurrentVertex feature for the car
+    (3) Draw car.getCurrentVertex().getBoundaryRect();
+*/

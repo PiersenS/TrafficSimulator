@@ -17,6 +17,7 @@ namespace ts {
     private:
         std::vector<ts::Edge> edges;
         int junction; // Vertex number - junction numbers
+        sf::RectangleShape boundaryRect;
     public:
         Vertex();                       // constructor
         int operator*();                // returns element associated with vertex - idk about return type yet
@@ -24,6 +25,7 @@ namespace ts {
         std::vector<ts::Edge> incidentEdges();   // returns edge list of vertex
         bool isAdjacentTo(Vertex v);    // true if Vertex is adjacent to v
         void setJunction(int num);
+        sf::FloatRect getBoundaries();
     };
 
 }

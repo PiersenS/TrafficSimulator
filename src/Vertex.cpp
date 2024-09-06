@@ -2,6 +2,7 @@
 #include "Edge.h"
 #include <vector>
 #include <algorithm>
+#include <SFML/Graphics.hpp>
 
 using namespace ts;
 
@@ -12,6 +13,7 @@ Vertex::Vertex() {
     *  - bc how do we get the incident edges?
     */
     junction = 0;
+    boundaryRect.setSize(sf::Vector2f(120,120));
 }
 
 int Vertex::operator*() {
@@ -51,4 +53,8 @@ void Vertex::setJunction(int num) {
     *   for all vertices with junct nums higher than the one being removed.
     */
    this->junction = num;
+}
+
+sf::FloatRect ts::Vertex::getBoundaries() {
+    return boundaryRect.getGlobalBounds();
 }
