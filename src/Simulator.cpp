@@ -96,17 +96,20 @@ void init() {
 
 void moveBtoA(Car& car, bool turn) {
     int x, y;
-    if (turn) {
-        car.setRotation(-90);
-        x = -car.getSpeed();
-        y = 0;
+    sf::RectangleShape aJunct = boundaries["A"];
+    if (!car.getGlobalBounds().intersects(aJunct.getGlobalBounds())) {
+        if (turn) {
+            car.setRotation(-90);
+            x = -car.getSpeed();
+            y = 0;
+        }
+        else {
+            car.setRotation(0);
+            x = 0;
+            y = -car.getSpeed();
+        }
+        car.move(x * delta, y * delta);
     }
-    else {
-        car.setRotation(0);
-        x = 0;
-        y = -car.getSpeed();
-    }
-    car.move(x * delta, y * delta);
 }
 
 void moveWithKeyboard(sf::Event::EventType et, Car& car) {
@@ -166,28 +169,75 @@ void placeBoundaries() {
     using namespace sf;
 
     RectangleShape A, B, C, D;
+    RectangleShape Mid;
 
     RectangleShape AB, AC, AD;
     RectangleShape BA, BC, BD;
     RectangleShape CA, CB, CD;
     RectangleShape DA, DB, DC;
 
-    
+    A.setSize(Vector2f(64, 64));
+    A.setPosition(320, 64);
 
-    BA.setFillColor(Color::Black);
+    B.setSize(Vector2f(64, 64));
+    B.setPosition(576, 320);
+
+    C.setSize(Vector2f(64, 64));
+    C.setPosition(320, 576);
+
+    D.setSize(Vector2f(64, 64));
+    D.setPosition(64, 320);
+
+    Mid.setSize(Vector2f(64, 64));
+    Mid.setPosition(320,320);
+
+    AB.setSize(Vector2f(10, 20));
+    AB.setPosition(632, 75);
+
     BA.setSize(Vector2f(20, 10));
-    BA.setPosition(610, 60);
+    BA.setPosition(610, 62);
+
+    BC.setSize(Vector2f(20, 10));
+    BC.setPosition(610, 632);
+
+    AD.setSize(Vector2f(10, 20));
+    AD.setPosition(62, 75);
+    
+    DA.setSize(Vector2f(20, 10));
+    DA.setPosition(75, 62);
+
+    CB.setSize(Vector2f(10, 20));
+    CB.setPosition(632, 608);
+
+    CD.setSize(Vector2f(10, 20));
+    CD.setPosition(62, 608);
+
+    DC.setSize(Vector2f(20, 10));
+    DC.setPosition(75, 632);
+
+
 
     boundaries["A"] = A;
     boundaries["B"] = B;
     boundaries["C"] = C;
     boundaries["D"] = D;
+    boundaries["Mid"] = Mid;
     boundaries["BA"] = BA;
+    boundaries["AB"] = AB;
+    boundaries["AD"] = AD;
+    boundaries["DA"] = DA;
+    boundaries["BC"] = BC;
+    boundaries["CB"] = CB;
+    boundaries["CD"] = CD;
+    boundaries["DC"] = DC;
 
-    // map<string, sf::RectangleShape>::iterator iter = boundaries.begin();
-    // while (iter != boundaries.end()) {
-    //     if (iter->first == "A")
-    // }
+
+    map<string, sf::RectangleShape>::iterator iter = boundaries.begin();
+    while (iter != boundaries.end()) {
+        RectangleShape& cur = iter->second;
+        cur.setFillColor(sf::Color(0,0,0,50));
+        iter++;
+    }
 }
 
 
