@@ -61,6 +61,7 @@ int main() {
             cout << "Traffic Simulator ending . . ." << endl;
             window.close();
         }
+        
         moveWithKeyboard(event.type, car);
         updateDelta();
         
@@ -92,6 +93,20 @@ void init() {
 }
 
 void moveBtoA(Car& car, bool turn) {
+    using namespace sf;
+    RectangleShape aJunct = boundaries["A"];
+    if (car.getGlobalBounds().intersects(boundaries["BA"].getGlobalBounds())) {
+        // turn
+        car.setDirection(Vector2f(-car.getSpeed(), 0)); // point left?
+    }
+    
+    float x = car.getDirection().x * delta;
+    float y = car.getDirection().y * delta;
+    car.move(x, y);
+    // car.move(car.getDirection().x * delta, car.getDirection().y * delta);
+}
+
+/* void moveBtoA(Car& car, bool turn) {
     int x, y;
     sf::RectangleShape aJunct = boundaries["A"];
     if (!car.getGlobalBounds().intersects(aJunct.getGlobalBounds())) {
@@ -107,7 +122,7 @@ void moveBtoA(Car& car, bool turn) {
         }
         car.move(x * delta, y * delta);
     }
-}
+} */
 
 void moveWithKeyboard(sf::Event::EventType et, Car& car) {
     using namespace sf;

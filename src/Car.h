@@ -9,8 +9,9 @@ class Car : public sf::Sprite {
 private:
     static const std::string textures[6];
     float speed;
-    float direction; // angle of rotation
+    float rotation; // angle of rotation
     float scaleFactor;
+    sf::Vector2f direction;
     sf::Vector2f position;
     sf::Texture texture;
 
@@ -28,6 +29,9 @@ public:
 
     ts::Vertex getCurrentVertex();
     ts::Vertex getDestination();
+
+    void setDirection(sf::Vector2f dir);
+    sf::Vector2f getDirection();
 
     void setCurrentVertex(ts::Vertex v);
     void setDestination(ts::Vertex v);

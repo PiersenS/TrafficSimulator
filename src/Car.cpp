@@ -13,26 +13,27 @@ const std::string Car::textures[6] = {"black","blue","green","yellow"};
 
 Car::Car() {
     speed = 100;
-    direction = 0.0;
-    //position = sf::Vector2f(612, 80);
+    rotation = 0.0;
+    direction = sf::Vector2f(0, 1); // pointing up?
     position = sf::Vector2f(620, 388);
     texture = randomCar();
 
     setTexture(texture);
     setOrigin(getLocalBounds().width / 2, getLocalBounds().height / 2);
-    setRotation(direction);
+    setRotation(rotation);
     setPosition(position);
 }
 
+// TODO: dir should no longer be a float
 Car::Car(sf::Texture t, sf::Vector2f pos, float dir) {
     speed = 100;
-    direction = dir;
+    rotation = dir;
     position = pos;
     texture = t;
 
     setTexture(texture);
     setOrigin(getLocalBounds().width / 2, getLocalBounds().height / 2);
-    setRotation(direction);
+    setRotation(rotation);
     setPosition(position);
 }
 
@@ -81,4 +82,12 @@ void Car::setCurrentVertex(ts::Vertex v) {
 
 ts::Vertex Car::getDestination() {
     return destination;
+}
+
+void Car::setDirection(sf::Vector2f dir) {
+    direction = dir;
+}
+
+sf::Vector2f Car::getDirection() {
+    return direction;
 }
