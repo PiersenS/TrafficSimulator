@@ -10,3 +10,4 @@ foxtrot 1
 1 0 1 1
 1 1 0 1
 1 1 1 0
+// PUT BOUNDARIES HERE

@@ -172,6 +172,8 @@ void placeBoundaries() {
     RectangleShape CA, CB, CD;
     RectangleShape DA, DB, DC;
 
+    
+
     BA.setFillColor(Color::Black);
     BA.setSize(Vector2f(20, 10));
     BA.setPosition(610, 60);
