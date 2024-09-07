@@ -17,7 +17,7 @@ using namespace ts;
 
 void updateDelta();
 void init(); // initializes simulator values
-void placeBoundaries();
+void loadBoundaries(string map);
 
 // TESTING FUNCTIONS
 void moveWithKeyboard(sf::Event::EventType et, Car& car);
@@ -64,8 +64,6 @@ int main() {
         moveWithKeyboard(event.type, car);
         updateDelta();
         
-        cout << "Position: (" << car.getPosition().x << ", " << car.getPosition().y << ")" << endl;
-
         if (car.getGlobalBounds().intersects(boundaries["BA"].getGlobalBounds())) {
             turn = true;
         }
@@ -75,7 +73,7 @@ int main() {
         window.clear();
         window.draw(background);
         window.draw(car);
-        drawBoundaries(window);
+        // drawBoundaries(window);
         window.display();
     }
     
@@ -90,8 +88,7 @@ void init() {
     startingPosition = sf::Vector2f(612, 80);
     laneWidth = 15.0;
 
-    // function to create boundaries
-    placeBoundaries();
+    loadBoundaries("k4");
 }
 
 void moveBtoA(Car& car, bool turn) {
@@ -165,82 +162,47 @@ void drawBoundaries(sf::RenderWindow& window) {
     }
 }
 
-void placeBoundaries() {
-    using namespace sf;
+void loadBoundaries(string map) {
+    ifstream ifs;
+    ifs.open("../maps/" + map + "/boundaries.txt");
 
-    RectangleShape A, B, C, D;
-    RectangleShape Mid;
+    // vars for processing each line
+    vector<string> segments;
+    string line;
+    stringstream sstream;
+    string seg;
+    while(getline(ifs, line)) {
+        sstream.str(line);
+        // parse line into individual strings
+        while (getline(sstream, seg, ' ')) {
+            segments.push_back(seg);
+            cout << seg << " ";
+        }
+        cout << endl;
+        
+        sstream.clear();
+        string name = segments.at(0);
+        int width = stoi(segments.at(1));
+        int height = stoi(segments.at(2));
 
-    RectangleShape AB, AC, AD;
-    RectangleShape BA, BC, BD;
-    RectangleShape CA, CB, CD;
-    RectangleShape DA, DB, DC;
+        int x = stoi(segments.at(3));
+        int y = stoi(segments.at(4));
 
-    A.setSize(Vector2f(64, 64));
-    A.setPosition(320, 64);
+        sf::RectangleShape rect;
+        rect.setSize(sf::Vector2f(width, height));
+        rect.setPosition(x, y);
 
-    B.setSize(Vector2f(64, 64));
-    B.setPosition(576, 320);
+        boundaries[name] = rect;
 
-    C.setSize(Vector2f(64, 64));
-    C.setPosition(320, 576);
-
-    D.setSize(Vector2f(64, 64));
-    D.setPosition(64, 320);
-
-    Mid.setSize(Vector2f(64, 64));
-    Mid.setPosition(320,320);
-
-    AB.setSize(Vector2f(10, 20));
-    AB.setPosition(632, 75);
-
-    BA.setSize(Vector2f(20, 10));
-    BA.setPosition(610, 62);
-
-    BC.setSize(Vector2f(20, 10));
-    BC.setPosition(610, 632);
-
-    AD.setSize(Vector2f(10, 20));
-    AD.setPosition(62, 75);
-    
-    DA.setSize(Vector2f(20, 10));
-    DA.setPosition(75, 62);
-
-    CB.setSize(Vector2f(10, 20));
-    CB.setPosition(632, 608);
-
-    CD.setSize(Vector2f(10, 20));
-    CD.setPosition(62, 608);
-
-    DC.setSize(Vector2f(20, 10));
-    DC.setPosition(75, 632);
-
-
-
-    boundaries["A"] = A;
-    boundaries["B"] = B;
-    boundaries["C"] = C;
-    boundaries["D"] = D;
-    boundaries["Mid"] = Mid;
-    boundaries["BA"] = BA;
-    boundaries["AB"] = AB;
-    boundaries["AD"] = AD;
-    boundaries["DA"] = DA;
-    boundaries["BC"] = BC;
-    boundaries["CB"] = CB;
-    boundaries["CD"] = CD;
-    boundaries["DC"] = DC;
-
-
-    map<string, sf::RectangleShape>::iterator iter = boundaries.begin();
-    while (iter != boundaries.end()) {
-        RectangleShape& cur = iter->second;
-        cur.setFillColor(sf::Color(0,0,0,50));
+        segments.clear();
+    }
+    ifs.close();
+    std::map<string, sf::RectangleShape>::iterator iter = boundaries.begin();
+    while(iter != boundaries.end()) {
+        iter->second.setFillColor(sf::Color(0,0,0,50));
         iter++;
     }
 }
-
-
 
 /*  NOTES:
 
