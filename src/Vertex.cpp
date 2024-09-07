@@ -2,7 +2,6 @@
 #include "Edge.h"
 #include <vector>
 #include <algorithm>
-#include <SFML/Graphics.hpp>
 
 using namespace ts;
 

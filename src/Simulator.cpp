@@ -66,11 +66,11 @@ int main() {
         
         cout << "Position: (" << car.getPosition().x << ", " << car.getPosition().y << ")" << endl;
 
-        // if (car.getGlobalBounds().intersects(abCorner.getGlobalBounds())) {
-        //     turn = true;
-        // }
+        if (car.getGlobalBounds().intersects(boundaries["BA"].getGlobalBounds())) {
+            turn = true;
+        }
 
-        // moveBtoA(car, turn);
+        moveBtoA(car, turn);
 
         window.clear();
         window.draw(background);
@@ -201,4 +201,11 @@ void placeBoundaries() {
     (1) Load k4 map into Graph
     (2) Implement CurrentVertex feature for the car
     (3) Draw car.getCurrentVertex().getBoundaryRect();
+
+
+
+Controlling Cars:
+    - maybe move each Car "forward" in the loop
+    - use methods to change direction and rotation
+
 */
