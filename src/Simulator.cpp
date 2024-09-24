@@ -24,6 +24,7 @@ void moveWithKeyboard(sf::Event::EventType et, Car& car);
 void moveSpriteWithKeyboard(sf::Event::EventType et, sf::Sprite& car);
 void drawBoundaries(sf::RenderWindow& windows);
 void moveBtoA(Car& car, bool turn);
+void moveAndTurn(Car& car, bool turnLeft, bool turnRight);
 
 sf::Clock deltaClock;
 sf::Vector2f startingPosition;
@@ -60,6 +61,7 @@ int main() {
         if (event.type == sf::Event::Closed) {
             cout << "Traffic Simulator ending . . ." << endl;
             window.close();
+            return 0;
         }
         
         moveWithKeyboard(event.type, car);
@@ -69,7 +71,8 @@ int main() {
             turn = true;
         }
 
-        moveBtoA(car, turn);
+        //moveBtoA(car, turn);
+        moveAndTurn(car, false, false);
 
         window.clear();
         window.draw(background);
@@ -123,6 +126,25 @@ void moveBtoA(Car& car, bool turn) {
         car.move(x * delta, y * delta);
     }
 } */
+
+void moveAndTurn(Car& car, bool turnLeft, bool turnRight) {
+    using namespace sf;
+    // move forward
+    //      - forward = direction the car is facing
+    int x = car.getDirection().x;
+    int y = car.getDirection().y;
+    cout << "(" << x << ", " << y << ")" << endl;
+
+    /*  for any x and y in direction vector,
+    *   -1 <= x <= 1 and -1 <= y <= 1
+    *   new position = (direction.x * speed, direction.y * speed)
+    */
+
+   Vector2f v(x * car.getSpeed() * delta, y * car.getSpeed() * delta);
+   car.setDirection(v);
+   car.move(v);
+
+}
 
 void moveWithKeyboard(sf::Event::EventType et, Car& car) {
     using namespace sf;

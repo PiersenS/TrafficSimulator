@@ -9,7 +9,6 @@
 #include <vector>
 #include <SFML/Graphics.hpp>
 
-
 namespace ts {
     
     class Edge;

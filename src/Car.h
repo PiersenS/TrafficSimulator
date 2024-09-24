@@ -39,5 +39,6 @@ public:
     ts::Vertex generateDestination(ts::Vertex current);
 
     void move(float x, float y);
+    void move(sf::Vector2f v);
 };
 #endif
