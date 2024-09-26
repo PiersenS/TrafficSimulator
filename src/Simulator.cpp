@@ -140,9 +140,13 @@ void moveAndTurn(Car& car, bool turnLeft, bool turnRight) {
     *   new position = (direction.x * speed, direction.y * speed)
     */
 
-   Vector2f v(x * car.getSpeed() * delta, y * car.getSpeed() * delta);
-   car.setDirection(v);
-   car.move(v);
+    // how tf to multiply vectors????
+    Vector2f v(x * car.getSpeed() * delta, y * car.getSpeed() * delta);
+    car.setDirection(v);
+
+    Vector2f dir = car.getDirection();
+    cout << "(" << dir.x << ", " << dir.y << ")" << endl;
+    car.move(v);
 
 }
 
