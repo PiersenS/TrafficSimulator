@@ -27,7 +27,6 @@ std::map<string,sf::RectangleShape> boundaries;
 float delta;
 float laneWidth;
 
-#include <cmath>
 int main() {
     cout << "Traffic Simulator started!" << endl;
     vector<Vertex> vertices;

@@ -107,7 +107,12 @@ void Car::rotate(float deg) {
     // Try rotating 90 degrees to the left (-90)
     // - flip sin?
     float rad = deg * (M_PI/180);
-    direction = Vector2f(-1, 0);
+
+    // flip sin & cos for 90 deg rotation
+    float x = sin(rad);
+    float y = -cos(rad);
+
+    direction = Vector2f(x, y);
 
 
     cout << "(" << direction.x << ", " << direction.y << ")" << endl;
