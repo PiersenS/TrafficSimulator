@@ -10,10 +10,13 @@
 
 using namespace sf;
 
+int PRECISION = 1000;
+
 const std::string Car::textures[6] = {"black","blue","green","yellow"};
 
 Car::Car() {
-    speed = 100;
+    // speed = 100;
+    speed = 200;
     rotation = 0.0;
     direction = sf::Vector2f(0, -1);
     position = sf::Vector2f(620, 388);
@@ -106,16 +109,18 @@ void Car::rotate(float deg) {
     // to rotate 90 degrees: flip sin or cos (depending on virtical/horizontal)
     // Try rotating 90 degrees to the left (-90)
     // - flip sin?
-    float rad = deg * (M_PI/180);
+    float degree = this->getRotation() + deg;
+    float rad = degree * (M_PI/180);
 
     // flip sin & cos for 90 deg rotation
-    float x = sin(rad);
-    float y = -cos(rad);
+    float x = round(sin(rad) * PRECISION) / PRECISION;
+    float y = round(-cos(rad) * PRECISION) / PRECISION;
 
-    direction = Vector2f(x, y);
-
-
-    cout << "(" << direction.x << ", " << direction.y << ")" << endl;
-
+    // direction = Vector2f(x, y);
+    this->setDirection(Vector2f(x, y));
     sf::Sprite::rotate(deg);
+
+    cout << "Direction: (" << direction.x << ", " << direction.y << ")" << endl;
+    cout << "Rotation: " << this->getRotation() << " degrees" << endl;
+    cout << endl;
 }

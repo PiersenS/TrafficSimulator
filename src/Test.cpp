@@ -9,27 +9,33 @@
 
 using namespace sf;
 
-void Test::moveAndTurn(Car& car, float& delta, bool turnLeft, bool turnRight) {
+void Test::moveCar(Car& car, float& delta) {
     car.move(car.getDirection() * car.getSpeed() * delta);
 }
 
 void Test::moveBtoA(Car& car, float& delta, std::map<string,sf::RectangleShape>& boundaries) {
     if (car.getGlobalBounds().intersects(boundaries["BA"].getGlobalBounds())) {
-        float rotation = -90;
-        // rotate to the left 90 degrees
-        // remember to adjust direction vector
-        // float sine = sin(rotation);
-        // Vector2f newDir = car.getDirection() * sine;
+        car.rotate(-90);
+    }
+    moveCar(car, delta);
+}
 
-        // car.setDirection(newDir);
-        // std::cout << "Direction vector: (" << car.getDirection().x << ", "
-        //           << car.getDirection().y << ")" << std::endl;
-        car.rotate(rotation);
+void Test::orbit(Car& car, float& delta, std::map<string,sf::RectangleShape>& boundaries) {
+    float rotation = -90;
+    if (car.getGlobalBounds().intersects(boundaries["BA"].getGlobalBounds())) {
+        car.rotate(-90);
+    }
+    if (car.getGlobalBounds().intersects(boundaries["AD"].getGlobalBounds())) {
+        car.rotate(-90);
+    }
+    if (car.getGlobalBounds().intersects(boundaries["DC"].getGlobalBounds())) {
+        car.rotate(-90);
+    }
+    if (car.getGlobalBounds().intersects(boundaries["CB"].getGlobalBounds())) {
+        car.rotate(-90);
     }
 
-    moveAndTurn(car, delta, false, false);
-
-
+    moveCar(car, delta);
 }
 
 void Test::moveWithKeyboard(sf::Event::EventType et, Car& car, float& delta) {

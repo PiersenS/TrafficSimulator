@@ -61,17 +61,16 @@ int main() {
             window.close();
             return 0;
         }
+        updateDelta();
         
         Test::moveWithKeyboard(event.type, car, delta);
-        updateDelta();
-
-        Test::moveBtoA(car, delta, boundaries);
+        // Test::moveBtoA(car, delta, boundaries);
+        Test::orbit(car, delta, boundaries);
 
         window.clear();
         window.draw(background);
         window.draw(car);
-        Test::drawBoundaries(window, boundaries);
-
+        // Test::drawBoundaries(window, boundaries);
         window.display();
     }
     

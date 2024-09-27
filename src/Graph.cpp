@@ -2,13 +2,14 @@
 * Implementation of Graph.h
 */
 
-#include "Graph.h"
-#include <algorithm>
+// C++ std lib
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include <string>
-#include "csv.hpp"
+#include <algorithm>
+// Custom header files
+#include "Graph.h"
 
 using namespace ts;
 
@@ -73,74 +74,7 @@ void Graph::updateJunctions(int n) {
         }
     }
 }
-/*
-// on second thought....maybe use csv-parser library
-void Graph::loadMap(string map) {
-    string path = "maps/" + map + ".csv"; // not sure if I'm going to use JSON or not
-    cout << "Loading Map: " << path << endl;
-
-    // IO
-    ifstream ifs(path);
-    if (!ifs) {
-        throw runtime_error("Unable to open map file.");
-    }
-    string line;
-    // Loop variables
-    int numVertices, numEdges, edgeLength;
-    Vertex* v;
-
-    // read first line
-    getline(ifs, line);
-    numVertices = stoi(line);
-    // read names of vertices
-    for (int i = 1; i <= numVertices; i++) {
-        getline(ifs, line);
-        v = new Vertex();
-        v->setJunction(i);
-        vertexList.push_back(*v);
-    }
-
-    // get number of Edges
-    getline(ifs, line);
-    numEdges = stoi(line);
-    Edge* e;
-    stringstream ss;
-    string edgeName, length;
-    for (int i = 0; i < numEdges; i++) {
-        getline(ifs, line); // get next line from file
-        ss.str(line);
-        // split line into edgeName / on second thought....maybe use csv-parser libraryand length
-        getline(ss, edgeName, ' ');
-        getline(ss, length, ' ');
-        
-        e = new Edge(edgeName, stod(length));
-        edgeList.push_back(*e);
-        // find a way to set origin and dest for each edge
-    }
-
-    for (int i = 0; i < numVertices; i++) {
-        for (int j = 0; j < numVertices; j++) {
-            ifs >> edgeLength;
-            this->adjMatrix.at(i).at(j) = edgeLength;
-
-            
-        }
-    }
-}
-*/
 
 void Graph::loadMap(string map) {
-    /*
-    using namespace csv;
-    string path = "maps/" + map + "/" + map + ".csv";
-    cout << "Loading Map: " << path << endl;
-
-    csv::CSVReader reader(path);
-    for (csv::CSVRow row : reader) {        // for each row
-        for (csv::CSVField field : row) {   // for each column
-            
-        }
-    }
-    */
-
+    
 }
