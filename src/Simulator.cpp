@@ -29,7 +29,7 @@ void moveAndTurn(Car& car, bool turnLeft, bool turnRight);
 sf::Clock deltaClock;
 sf::Vector2f startingPosition;
 std::map<string,sf::RectangleShape> boundaries;
-double delta;
+float delta;
 float laneWidth;
 
 int main() {
@@ -54,6 +54,8 @@ int main() {
     car.setScaleFactor(laneWidth / car.getLocalBounds().width);
     
     bool turn = false;
+
+    sf::Vector2f testVector(0, -1);
     
     sf::Event event;
     while (window.isOpen()) {
@@ -72,7 +74,10 @@ int main() {
         }
 
         //moveBtoA(car, turn);
-        moveAndTurn(car, false, false);
+        //moveAndTurn(car, false, false);
+        sf::Vector2f testVector_2 = testVector * car.getSpeed() * delta; // use testVector as direction (0, -1)
+        car.move(testVector * car.getSpeed() * delta); // should move up
+        cout << "(" << car.getPosition().x << ", " << car.getPosition().y << ")" << endl;
 
         window.clear();
         window.draw(background);
@@ -131,8 +136,8 @@ void moveAndTurn(Car& car, bool turnLeft, bool turnRight) {
     using namespace sf;
     // move forward
     //      - forward = direction the car is facing
-    int x = car.getDirection().x;
-    int y = car.getDirection().y;
+    float x = car.getDirection().x;
+    float y = car.getDirection().y;
     cout << "(" << x << ", " << y << ")" << endl;
 
     /*  for any x and y in direction vector,
@@ -141,13 +146,15 @@ void moveAndTurn(Car& car, bool turnLeft, bool turnRight) {
     */
 
     // how tf to multiply vectors????
-    Vector2f v(x * car.getSpeed() * delta, y * car.getSpeed() * delta);
+    float newX = x * car.getSpeed() * delta;
+    float newY = y * car.getSpeed() * delta;
+    const Vector2f v(newX, newY);
     car.setDirection(v);
 
     Vector2f dir = car.getDirection();
     cout << "(" << dir.x << ", " << dir.y << ")" << endl;
+    //car.move(0, car.getSpeed() * delta);
     car.move(v);
-
 }
 
 void moveWithKeyboard(sf::Event::EventType et, Car& car) {

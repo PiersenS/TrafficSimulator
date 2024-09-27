@@ -65,7 +65,7 @@ void Car::move(float x, float y) {
 }
 
 void Car::move(sf::Vector2f v) {
-    position = v;
+    position += v;
     sf::Sprite::move(v);
 }
 
