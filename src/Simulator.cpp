@@ -1,18 +1,19 @@
-/* main.cpp
+/* Simulator.cpp
 *  Contains the main function for the project
 *  and acts as the driver for the graph
 */
 
+// I/O
 #include <iostream>
 #include <fstream> // filestream
 #include <sstream> // string stream
 #include <string>
+// Custom header files
 #include "Graph.h"
 #include "Car.h"
-
-#include <SFML/Graphics.hpp>
-
 #include "Test.h"
+// SFML
+#include <SFML/Graphics.hpp>
 
 using namespace std;
 using namespace ts;
@@ -102,9 +103,7 @@ void loadBoundaries(string map) {
         // parse line into individual strings
         while (getline(sstream, seg, ' ')) {
             segments.push_back(seg);
-            cout << seg << " ";
         }
-        cout << endl;
         
         sstream.clear();
         string name = segments.at(0);
@@ -117,17 +116,13 @@ void loadBoundaries(string map) {
         sf::RectangleShape rect;
         rect.setSize(sf::Vector2f(width, height));
         rect.setPosition(x, y);
+        rect.setFillColor(sf::Color(0,0,0,50));
 
         boundaries[name] = rect;
 
         segments.clear();
     }
     ifs.close();
-    std::map<string, sf::RectangleShape>::iterator iter = boundaries.begin();
-    while(iter != boundaries.end()) {
-        iter->second.setFillColor(sf::Color(0,0,0,50));
-        iter++;
-    }
 }
 
 /*  NOTES:
