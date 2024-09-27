@@ -12,6 +12,8 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "Test.h"
+
 using namespace std;
 using namespace ts;
 
@@ -19,19 +21,13 @@ void updateDelta();
 void init(); // initializes simulator values
 void loadBoundaries(string map);
 
-// TESTING FUNCTIONS
-void moveWithKeyboard(sf::Event::EventType et, Car& car);
-void moveSpriteWithKeyboard(sf::Event::EventType et, sf::Sprite& car);
-void drawBoundaries(sf::RenderWindow& windows);
-void moveBtoA(Car& car, bool turn);
-void moveAndTurn(Car& car, bool turnLeft, bool turnRight);
-
 sf::Clock deltaClock;
 sf::Vector2f startingPosition;
 std::map<string,sf::RectangleShape> boundaries;
 float delta;
 float laneWidth;
 
+#include <cmath>
 int main() {
     cout << "Traffic Simulator started!" << endl;
     vector<Vertex> vertices;
@@ -66,23 +62,16 @@ int main() {
             return 0;
         }
         
-        moveWithKeyboard(event.type, car);
+        Test::moveWithKeyboard(event.type, car, delta);
         updateDelta();
-        
-        if (car.getGlobalBounds().intersects(boundaries["BA"].getGlobalBounds())) {
-            turn = true;
-        }
 
-        //moveBtoA(car, turn);
-        //moveAndTurn(car, false, false);
-        sf::Vector2f testVector_2 = testVector * car.getSpeed() * delta; // use testVector as direction (0, -1)
-        car.move(testVector * car.getSpeed() * delta); // should move up
-        cout << "(" << car.getPosition().x << ", " << car.getPosition().y << ")" << endl;
+        Test::moveBtoA(car, delta, boundaries);
 
         window.clear();
         window.draw(background);
         window.draw(car);
-        // drawBoundaries(window);
+        Test::drawBoundaries(window, boundaries);
+
         window.display();
     }
     
@@ -98,116 +87,6 @@ void init() {
     laneWidth = 15.0;
 
     loadBoundaries("k4");
-}
-
-void moveBtoA(Car& car, bool turn) {
-    using namespace sf;
-    RectangleShape aJunct = boundaries["A"];
-    if (car.getGlobalBounds().intersects(boundaries["BA"].getGlobalBounds())) {
-        // turn
-        car.setDirection(Vector2f(-car.getSpeed(), 0)); // point left?
-    }
-    
-    float x = car.getDirection().x * delta;
-    float y = car.getDirection().y * delta;
-    car.move(x, y);
-    // car.move(car.getDirection().x * delta, car.getDirection().y * delta);
-}
-
-/* void moveBtoA(Car& car, bool turn) {
-    int x, y;
-    sf::RectangleShape aJunct = boundaries["A"];
-    if (!car.getGlobalBounds().intersects(aJunct.getGlobalBounds())) {
-        if (turn) {
-            car.setRotation(-90);
-            x = -car.getSpeed();
-            y = 0;
-        }
-        else {
-            car.setRotation(0);
-            x = 0;
-            y = -car.getSpeed();
-        }
-        car.move(x * delta, y * delta);
-    }
-} */
-
-void moveAndTurn(Car& car, bool turnLeft, bool turnRight) {
-    using namespace sf;
-    // move forward
-    //      - forward = direction the car is facing
-    float x = car.getDirection().x;
-    float y = car.getDirection().y;
-    cout << "(" << x << ", " << y << ")" << endl;
-
-    /*  for any x and y in direction vector,
-    *   -1 <= x <= 1 and -1 <= y <= 1
-    *   new position = (direction.x * speed, direction.y * speed)
-    */
-
-    // how tf to multiply vectors????
-    float newX = x * car.getSpeed() * delta;
-    float newY = y * car.getSpeed() * delta;
-    const Vector2f v(newX, newY);
-    car.setDirection(v);
-
-    Vector2f dir = car.getDirection();
-    cout << "(" << dir.x << ", " << dir.y << ")" << endl;
-    //car.move(0, car.getSpeed() * delta);
-    car.move(v);
-}
-
-void moveWithKeyboard(sf::Event::EventType et, Car& car) {
-    using namespace sf;
-    if (et == Event::KeyPressed) {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-                car.setRotation(-90);
-                car.move(-car.getSpeed() * delta, 0);
-            }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-            car.setRotation(90);
-            car.move(car.getSpeed() * delta, 0);
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-            car.setRotation(0);
-            car.move(0, -car.getSpeed() * delta);
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-            car.setRotation(180);
-            car.move(0, car.getSpeed() * delta);
-        }
-    }
-}
-
-void moveSpriteWithKeyboard(sf::Event::EventType et, sf::Sprite& car) {
-    using namespace sf;
-    float speed = 100;
-    if (et == Event::KeyPressed) {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-                car.setRotation(-90);
-                car.move(-speed * delta, 0);
-            }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-            car.setRotation(90);
-            car.move(speed * delta, 0);
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-            car.setRotation(0);
-            car.move(0, -speed * delta);
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-            car.setRotation(180);
-            car.move(0, speed * delta);
-        }
-    }
-}
-
-void drawBoundaries(sf::RenderWindow& window) {
-    map<string, sf::RectangleShape>::iterator iter = boundaries.begin();
-    while (iter != boundaries.end()) {
-        window.draw(iter->second);
-        iter++;
-    }
 }
 
 void loadBoundaries(string map) {

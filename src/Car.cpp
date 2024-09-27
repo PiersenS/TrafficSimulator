@@ -4,6 +4,7 @@
 
 #include "Car.h"
 #include <random>
+#include <cmath>
 
 #include <iostream>
 
@@ -14,17 +15,17 @@ const std::string Car::textures[6] = {"black","blue","green","yellow"};
 Car::Car() {
     speed = 100;
     rotation = 0.0;
-    direction = sf::Vector2f(0, 1); // pointing up?
+    direction = sf::Vector2f(0, -1);
     position = sf::Vector2f(620, 388);
     texture = randomCar();
 
     setTexture(texture);
-    setOrigin(getLocalBounds().width / 2, getLocalBounds().height / 2);
+    setOrigin(getLocalBounds().width / 2, getLocalBounds().height / 2); // set origin of sprite to middle
     setRotation(rotation);
     setPosition(position);
 }
 
-// TODO: dir should no longer be a float
+// TODO: dir should no longer be a float (I don't remember why - as of 9/26/24)
 Car::Car(sf::Texture t, sf::Vector2f pos, float dir) {
     speed = 100;
     rotation = dir;
@@ -57,18 +58,6 @@ void Car::setScaleFactor(float factor) {
     setScale(scaleFactor, scaleFactor);
 }
 
-void Car::move(float x, float y) {
-    float newX = position.x + x;
-    float newY = position.y + y;
-    position = Vector2f(newX, newY);
-    sf::Sprite::move(x, y);
-}
-
-void Car::move(sf::Vector2f v) {
-    position += v;
-    sf::Sprite::move(v);
-}
-
 Vector2f Car::getPosition() {
     return position;
 }
@@ -95,4 +84,33 @@ void Car::setDirection(sf::Vector2f dir) {
 
 sf::Vector2f Car::getDirection() {
     return direction;
+}
+
+/********************* Overloaded sf::Sprite functions *********************/
+
+void Car::move(float x, float y) {
+    float newX = position.x + x;
+    float newY = position.y + y;
+    position = Vector2f(newX, newY);
+    sf::Sprite::move(x, y);
+}
+
+void Car::move(sf::Vector2f v) {
+    position += v;
+    sf::Sprite::move(v);
+}
+
+void Car::rotate(float deg) {
+    // update direction vector
+    
+    // to rotate 90 degrees: flip sin or cos (depending on virtical/horizontal)
+    // Try rotating 90 degrees to the left (-90)
+    // - flip sin?
+    float rad = deg * (M_PI/180);
+    direction = Vector2f(-1, 0);
+
+
+    cout << "(" << direction.x << ", " << direction.y << ")" << endl;
+
+    sf::Sprite::rotate(deg);
 }
