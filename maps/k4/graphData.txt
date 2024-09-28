@@ -10,3 +10,9 @@ foxtrot 1
 1 0 1 1
 1 1 0 1
 1 1 1 0
+
+
+NOTE:
+the format above works to initialize edge list and adjacency matrix
+However....it does not allow for proper initialization of Edge objects
+    - Unable to set origin and destination Vertices

@@ -79,5 +79,22 @@ void Graph::loadMap(string map) {
     using namespace std;
     ifstream ifs;
     ifs.open("../maps/" + map + "/graphData.txt");
+
+    int vertices, edges;
+    ifs >> vertices >> edges;
+
+    Edge* e;
+    string name;
+    int length, origin, dest;
+    for (int i = 0; i < edges; i++) {       // read in Edges
+        ifs >> name >> length;
+        e = new Edge(name, length);
+    }
+
+    for (int i = 0; i < vertices; i++) {    // read adjacency matrix
+
+    }
+
+    
     
 }

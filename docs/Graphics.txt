@@ -1,7 +1,0 @@
-Plans for implementing Graphics
-
-Likely using a graphics library. 
-Top picks:
-- SFML
-- SDL
-- GLSW
