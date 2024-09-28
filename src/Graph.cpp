@@ -76,5 +76,8 @@ void Graph::updateJunctions(int n) {
 }
 
 void Graph::loadMap(string map) {
+    using namespace std;
+    ifstream ifs;
+    ifs.open("../maps/" + map + "/graphData.txt");
     
 }
