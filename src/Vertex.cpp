@@ -15,6 +15,11 @@ Vertex::Vertex() {
     boundaryRect.setSize(sf::Vector2f(120,120));
 }
 
+Vertex::Vertex(string name, int junction) {
+    this->name = name;
+    this->junction = junction;
+}
+
 int Vertex::operator*() {
     // returns element associated with Vertex
     // maybe vertex num?

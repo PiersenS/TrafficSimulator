@@ -17,9 +17,11 @@ namespace ts {
     private:
         std::vector<ts::Edge> edges;
         int junction; // Vertex number - junction numbers
+        string name;
         sf::RectangleShape boundaryRect;
     public:
         Vertex();                       // constructor
+        Vertex(string name, int junction);
         int operator*();                // returns element associated with vertex - idk about return type yet
         bool operator==(Vertex v);
         std::vector<ts::Edge> incidentEdges();   // returns edge list of vertex

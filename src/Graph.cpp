@@ -83,18 +83,11 @@ void Graph::loadMap(string map) {
     int vertices, edges;
     ifs >> vertices >> edges;
 
-    Edge* e;
-    string name;
-    int length, origin, dest;
-    for (int i = 0; i < edges; i++) {       // read in Edges
-        ifs >> name >> length;
-        e = new Edge(name, length);
+    string vertexName;
+    for (int i = 0; i < vertices; i++) {
+        cin >> vertexName;
+        
     }
-
-    for (int i = 0; i < vertices; i++) {    // read adjacency matrix
-
-    }
-
     
     
 }

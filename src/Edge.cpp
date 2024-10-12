@@ -13,9 +13,11 @@ Edge::Edge(string name) {
     this->name = name;
 }
 
-Edge::Edge(string name, double length) {
+Edge::Edge(string name, double length, int speedLimit, bool directed) {
     this->name = name;
     this->length = length;
+    this->speedLimit = speedLimit;
+    this->directed = directed;
 }
 
 string Edge::operator*() {
@@ -84,4 +86,8 @@ void Edge::setName(string name) {
 
 void Edge::setDirected(bool directed) {
     this->directed = directed;
+}
+
+void Edge::setSpeedLimit(int sl) {
+    speedLimit = sl;
 }

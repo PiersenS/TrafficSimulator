@@ -22,12 +22,13 @@ namespace ts {
         Vertex* dest; // destination
         string name;
         double length;
+        int speedLimit;
         bool directed;
 
     public: 
         Edge();                         // constructor
         Edge(string name);
-        Edge(string name, double length);
+        Edge(string name, double length, int speedLimit, bool directed);
 
         string operator*();                // returns element associated with edge - idk about return type yet
         bool operator==(const Edge e);
@@ -40,6 +41,7 @@ namespace ts {
         void setOrigin(Vertex origin);
         void setDest(Vertex dest);
         void setName(string name);
+        void setSpeedLimit(int sl);
         void setDirected(bool directed);
     };
 }
