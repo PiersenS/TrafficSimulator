@@ -1,0 +1,27 @@
+First line: N number of vertices, M number of edges
+Next N lines: name of vertices (junctions)
+Second line: M number of Edges
+Next M lines include the following fields separated by spaces:
+    EdgeName
+    originJunction
+    destinationJuntion
+    length
+    speed
+    isDirected (0 or 1)
+
+*Note: use underscores to denote spaces - replace with spaces in loadMap()
+
+Example:
+3 3
+Junct1
+Junct2
+Junct3
+Main_Street Junct1 Junct2 10 0
+Second_Street Junct2 Junct3 5 1
+Third_Street Junct1 Junct3 15 0
+
+
+TODO:
+find a way to convert mph to pixel speed
+or another way to represent speed
+    - must be labeled by MPH
