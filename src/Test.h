@@ -12,6 +12,7 @@
 
 class Test {
 public:
+    static int frameCounter;
     static void moveCar(Car& car, float& delta);
     static void moveBtoA(Car& car, float& delta, std::map<string,sf::RectangleShape>& boundaries);
     static void orbit(Car& car, float& delta, std::map<string,sf::RectangleShape>& boundaries);

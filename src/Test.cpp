@@ -9,6 +9,8 @@
 
 using namespace sf;
 
+int Test::frameCounter = 0;
+
 void Test::moveCar(Car& car, float& delta) {
     car.move(car.getDirection() * car.getSpeed() * delta);
 }
@@ -22,18 +24,26 @@ void Test::moveBtoA(Car& car, float& delta, std::map<string,sf::RectangleShape>&
 
 void Test::orbit(Car& car, float& delta, std::map<string,sf::RectangleShape>& boundaries) {
     float rotation = -90;
-    if (car.getGlobalBounds().intersects(boundaries["BA"].getGlobalBounds())) {
-        car.rotate(-90);
-    }
-    if (car.getGlobalBounds().intersects(boundaries["AD"].getGlobalBounds())) {
-        car.rotate(-90);
-    }
-    if (car.getGlobalBounds().intersects(boundaries["DC"].getGlobalBounds())) {
-        car.rotate(-90);
-    }
-    if (car.getGlobalBounds().intersects(boundaries["CB"].getGlobalBounds())) {
-        car.rotate(-90);
-    }
+    //if (frameCounter == 0) {
+
+        if (car.getGlobalBounds().intersects(boundaries["BA"].getGlobalBounds())) {
+            car.rotate(rotation);
+            //frameCounter = 10;
+        }
+        if (car.getGlobalBounds().intersects(boundaries["AD"].getGlobalBounds())) {
+            car.rotate(rotation);
+            //frameCounter = 10;
+        }
+        if (car.getGlobalBounds().intersects(boundaries["DC"].getGlobalBounds())) {
+            car.rotate(rotation);
+            //frameCounter = 10;
+        }
+        if (car.getGlobalBounds().intersects(boundaries["CB"].getGlobalBounds())) {
+            car.rotate(rotation);
+            //frameCounter = 10;
+        }
+    //}
+    
 
     moveCar(car, delta);
 }
