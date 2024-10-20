@@ -13,6 +13,8 @@ namespace ts {
         vector<Vertex> vertexList;
         vector<Edge> edgeList;
         vector<vector<int>> adjMatrix;
+
+        static int numJunctions;
         /* For adjMatrix:
         *   I think 2D vector of Vertex objects would 
         *   allow for easy indexing
@@ -31,17 +33,22 @@ namespace ts {
     public:
         Graph(string map);
         Graph(vector<vector<int>> matrix);
+        void loadMap(string map);
         vector<Vertex> getVertices();
         vector<Edge> getEdges();
 
         void setMatrix(vector<vector<int>> matrix);
-        void insertVertex(Vertex v);
-        void insertEdge(Edge e, Vertex origin, Vertex dest);
+        void addAdjacency(int originJunct, int destJunct, int edgeLength);
 
-        void removeVertex(Vertex v);
-        void removeEdge(Edge e);
+        bool insertVertex(Vertex v);
+        bool insertEdge(Edge e, Vertex origin, Vertex dest);
+        bool removeVertex(Vertex v);
+        bool removeEdge(Edge e);
 
-        void loadMap(string map);
+        /* Static Functions */
+        static void addJunction();
+        static void removeJunction();
+        static int getNumJunctions();
     };
 }
 #endif

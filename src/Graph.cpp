@@ -13,6 +13,8 @@
 
 using namespace ts;
 
+int Graph::numJunctions = 0;
+
 Graph::Graph(string map) {
     loadMap(map);
 }
@@ -31,18 +33,45 @@ vector<Edge> Graph::getEdges() {
 void Graph::setMatrix(vector<vector<int>> matrix) {
     this->adjMatrix = matrix;
 }
+
+void Graph::addAdjacency(int originJunct, int destJunct, int edgeLength) {
+    // idk how yet.
     
-void Graph::insertVertex(Vertex v) {
-    vertexList.push_back(v);
 }
-void Graph::insertEdge(Edge e, Vertex origin, Vertex dest) {
+    
+bool Graph::insertVertex(Vertex v) {
+    if (find(vertexList.begin(), vertexList.end(), v) != vertexList.end()) {
+        return false;
+    }
+
+    vertexList.push_back(v);
+
+    return true;
+}
+bool Graph::insertEdge(Edge e, Vertex origin, Vertex dest) {
     /* Maybe do some error checking
     *  see if origin and dest are in vertexList
     */
-   
+    // add Edge if not already in list
+    if (find(edgeList.begin(), edgeList.end(), e) != edgeList.end()) {
+        return false;
+    }
+
+    edgeList.push_back(e);
+
+    // do I care if these return false? 
+    // Wouldn't that just mean they were already there?
+    //      So I can update adjacency matrix anyway?
+    insertVertex(origin);
+    insertVertex(dest);
+
+    // update adjacency matrix
+    addAdjacency(*origin, *dest, e.getLength());
+
+   return true;
 }
 
-void Graph::removeVertex(Vertex v) {
+bool Graph::removeVertex(Vertex v) {
     vector<Vertex>::iterator pos = find(vertexList.begin(), vertexList.end(), v);
     vertexList.erase(pos);
     // udpate adjacency matrix
@@ -52,7 +81,7 @@ void Graph::removeVertex(Vertex v) {
     updateJunctions(*v);
 }
 
-void Graph::removeEdge(Edge e) {
+bool Graph::removeEdge(Edge e) {
     vector<Edge>::iterator pos = find(edgeList.begin(), edgeList.end(), e);
     edgeList.erase(pos);
     // update adjacency matrix
@@ -75,6 +104,18 @@ void Graph::updateJunctions(int n) {
     }
 }
 
+void Graph::addJunction() {
+    numJunctions++;
+}
+
+void Graph::removeJunction() {
+    numJunctions--;
+}
+
+int Graph::getNumJunctions() {
+    return numJunctions;
+}
+
 void Graph::loadMap(string map) {
     using namespace std;
     ifstream ifs;
@@ -84,10 +125,51 @@ void Graph::loadMap(string map) {
     ifs >> vertices >> edges;
 
     string vertexName;
-    for (int i = 0; i < vertices; i++) {
+    for (int i = 0; i < vertices; i++) {    // process vertices
         cin >> vertexName;
+        // Vertex v(vertexName, i); // name and junction number
+        // vertexList.push_back(v);
+    }
+    
+    string edgeName, originName, destName;
+    int speedLimit, isDirected;
+    double length;
+    bool directed;
+    for (int i = 0; i < edges; i++) {       // process edges
+        // take input
+        cin >> edgeName >> originName >> destName;
+        cin >> length >> speedLimit >> isDirected;
+        directed = (bool) isDirected;
+
+        // Create Edge and Vertices
+        Edge e(edgeName, length, speedLimit, directed);
+        Vertex origin(originName);
+        Vertex destination(destName);
+        
+        e.setOrigin(origin);
+        e.setDest(destination);
+
+        // insert Edge/Vertices in Graph
+        insertEdge(e, origin, destination); // inserts Edge, origin, & destination
         
     }
     
     
 }
+
+/*
+    Try:
+        skip reading in Vertices, since they are included with the Edges
+        Instead, create vertices, store in vertex list, 
+        and store pointer in Edge object
+            - all of this can possibly be gathered from each
+              edge description
+
+*/
+
+/*
+Look at ~/Downloads/Graph.h for reference
+    - How do they find individual vertices?
+
+
+*/

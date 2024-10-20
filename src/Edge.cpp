@@ -9,18 +9,18 @@ Edge::Edge() {
     name = "";
 }
 
-Edge::Edge(string name) {
+Edge::Edge(std::string name) {
     this->name = name;
 }
 
-Edge::Edge(string name, double length, int speedLimit, bool directed) {
+Edge::Edge(std::string name, double length, int speedLimit, bool directed) {
     this->name = name;
     this->length = length;
     this->speedLimit = speedLimit;
     this->directed = directed;
 }
 
-string Edge::operator*() {
+std::string Edge::operator*() {
     return this->name;
 }
 
@@ -69,25 +69,26 @@ bool Edge::isIncidentOn(Vertex v) {
     return false;
 }
 
-bool Edge::isDirected() {
-    return directed;
-}
+/* -------------------- Accessors -------------------- */
+Vertex* Edge::getOrigin()   { return this->origin; }
 
-void Edge::setOrigin(Vertex origin) {
-    this->origin = &origin;
-}
+Vertex* Edge::getDest()     { return this->dest; }
 
-void Edge::setDest(Vertex dest) {
-    this->dest = &dest;
-}
-void Edge::setName(string name) {
-    this->name = name;
-}
+string Edge::getName()      { return this->name; }
 
-void Edge::setDirected(bool directed) {
-    this->directed = directed;
-}
+double Edge::getLength()    { return this->length; }
 
-void Edge::setSpeedLimit(int sl) {
-    speedLimit = sl;
-}
+int Edge::getSpeedLimit()   { return this->speedLimit; }
+
+bool Edge::isDirected()     { return this->directed; }
+
+/* -------------------- Mutators -------------------- */
+void Edge::setOrigin(const Vertex& origin)  { *this->origin = origin; }
+
+void Edge::setDest(const Vertex& dest)      { *this->dest = dest; }
+
+void Edge::setName(std::string name)        { this->name = name; }
+
+void Edge::setDirected(bool directed)       { this->directed = directed; }
+
+void Edge::setSpeedLimit(int sl)            { speedLimit = sl; }

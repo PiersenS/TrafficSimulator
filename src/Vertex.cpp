@@ -1,5 +1,6 @@
 #include "Vertex.h"
 #include "Edge.h"
+#include "Graph.h"
 #include <vector>
 #include <algorithm>
 
@@ -11,11 +12,16 @@ Vertex::Vertex() {
     *  - do after making Graph.cpp
     *  - bc how do we get the incident edges?
     */
-    junction = 0;
+    this->junction = addJunction();
     boundaryRect.setSize(sf::Vector2f(120,120));
 }
 
-Vertex::Vertex(string name, int junction) {
+Vertex::Vertex(std::string name) {
+    this->name = name;
+    this->junction = addJunction();
+}
+
+Vertex::Vertex(std::string name, int junction) {
     this->name = name;
     this->junction = junction;
 }
@@ -57,6 +63,11 @@ void Vertex::setJunction(int num) {
     *   for all vertices with junct nums higher than the one being removed.
     */
    this->junction = num;
+}
+
+int Vertex::addJunction() {
+    Graph::addJunction();
+    return Graph::getNumJunctions();
 }
 
 sf::FloatRect ts::Vertex::getBoundaries() {

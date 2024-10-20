@@ -32,7 +32,7 @@ int main() {
     cout << "Traffic Simulator started!" << endl;
     vector<Vertex> vertices;
     vector<Edge> edges;
-    Graph graph("k4");
+    // Graph graph("k4");
 
     init();
     
@@ -50,8 +50,6 @@ int main() {
     car.setScaleFactor(laneWidth / car.getLocalBounds().width);
     
     bool turn = false;
-
-    sf::Vector2f testVector(0, -1);
     
     sf::Event event;
     while (window.isOpen()) {

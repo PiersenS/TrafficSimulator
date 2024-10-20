@@ -20,15 +20,15 @@ namespace ts {
     private:
         Vertex* origin;
         Vertex* dest; // destination
-        string name;
+        std::string name;
         double length;
         int speedLimit;
         bool directed;
 
     public: 
         Edge();                         // constructor
-        Edge(string name);
-        Edge(string name, double length, int speedLimit, bool directed);
+        Edge(std::string name);
+        Edge(std::string name, double length, int speedLimit, bool directed);
 
         string operator*();                // returns element associated with edge - idk about return type yet
         bool operator==(const Edge e);
@@ -36,11 +36,20 @@ namespace ts {
         Vertex opposite(Vertex v);      // returns vertex on opposite end of v
         bool isAdjacentTo(Edge e);      // true if Edge is adjacent to e
         bool isIncidentOn(Vertex v);    // true if Edge is incident on vertex v
+
+        /* Accessors */
+        Vertex* getOrigin();
+        Vertex* getDest();
+        std::string getName();
+        double getLength();
+        int getSpeedLimit();
         bool isDirected();
 
-        void setOrigin(Vertex origin);
-        void setDest(Vertex dest);
-        void setName(string name);
+        /* Mutators */
+        void setOrigin(const Vertex& origin);
+        void setDest(const Vertex& dest);
+        void setName(std::string name);
+        void setLength(double length);
         void setSpeedLimit(int sl);
         void setDirected(bool directed);
     };

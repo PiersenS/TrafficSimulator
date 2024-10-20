@@ -1,0 +1,38 @@
+.----------------.
+| What I've Done |
+'----------------'
+- Started reading from graphData file
+- Starting implementing insert/remove Edge/Vertex functions
+- Added static member variable to Graph called numJunctions
+    - used to assign junction number to each Vertex (in Vertex constructor)
+
+
+.----------------------.
+| What I am Working On |
+'----------------------'
+- Same as "What I've Done" section
+- accessing adjacency matrix using junction variable for each Vertex
+- Need to update adjacency matrix when vertex/edge is inserted/removed
+    - implement addAdjacency function
+- Need to update junction variable for each Vertex when a Vertex is removed
+    - shouldn't need to update them when a Vertex is added.
+
+.-----------.
+| Questions |
+'-----------'
+I changed the return type of the following functions:
+    insertVertex
+    insertEdge
+    removeVertex
+    removeEdge
+from void to bool. Is this okay or is there another way I should determine
+if a vertex/edge was properly inserted/removed?
+- should exceptions and error-handling be used here instead?
+
+- When implementing addAdjacency:
+    - how to handle adding columns/rows to matrix?
+    - ideally, only one will be added at a time, so:
+        - if junctionNumber > matrix.size(), then push_back junctionNumber
+    - what to do if this is not the case?
+        - if multiple vertices got missed?
+        - if (size-junctionNumber) > 1? 
