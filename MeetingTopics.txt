@@ -35,4 +35,9 @@ if a vertex/edge was properly inserted/removed?
         - if junctionNumber > matrix.size(), then push_back junctionNumber
     - what to do if this is not the case?
         - if multiple vertices got missed?
-        - if (size-junctionNumber) > 1? 
+        - if (size-junctionNumber) > 1?
+
+- Should I load instructions into an object
+    - encapsulation?
+    - store in XML file seems fine to me
+        - reading from file for every instruction is slow
