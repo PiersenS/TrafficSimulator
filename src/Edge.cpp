@@ -71,24 +71,16 @@ bool Edge::isIncidentOn(Vertex v) {
 
 /* -------------------- Accessors -------------------- */
 Vertex* Edge::getOrigin()   { return this->origin; }
-
 Vertex* Edge::getDest()     { return this->dest; }
-
 string Edge::getName()      { return this->name; }
-
 double Edge::getLength()    { return this->length; }
-
 int Edge::getSpeedLimit()   { return this->speedLimit; }
-
 bool Edge::isDirected()     { return this->directed; }
 
 /* -------------------- Mutators -------------------- */
 void Edge::setOrigin(const Vertex& origin)  { *this->origin = origin; }
-
 void Edge::setDest(const Vertex& dest)      { *this->dest = dest; }
-
 void Edge::setName(std::string name)        { this->name = name; }
-
-void Edge::setDirected(bool directed)       { this->directed = directed; }
-
+void Edge::setLength(double length)         { this->length = length; }
 void Edge::setSpeedLimit(int sl)            { speedLimit = sl; }
+void Edge::setDirected(bool directed)       { this->directed = directed; }
