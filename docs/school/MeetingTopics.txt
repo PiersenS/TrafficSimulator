@@ -29,6 +29,9 @@ from void to bool. Is this okay or is there another way I should determine
 if a vertex/edge was properly inserted/removed?
 - should exceptions and error-handling be used here instead?
 
+ANSWER: this is fine.
+---------------------------------------------------------------------------------
+
 - When implementing addAdjacency:
     - how to handle adding columns/rows to matrix?
     - ideally, only one will be added at a time, so:
@@ -37,7 +40,17 @@ if a vertex/edge was properly inserted/removed?
         - if multiple vertices got missed?
         - if (size-junctionNumber) > 1?
 
+ANSWER:
+This isn't necessarily a case that will happen - depending on how I write the code
+Positions in vertexList should match junction number
+
+---------------------------------------------------------------------------------
+
 - Should I load instructions into an object
     - encapsulation?
     - store in XML file seems fine to me
         - reading from file for every instruction is slow
+
+ANSWER:
+Use pre-placed vectors on the Edge objects to direct a Car
+---------------------------------------------------------------------------------

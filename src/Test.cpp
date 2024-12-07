@@ -48,25 +48,32 @@ void Test::orbit(Car& car, float& delta, std::map<string,sf::RectangleShape>& bo
     moveCar(car, delta);
 }
 
+
+// This doesn't properly move the car - use car.rotate() to update direction vector
+// it also moves very....very....very slow
 void Test::moveWithKeyboard(sf::Event::EventType et, Car& car, float& delta) {
     using namespace sf;
     float speed = car.getSpeed();
     if (et == Event::KeyPressed) {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-                car.setRotation(-90);
-                car.move(-speed * delta, 0);
-            }
+            car.setRotation(-90);
+            // car.move(-speed * delta, 0);
+            moveCar(car, delta);
+        }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
             car.setRotation(90);
-            car.move(speed * delta, 0);
+            // car.move(speed * delta, 0);
+            moveCar(car, delta);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
             car.setRotation(0);
-            car.move(0, -speed * delta);
+            // car.move(0, -speed * delta);
+            moveCar(car, delta);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
             car.setRotation(180);
-            car.move(0, speed * delta);
+            // car.move(0, speed * delta);
+            moveCar(car, delta);
         }
     }
 }

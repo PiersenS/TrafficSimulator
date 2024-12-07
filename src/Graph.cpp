@@ -40,7 +40,7 @@ void Graph::addAdjacency(int originJunct, int destJunct, int edgeLength) {
 }
     
 bool Graph::insertVertex(Vertex v) {
-    if (find(vertexList.begin(), vertexList.end(), v) != vertexList.end()) {
+    if (find(vertexList.begin(), vertexList.end(), v) != vertexList.end()) {    // if already in Vertex List
         return false;
     }
 

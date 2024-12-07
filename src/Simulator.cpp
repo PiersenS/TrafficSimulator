@@ -62,13 +62,14 @@ int main() {
         updateDelta();
         
         Test::moveWithKeyboard(event.type, car, delta);
+        cout << "(" << car.getPosition().x << ", " << car.getPosition().y << ")" << endl;
         // Test::moveBtoA(car, delta, boundaries);
-        Test::orbit(car, delta, boundaries);
+        //Test::orbit(car, delta, boundaries);
 
         window.clear();
         window.draw(background);
         window.draw(car);
-        // Test::drawBoundaries(window, boundaries);
+        Test::drawBoundaries(window, boundaries);
         window.display();
     }
     
