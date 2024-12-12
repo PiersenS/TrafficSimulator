@@ -25,3 +25,5 @@ TODO:
 find a way to convert mph to pixel speed
 or another way to represent speed
     - must be labeled by MPH
+
+Include direction vectors for roads at end of data

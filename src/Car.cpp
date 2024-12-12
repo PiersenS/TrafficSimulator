@@ -69,16 +69,16 @@ float Car::getSpeed() {
     return speed;
 }
 
-ts::Vertex Car::getCurrentVertex() {
-    return currentVertex;
+ts::Vertex& Car::getCurrentVertex() {
+    return *currentVertex;
 }
 
-void Car::setCurrentVertex(ts::Vertex v) {
-    currentVertex = v;
+void Car::setCurrentVertex(ts::Vertex& v) {
+    currentVertex = &v;
 }
 
-ts::Vertex Car::getDestination() {
-    return destination;
+ts::Vertex& Car::getDestination() {
+    return *destVertex;
 }
 
 void Car::setDirection(sf::Vector2f dir) {

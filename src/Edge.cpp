@@ -70,12 +70,13 @@ bool Edge::isIncidentOn(Vertex v) {
 }
 
 /* -------------------- Accessors -------------------- */
-Vertex* Edge::getOrigin()   { return this->origin; }
-Vertex* Edge::getDest()     { return this->dest; }
-string Edge::getName()      { return this->name; }
-double Edge::getLength()    { return this->length; }
-int Edge::getSpeedLimit()   { return this->speedLimit; }
-bool Edge::isDirected()     { return this->directed; }
+Vertex* Edge::getOrigin()           { return this->origin; }
+Vertex* Edge::getDest()             { return this->dest; }
+string Edge::getName()              { return this->name; }
+double Edge::getLength()            { return this->length; }
+int Edge::getSpeedLimit()           { return this->speedLimit; }
+bool Edge::isDirected()             { return this->directed; }
+// sf::Vector2f Edge::getDirection()   { return this->dirVector; }
 
 /* -------------------- Mutators -------------------- */
 void Edge::setOrigin(const Vertex& origin)  { *this->origin = origin; }
@@ -84,3 +85,4 @@ void Edge::setName(std::string name)        { this->name = name; }
 void Edge::setLength(double length)         { this->length = length; }
 void Edge::setSpeedLimit(int sl)            { speedLimit = sl; }
 void Edge::setDirected(bool directed)       { this->directed = directed; }
+// void Edge::setDirection(float x, float y)   { dirVector = sf::Vector2f(x, y); }

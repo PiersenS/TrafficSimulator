@@ -15,8 +15,9 @@ private:
     sf::Vector2f position;
     sf::Texture texture;
 
-    ts::Vertex currentVertex;
-    ts::Vertex destination;
+    ts::Edge* currentEdge;
+    ts::Vertex* currentVertex;
+    ts::Vertex* destVertex;
 
     static sf::Texture randomCar();
 
@@ -27,14 +28,16 @@ public:
     sf::Vector2f getPosition();
     float getSpeed();
 
-    ts::Vertex getCurrentVertex();
-    ts::Vertex getDestination();
+    ts::Edge& getCurrentEdge();
+    ts::Vertex& getCurrentVertex();
+    ts::Vertex& getDestination();
 
     void setDirection(sf::Vector2f dir);
     sf::Vector2f getDirection();
 
-    void setCurrentVertex(ts::Vertex v);
-    void setDestination(ts::Vertex v);
+    void setCurrentEdge(ts::Edge* e);
+    void setCurrentVertex(ts::Vertex& v);
+    void setDestination(ts::Vertex& v);
 
     ts::Vertex generateDestination(ts::Vertex current);
 

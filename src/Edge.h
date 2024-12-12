@@ -5,7 +5,11 @@
 #ifndef Edge_H
 #define Edge_H
 
+// Graph Includes
 #include "Vertex.h"
+// SFML
+#include <SFML/Graphics.hpp>
+// CPP Includes
 #include <vector>
 #include <string>
 
@@ -24,6 +28,7 @@ namespace ts {
         double length;
         int speedLimit;
         bool directed;
+        sf::Vector2f dirVector; // direction vector
 
     public: 
         Edge();                         // constructor
@@ -44,6 +49,7 @@ namespace ts {
         double getLength();
         int getSpeedLimit();
         bool isDirected();
+        // sf::Vector2f getDirection();
 
         /* Mutators */
         void setOrigin(const Vertex& origin);
@@ -52,6 +58,7 @@ namespace ts {
         void setLength(double length);
         void setSpeedLimit(int sl);
         void setDirected(bool directed);
+        // void setDirection(float x, float y);
     };
 }
 

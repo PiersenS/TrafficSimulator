@@ -43,9 +43,11 @@ void Test::orbit(Car& car, float& delta, std::map<string,sf::RectangleShape>& bo
             //frameCounter = 10;
         }
     //}
-    
-
     moveCar(car, delta);
+}
+
+void Test::orbitWithVectors(Car& car, float& delta) {
+    
 }
 
 

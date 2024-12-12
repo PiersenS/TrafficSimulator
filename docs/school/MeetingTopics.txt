@@ -54,3 +54,6 @@ Positions in vertexList should match junction number
 ANSWER:
 Use pre-placed vectors on the Edge objects to direct a Car
 ---------------------------------------------------------------------------------
+
+Am I using too much static allocation?
+Should I start using more pointers (like Edge direction vector) for better memory usage?
