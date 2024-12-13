@@ -9,7 +9,7 @@
 
 namespace ts {
     
-    class Road {
+    class RoadSegment {
     private:
         sf::Vector2f* incoming;
         sf::Vector2f* outgoing;
