@@ -21,12 +21,13 @@ using namespace ts;
 void updateDelta();
 void init(); // initializes simulator values
 void loadBoundaries(string map);
+void placeRoadSegments(string map);
 
 sf::Clock deltaClock;
 sf::Vector2f startingPosition;
 std::map<string,sf::RectangleShape> boundaries;
 float delta;
-float laneWidth;
+float laneWidth, roadWidth;
 
 int main() {
     cout << "Traffic Simulator started!" << endl;
@@ -84,8 +85,10 @@ void updateDelta() {
 void init() {
     startingPosition = sf::Vector2f(612, 80);
     laneWidth = 15.0;
+    roadWidth = laneWidth * 2;
 
     loadBoundaries("k4");
+    // placeRoadSegments()
 }
 
 void loadBoundaries(string map) {
