@@ -9,4 +9,4 @@
     18:15 - 18:30 (System Reqs Document)
 
 01/10/25:
-    18:30pm - 
+    21:30 - 22:45 (RoadSegment txt file - format and reading as input)

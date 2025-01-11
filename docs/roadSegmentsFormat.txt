@@ -1,0 +1,16 @@
+.----------------------------------------.
+| Format for roadSegments.txt Input File |
+'----------------------------------------'
+
+EdgeName LeftCornerLocation Height Width
+
+
+
+
+
+Information Needed:
+    - Edge it's attached to
+    - Location (pixel coordinates)
+        - top left corner
+    - height
+    - width

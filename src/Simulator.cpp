@@ -18,10 +18,17 @@
 using namespace std;
 using namespace ts;
 
+string sim_map;
+string windowTitle;
+sf::VideoMode* videoMode;
+sf::RenderWindow* window;
+sf::Texture* backgroundTexture;
+sf::Sprite* background;
+
 void updateDelta();
-void init(); // initializes simulator values
-void loadBoundaries(string map);
-void placeRoadSegments(string map);
+void setup(); // initializes simulator values
+void loadBoundaries();
+void placeRoadSegments();
 
 sf::Clock deltaClock;
 sf::Vector2f startingPosition;
@@ -35,29 +42,22 @@ int main() {
     vector<Edge> edges;
     // Graph graph("k4");
 
-    init();
-    
-    sf::Texture backgroundTexture;
-    backgroundTexture.loadFromFile("../maps/k4/k4.png");
-
-    string title = "Traffic Simulator";
-    sf::VideoMode mode(710, 710);
-    sf::RenderWindow window(mode, title);
-    
-    sf::Sprite background(backgroundTexture);
-    background.setPosition(0,0);
+    setup();
 
     Car car;
     car.setScaleFactor(laneWidth / car.getLocalBounds().width);
     
     bool turn = false;
+
+    background = new sf::Sprite(backgroundTexture);
+    background->setPosition(0,0);
     
     sf::Event event;
-    while (window.isOpen()) {
-        window.pollEvent(event);
+    while (window->isOpen()) {
+        window->pollEvent(event);
         if (event.type == sf::Event::Closed) {
             cout << "Traffic Simulator ending . . ." << endl;
-            window.close();
+            window->close();
             return 0;
         }
         updateDelta();
@@ -68,11 +68,12 @@ int main() {
         Test::orbit(car, delta, boundaries);
         Test::orbitWithVectors(car, delta);
 
-        window.clear();
-        window.draw(background);
-        window.draw(car);
-        Test::drawBoundaries(window, boundaries);
-        window.display();
+        sf::Sprite tempBack = *background;
+        window->clear();
+        window->draw(tempBack);
+        window->draw(car);
+        Test::drawBoundaries(*window, boundaries);
+        window->display();
     }
     
     return 0;
@@ -82,18 +83,34 @@ void updateDelta() {
     delta = deltaClock.restart().asSeconds();
 }
 
-void init() {
+void setup() {
+    /* Rendering */
+    //sf::Texture backgroundTexture;
+    if (!backgroundTexture->loadFromFile("../maps/k4/k4.png")) {
+        std::cout << "SOMETHING WENT WRONG" << std::endl;
+    }
+    else {
+        std::cout << "backgroundTexture loaded!" << std::endl;
+    }
+
+    windowTitle = "Traffic Simulator";
+    videoMode = new sf::VideoMode(710, 710);
+    window = new sf::RenderWindow(*videoMode, windowTitle);
+
+    /* Simulation */
+    sim_map = "k4";
     startingPosition = sf::Vector2f(612, 80);
     laneWidth = 15.0;
     roadWidth = laneWidth * 2;
 
-    loadBoundaries("k4");
-    // placeRoadSegments()
+    /* Map Setup */
+    loadBoundaries();
+    //placeRoadSegments();
 }
 
-void loadBoundaries(string map) {
+void loadBoundaries() {
     ifstream ifs;
-    ifs.open("../maps/" + map + "/boundaries.txt");
+    ifs.open("../maps/" + sim_map + "/boundaries.txt");
 
     // vars for processing each line
     vector<string> segments;
@@ -125,6 +142,16 @@ void loadBoundaries(string map) {
         segments.clear();
     }
     ifs.close();
+}
+
+void placeRoadSegments() {
+    using namespace std;
+    ifstream ifs;
+    ifs.open("../maps/" + sim_map + "/roadSegments.txt");
+
+    while (!ifs.eof()) {
+
+    }
 }
 
 /*  NOTES:

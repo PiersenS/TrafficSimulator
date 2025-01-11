@@ -16,7 +16,7 @@ namespace ts {
         sf::Vector2f* outgoing;
         sf::RectangleShape* boundary;
 
-        sf::Vector2f position;   // location on map - center of RoadSegement (bounding box)
+        sf::Vector2f position;   // location on map - top left corner of RoadSegement (bounding box)
         float length, width;
 
     public:

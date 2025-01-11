@@ -6,7 +6,6 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <string>
 #include <algorithm>
 // Custom header files
 #include "Graph.h"
@@ -126,9 +125,9 @@ void Graph::loadMap(string map) {
 
     string vertexName;
     for (int i = 0; i < vertices; i++) {    // process vertices
-        cin >> vertexName;
-        // Vertex v(vertexName, i); // name and junction number
-        // vertexList.push_back(v);
+        ifs >> vertexName;
+        Vertex v(vertexName, i); // name and junction number
+        vertexList.push_back(v);
     }
     
     string edgeName, originName, destName;
@@ -151,10 +150,7 @@ void Graph::loadMap(string map) {
 
         // insert Edge/Vertices in Graph
         insertEdge(e, origin, destination); // inserts Edge, origin, & destination
-        
     }
-    
-    
 }
 
 /*
