@@ -5,6 +5,8 @@
  * RoadSegment object will sit on top of Edge
  */
 
+// TS includes
+#include "Edge.h"
 // SFML includes
 #include <SFML/Graphics.hpp>
 
@@ -12,6 +14,7 @@ namespace ts {
     
     class RoadSegment {
     private:
+        ts::Edge* edge;
         sf::Vector2f* incoming;
         sf::Vector2f* outgoing;
         sf::RectangleShape* boundary;

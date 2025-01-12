@@ -22,8 +22,8 @@ string sim_map;
 string windowTitle;
 sf::VideoMode* videoMode;
 sf::RenderWindow* window;
-sf::Texture* backgroundTexture;
 sf::Sprite* background;
+sf::Texture* backgroundTexture;
 
 void updateDelta();
 void setup(); // initializes simulator values
@@ -48,9 +48,6 @@ int main() {
     car.setScaleFactor(laneWidth / car.getLocalBounds().width);
     
     bool turn = false;
-
-    background = new sf::Sprite(backgroundTexture);
-    background->setPosition(0,0);
     
     sf::Event event;
     while (window->isOpen()) {
@@ -61,12 +58,8 @@ int main() {
             return 0;
         }
         updateDelta();
-        
-        Test::moveWithKeyboard(event.type, car, delta);
-        // cout << "(" << car.getPosition().x << ", " << car.getPosition().y << ")" << endl;
-        // Test::moveBtoA(car, delta, boundaries);
+
         Test::orbit(car, delta, boundaries);
-        Test::orbitWithVectors(car, delta);
 
         sf::Sprite tempBack = *background;
         window->clear();
@@ -84,24 +77,30 @@ void updateDelta() {
 }
 
 void setup() {
-    /* Rendering */
-    //sf::Texture backgroundTexture;
-    if (!backgroundTexture->loadFromFile("../maps/k4/k4.png")) {
-        std::cout << "SOMETHING WENT WRONG" << std::endl;
-    }
-    else {
-        std::cout << "backgroundTexture loaded!" << std::endl;
-    }
-
-    windowTitle = "Traffic Simulator";
-    videoMode = new sf::VideoMode(710, 710);
-    window = new sf::RenderWindow(*videoMode, windowTitle);
+    std::cout << "Running setup . . ." << std::endl;
 
     /* Simulation */
     sim_map = "k4";
     startingPosition = sf::Vector2f(612, 80);
     laneWidth = 15.0;
     roadWidth = laneWidth * 2;
+
+    /* Rendering */
+    backgroundTexture = new sf::Texture();
+    string path = "../maps/" + sim_map + "/" + sim_map + ".png";
+    if (backgroundTexture->loadFromFile(path)) {
+        std::cout << "Background Texture Loaded." << std::endl;
+    }
+    else {
+        std::cout << "There was an error loading Background Textures. Exiting the program." << std::endl;
+        exit(1);
+    }
+
+    background = new sf::Sprite(*backgroundTexture);
+
+    windowTitle = "Traffic Simulator";
+    videoMode = new sf::VideoMode(710, 710);
+    window = new sf::RenderWindow(*videoMode, windowTitle);
 
     /* Map Setup */
     loadBoundaries();

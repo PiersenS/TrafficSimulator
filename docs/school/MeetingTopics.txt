@@ -57,3 +57,13 @@ Use pre-placed vectors on the Edge objects to direct a Car
 
 Am I using too much static allocation?
 Should I start using more pointers (like Edge direction vector) for better memory usage?
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+What's up with static vs. dynamic allocation?
+- Statically-allocated variables behaved as expected with scope
+- Dynamically-allocated variables didn't seem to have scope
+    - sf::Sprite* background = new (*backgroundTexture) // sf::Texture* backgroundTexture = new sf::Texture();  --> dynamic
+        worked while
+    - sf::Sprite* background = new (backgroundTexture)      // sf::Texture backgroundTexture;                       --> static
+        did not. 
