@@ -61,9 +61,8 @@ int main() {
 
         Test::orbit(car, delta, boundaries);
 
-        sf::Sprite tempBack = *background;
         window->clear();
-        window->draw(tempBack);
+        window->draw(*background);
         window->draw(car);
         Test::drawBoundaries(*window, boundaries);
         window->display();
