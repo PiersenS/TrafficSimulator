@@ -2,9 +2,7 @@
 | Format for roadSegments.txt Input File |
 '----------------------------------------'
 
-EdgeName LeftCornerLocation Height Width
-
-
+EdgeName LeftCornerX LeftCornerY Height Width
 
 
 
