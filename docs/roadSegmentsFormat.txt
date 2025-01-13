@@ -9,8 +9,13 @@ EdgeName LeftCornerLocation Height Width
 
 
 Information Needed:
-    - Edge it's attached to
+    - Edge(s) it's attached to
     - Location (pixel coordinates)
         - top left corner
     - height
     - width
+
+
+How to handle shared roadSegments?
+    - Road Segments should represent sections of roads - not edges
+    - I will temporarily take out edge names and go from there
