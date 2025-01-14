@@ -11,14 +11,19 @@ using namespace ts;
 
 RoadSegment::RoadSegment() {
     position = sf::Vector2f(0,0);
-    length = 0;
+    height = 0;
     width = 0;
 }
 
-RoadSegment::RoadSegment(sf::Vector2f pos, float length, float width) {
+RoadSegment::RoadSegment(sf::Vector2f pos, float height, float width) {
     this->position = pos;
-    this->length = length;
+    this->height = height;
     this->width = width;
+
+    boundary = new sf::RectangleShape();
+    boundary->setSize(sf::Vector2f(width, height));
+    boundary->setPosition(position);
+    boundary->setFillColor(sf::Color(0,0,0,50)); // grey
 }
 
 /********************* Accessors *********************/

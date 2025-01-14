@@ -7,8 +7,6 @@
 #include <cmath>
 #include <iostream>
 
-using namespace sf;
-
 int Test::frameCounter = 0;
 
 void Test::moveCar(Car& car, float& delta) {
@@ -85,5 +83,11 @@ void Test::drawBoundaries(sf::RenderWindow& window, std::map<string,sf::Rectangl
     while (iter != boundaries.end()) {
         window.draw(iter->second);
         iter++;
+    }
+}
+void Test::drawRoadSegments(sf::RenderWindow& window, std::vector<ts::RoadSegment>& roadSegments) {
+    using namespace ts;
+    for (RoadSegment rs : roadSegments) {
+        window.draw(*rs.getBoundary());
     }
 }

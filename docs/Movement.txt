@@ -1,0 +1,2 @@
+Overlapping RoadSegment boundaries is helpful:
+- following current vector until position = NextVectorPosition

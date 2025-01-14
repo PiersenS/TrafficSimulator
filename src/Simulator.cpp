@@ -11,6 +11,7 @@
 // Custom header files
 #include "Graph.h"
 #include "Car.h"
+#include "RoadSegment.h"
 #include "Test.h"
 // SFML
 #include <SFML/Graphics.hpp>
@@ -33,6 +34,7 @@ void placeRoadSegments();
 sf::Clock deltaClock;
 sf::Vector2f startingPosition;
 std::map<string,sf::RectangleShape> boundaries;
+std::vector<ts::RoadSegment> roadSegments;
 float delta;
 float laneWidth, roadWidth;
 
@@ -64,7 +66,8 @@ int main() {
         window->clear();
         window->draw(*background);
         window->draw(car);
-        Test::drawBoundaries(*window, boundaries);
+        //Test::drawBoundaries(*window, boundaries);
+        Test::drawRoadSegments(*window, roadSegments);
         window->display();
     }
     
@@ -103,7 +106,7 @@ void setup() {
 
     /* Map Setup */
     loadBoundaries();
-    //placeRoadSegments();
+    placeRoadSegments();
 }
 
 void loadBoundaries() {
@@ -145,11 +148,18 @@ void loadBoundaries() {
 void placeRoadSegments() {
     using namespace std;
     ifstream ifs;
-    ifs.open("../maps/" + sim_map + "/roadSegments.txt");
+    string path = "../maps/" + sim_map + "/roadSegments.txt";
+    ifs.open(path);
 
+    int x, y, height, width;
+    ts::RoadSegment* rs;
     while (!ifs.eof()) {
-
+        ifs >> x >> y >> height >> width;
+        rs = new ts::RoadSegment(sf::Vector2f(x, y), height, width);
+        roadSegments.push_back(*rs);
+        cout << "Road Segment created." << endl;
     }
+    ifs.close();
 }
 
 /*  NOTES:

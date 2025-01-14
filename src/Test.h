@@ -8,6 +8,7 @@
 
 #include "Car.h"
 #include "Graph.h"
+#include "RoadSegment.h"
 #include <SFML/Graphics.hpp>
 
 class Test {
@@ -19,6 +20,7 @@ public:
     static void orbitWithVectors(Car& car, float& delta);
     static void moveWithKeyboard(sf::Event::EventType et, Car& car, float& delta);
     static void drawBoundaries(sf::RenderWindow& window, std::map<string,sf::RectangleShape>& boundaries);
+    static void drawRoadSegments(sf::RenderWindow& window, std::vector<ts::RoadSegment>& roadSegments);
 };
 
 #endif

@@ -17,3 +17,13 @@ Information Needed:
 How to handle shared roadSegments?
     - Road Segments should represent sections of roads - not edges
     - I will temporarily take out edge names and go from there
+
+
+
+Order of current RoadSegments in file:
+    - Top horizontal
+    - Middle horizontal
+    - Bottom horizontal
+    - Left vertical
+    - Middle vertical
+    - Right vertical

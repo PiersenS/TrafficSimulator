@@ -5,6 +5,9 @@
  * RoadSegment object will sit on top of Edge
  */
 
+#ifndef ROAD_SEGMENT_H
+#define ROAD_SEGMENT_H
+
 // TS includes
 #include "Edge.h"
 // SFML includes
@@ -14,18 +17,18 @@ namespace ts {
     
     class RoadSegment {
     private:
-        ts::Edge* edge;
-        sf::Vector2f* incoming;
-        sf::Vector2f* outgoing;
-        sf::RectangleShape* boundary;
+        ts::Edge* edge = NULL;
+        sf::Vector2f* incoming = NULL;
+        sf::Vector2f* outgoing = NULL;
+        sf::RectangleShape* boundary = NULL;
 
         sf::Vector2f position;   // location on map - top left corner of RoadSegement (bounding box)
-        float length, width;
+        float height, width;
 
     public:
         /* Constructors */
         RoadSegment();
-        RoadSegment(sf::Vector2f pos, float length, float width);
+        RoadSegment(sf::Vector2f pos, float height, float width);
 
         /* Accessors */
         sf::Vector2f* getIncoming();
@@ -38,3 +41,5 @@ namespace ts {
         void setBoundary(sf::RectangleShape& rect);
     };
 }
+
+#endif

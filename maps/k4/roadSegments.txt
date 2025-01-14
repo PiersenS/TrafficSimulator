@@ -1,9 +1,6 @@
-576 64 256 64
-352 64 64 256
-
-
-Bravo x y h w
-Charlie x y h w
-Delta x y h w
-Echo x y h w
-Foxtrot x y h w
+64 64 64 576
+64 320 64 576
+64 576 64 576
+64 64 576 64
+320 64 576 64
+576 64 576 64
