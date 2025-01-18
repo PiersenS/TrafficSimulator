@@ -2,11 +2,13 @@
 *   Implementation of Car.h
 */
 
-#include "Car.h"
+/* C++ includes */
+#include <iostream>
 #include <random>
 #include <cmath>
+/* Simulator includes */
+#include "Car.h"
 
-#include <iostream>
 
 using namespace sf;
 
@@ -61,36 +63,18 @@ void Car::setScaleFactor(float factor) {
     setScale(scaleFactor, scaleFactor);
 }
 
-Vector2f Car::getPosition() {
-    return position;
-}
+/********************* Accessors *********************/
+Vector2f Car::getPosition()             { return position; }
+float Car::getSpeed()                   { return speed; }
+ts::Vertex& Car::getCurrentVertex()     { return *currentVertex; }
+ts::Vertex& Car::getDestination()       { return *destVertex; }
+sf::Vector2f Car::getDirection()        { return direction; }
 
-float Car::getSpeed() {
-    return speed;
-}
-
-ts::Vertex& Car::getCurrentVertex() {
-    return *currentVertex;
-}
-
-void Car::setCurrentVertex(ts::Vertex& v) {
-    currentVertex = &v;
-}
-
-ts::Vertex& Car::getDestination() {
-    return *destVertex;
-}
-
-void Car::setDirection(sf::Vector2f dir) {
-    direction = dir;
-}
-
-sf::Vector2f Car::getDirection() {
-    return direction;
-}
+/********************* Mutators *********************/
+void Car::setCurrentVertex(ts::Vertex& v) { currentVertex = &v; }
+void Car::setDirection(sf::Vector2f dir) { direction = dir; }
 
 /********************* Overloaded sf::Sprite functions *********************/
-
 void Car::move(float x, float y) {
     float newX = position.x + x;
     float newY = position.y + y;

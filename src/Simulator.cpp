@@ -66,7 +66,7 @@ int main() {
         window->clear();
         window->draw(*background);
         window->draw(car);
-        //Test::drawBoundaries(*window, boundaries);
+        // Test::drawBoundaries(*window, boundaries);
         Test::drawRoadSegments(*window, roadSegments);
         window->display();
     }
@@ -109,6 +109,25 @@ void setup() {
     placeRoadSegments();
 }
 
+void placeRoadSegments() {
+    using namespace std;
+    ifstream ifs;
+    string path = "../maps/" + sim_map + "/roadSegments.txt";
+    ifs.open(path);
+
+    int x, y, height, width;
+    ts::RoadSegment* rs;
+    while (!ifs.eof()) {
+        ifs >> x >> y >> height >> width;
+        rs = new ts::RoadSegment(sf::Vector2f(x, y), height, width);
+        roadSegments.push_back(*rs);
+        cout << "Road Segment created." << endl;
+    }
+    ifs.close();
+}
+
+
+/* loadBoundaries() will eventually be deleted */
 void loadBoundaries() {
     ifstream ifs;
     ifs.open("../maps/" + sim_map + "/boundaries.txt");
@@ -141,23 +160,6 @@ void loadBoundaries() {
         boundaries[name] = rect;
 
         segments.clear();
-    }
-    ifs.close();
-}
-
-void placeRoadSegments() {
-    using namespace std;
-    ifstream ifs;
-    string path = "../maps/" + sim_map + "/roadSegments.txt";
-    ifs.open(path);
-
-    int x, y, height, width;
-    ts::RoadSegment* rs;
-    while (!ifs.eof()) {
-        ifs >> x >> y >> height >> width;
-        rs = new ts::RoadSegment(sf::Vector2f(x, y), height, width);
-        roadSegments.push_back(*rs);
-        cout << "Road Segment created." << endl;
     }
     ifs.close();
 }

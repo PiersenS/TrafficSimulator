@@ -1,16 +1,9 @@
-10/22/24:
-    18:45 - 19:00
-
-10/29/24:
-    12:00 - 12:40 (Meeting)
-
-11/12/24:
-    15:30 - 17:00 (System Reqs Document)
-    18:15 - 18:30 (System Reqs Document)
-
 01/10/25:
     21:30 - 22:45 (RoadSegment txt file - format and reading as input)
 01/11/25:
     12:30 - 13:30 (RoadSegment txt file - format and reading as input)
 01/13/25:
     18:00 - 19:30 (RoadSegment txt file - defining road segments)
+    
+
+
