@@ -115,11 +115,37 @@ void placeRoadSegments() {
     string path = "../maps/" + sim_map + "/roadSegments.txt";
     ifs.open(path);
 
-    int x, y, height, width;
+    int x, y, height, width, oneWay;
     ts::RoadSegment* rs;
     while (!ifs.eof()) {
-        ifs >> x >> y >> height >> width;
+        ifs >> x >> y >> height >> width >> oneWay;
         rs = new ts::RoadSegment(sf::Vector2f(x, y), height, width);
+        // generate vectors
+        sf::Vector2f* in; 
+        sf::Vector2f* out;
+        if (oneWay) {
+            // idk
+            delete out;
+        }
+        else {
+            int start; 
+            if (height > width) {
+                in = new sf::Vector2f(0, height);
+                out = new sf::Vector2f(0, -height);
+            }
+            else { 
+                in = new sf::Vector2f(width, 0);
+                out = new sf::Vector2f(-width, 0);
+            }
+            rs->setIncoming(*in);
+            rs->setOutgoing(*out);
+            /* Unhandled Edge Case: x = y */
+            /* Unhandled situation: diagonal roads
+            *       - just rotate vector and include rotation in txt file 
+            *       - reference Car.cpp for vector rotations
+            */
+        }
+
         roadSegments.push_back(*rs);
         cout << "Road Segment created." << endl;
     }

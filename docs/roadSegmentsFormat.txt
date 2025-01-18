@@ -2,7 +2,7 @@
 | Format for roadSegments.txt Input File |
 '----------------------------------------'
 
-EdgeName LeftCornerX LeftCornerY Height Width
+EdgeName LeftCornerX LeftCornerY Height Width isOneWay
 
 
 
@@ -12,6 +12,9 @@ Information Needed:
         - top left corner
     - height
     - width
+    - where to place vectors
+        - if it's a one-way, only need one vector in the middle 
+            - direction? (idk yet)
 
 
 How to handle shared roadSegments?
