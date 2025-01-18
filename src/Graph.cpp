@@ -78,12 +78,16 @@ bool Graph::removeVertex(Vertex v) {
 
     // (2) update all higher vertices with setJunction
     updateJunctions(*v);
+    
+    return true; // always returns true
 }
 
 bool Graph::removeEdge(Edge e) {
     vector<Edge>::iterator pos = find(edgeList.begin(), edgeList.end(), e);
     edgeList.erase(pos);
     // update adjacency matrix
+
+    return true; // always returns true
 }
 
 
