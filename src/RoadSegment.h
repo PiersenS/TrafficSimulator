@@ -17,10 +17,10 @@ namespace ts {
     
     class RoadSegment {
     private:
-        ts::Edge* edge = NULL;
-        sf::Vector2f* incoming = NULL;
-        sf::Vector2f* outgoing = NULL;
-        sf::RectangleShape* boundary = NULL;
+        ts::Edge* edge;
+        sf::Vector2f* incoming;
+        sf::Vector2f* outgoing;
+        sf::RectangleShape* boundary;
 
         sf::Vector2f position;   // location on map - top left corner of RoadSegement (bounding box)
         float height, width;

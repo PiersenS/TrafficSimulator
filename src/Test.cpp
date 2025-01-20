@@ -44,8 +44,16 @@ void Test::orbit(Car& car, float& delta, std::map<string,sf::RectangleShape>& bo
     moveCar(car, delta);
 }
 
-void Test::orbitWithVectors(Car& car, float& delta) {
-    
+void Test::orbitWithVectors(Car& car, float& delta, std::vector<ts::RoadSegment>& roadSegments) {
+    ts::RoadSegment current;
+    sf::FloatRect carBounds = car.getGlobalBounds();
+    for (ts::RoadSegment rs : roadSegments) {
+        if (carBounds.intersects(rs.getBoundary()->getGlobalBounds())) {
+            current = rs;
+            break;
+        }
+    }
+    car.move(*current.getIncoming());
 }
 
 

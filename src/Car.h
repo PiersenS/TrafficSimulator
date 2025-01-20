@@ -1,13 +1,18 @@
 #ifndef Car_H
 #define Car_H
 
+/* Simulator includes */
 #include "Vertex.h"
+#include "MovableEntity.h"
+/* SFML includes */
 #include <SFML/Graphics.hpp>
 
 
-class Car : public sf::Sprite {
+class Car : public MovableEntity {
 private:
     static const std::string textures[6];
+    static sf::Texture randomCar();
+    /*
     float speed;
     float rotation; // angle of rotation
     float scaleFactor;
@@ -18,8 +23,7 @@ private:
     ts::Edge* currentEdge;
     ts::Vertex* currentVertex;
     ts::Vertex* destVertex;
-
-    static sf::Texture randomCar();
+    */
 
 public:
     Car();
@@ -39,7 +43,7 @@ public:
     void setCurrentVertex(ts::Vertex& v);
     void setDestination(ts::Vertex& v);
 
-    ts::Vertex generateDestination(ts::Vertex current);
+    // ts::Vertex generateDestination(ts::Vertex current);
 
     // Overloaded sf::Sprite functions
     void move(float x, float y);

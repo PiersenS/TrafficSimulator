@@ -13,12 +13,18 @@ RoadSegment::RoadSegment() {
     position = sf::Vector2f(0,0);
     height = 0;
     width = 0;
+
+    incoming = NULL;
+    outgoing = NULL;
 }
 
 RoadSegment::RoadSegment(sf::Vector2f pos, float height, float width) {
     this->position = pos;
     this->height = height;
     this->width = width;
+
+    incoming = NULL;
+    outgoing = NULL;
 
     boundary = new sf::RectangleShape();
     boundary->setSize(sf::Vector2f(width, height));
