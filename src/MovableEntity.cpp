@@ -20,8 +20,9 @@ ts::Vertex MovableEntity::generateDestination(ts::Vertex* current) {
         vertices.push_back(e.opposite(*current));
     }
 
-    int vertexChoice = ts::random(0, vertices.size());
-    ts::Vertex v = vertices.at(vertexChoice);
+    //int vertexChoice = ts::random(0, vertices.size());
+    //ts::Vertex v = vertices.at(vertexChoice);
     
+    ts::Vertex v;
     return v;
 }

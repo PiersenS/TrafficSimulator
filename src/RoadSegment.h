@@ -36,9 +36,9 @@ namespace ts {
         sf::RectangleShape* getBoundary();
 
         /* Mutators */
-        void setIncoming(sf::Vector2f& in);
-        void setOutgoing(sf::Vector2f& out);
-        void setBoundary(sf::RectangleShape& rect);
+        void setIncoming(sf::Vector2f in);
+        void setOutgoing(sf::Vector2f out);
+        void setBoundary(sf::RectangleShape rect);
     };
 }
 

@@ -62,7 +62,7 @@ int main() {
         updateDelta();
 
         // Test::orbit(car, delta, boundaries);
-        Test::orbitWithVectors(car, delta, roadSegments);
+        // Test::orbitWithVectors(car, delta, roadSegments);
 
         window->clear();
         window->draw(*background);
@@ -107,7 +107,7 @@ void setup() {
 
     /* Map Setup */
     loadBoundaries();
-    // placeRoadSegments();
+    placeRoadSegments();
 }
 
 void placeRoadSegments() {
@@ -138,7 +138,7 @@ void placeRoadSegments() {
                 in = new sf::Vector2f(width, 0);
                 out = new sf::Vector2f(-width, 0);
             }
-            cout << "Setting Incoming and Outgoing vectors." << endl;
+
             rs->setIncoming(*in);
             rs->setOutgoing(*out);
             /* Unhandled Edge Case: x = y */
@@ -149,7 +149,6 @@ void placeRoadSegments() {
         }
 
         roadSegments.push_back(*rs);
-        cout << "Road Segment created." << endl;
     }
     ifs.close();
 }
