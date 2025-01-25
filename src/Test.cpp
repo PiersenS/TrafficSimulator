@@ -53,6 +53,7 @@ void Test::orbitWithVectors(Car& car, float& delta, std::vector<ts::RoadSegment>
             break;
         }
     }
+    // std::cout << "Selected vector: (" << current.getIncoming()->x << ", " << current.getIncoming()->y << ")" << std::endl;
     car.move(*current.getIncoming());
 }
 
@@ -97,5 +98,33 @@ void Test::drawRoadSegments(sf::RenderWindow& window, std::vector<ts::RoadSegmen
     using namespace ts;
     for (RoadSegment rs : roadSegments) {
         window.draw(*rs.getBoundary());
+    }
+}
+
+void Test::printRoadSegments(std::vector<ts::RoadSegment>& roadSegments) {
+    using namespace std;
+    int h, w;
+    sf::Vector2f pos, in, out;
+    ts::RoadSegment rs;
+    for (int i = 0; i < roadSegments.size(); i++) {
+        rs = roadSegments.at(i);
+        h = rs.getHeight();
+        w = rs.getWidth();
+        pos = rs.getPosition();
+        in = *rs.getIncoming();
+        out = *rs.getOutgoing();
+
+        printf("RoadSegment %d:\n"
+               "\tPosition: (%f, %f)\n"
+               "\tHeight: %d\n"
+               "\tWidth: %d\n"
+               "\tIncoming Vector: (%f, %f)\n"
+               "\tOutgoing Vector: (%f, %f)\n", 
+               i + 1, 
+               pos.x, pos.y,
+               h, w,
+               in.x, in.y,
+               out.x, out.y);
+        cout << endl;
     }
 }

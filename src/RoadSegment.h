@@ -33,7 +33,10 @@ namespace ts {
         /* Accessors */
         sf::Vector2f* getIncoming();
         sf::Vector2f* getOutgoing();
+        sf::Vector2f getPosition();
         sf::RectangleShape* getBoundary();
+        float getHeight();
+        float getWidth();
 
         /* Mutators */
         void setIncoming(sf::Vector2f in);

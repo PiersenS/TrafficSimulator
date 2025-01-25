@@ -62,7 +62,7 @@ int main() {
         updateDelta();
 
         // Test::orbit(car, delta, boundaries);
-        // Test::orbitWithVectors(car, delta, roadSegments);
+        Test::orbitWithVectors(car, delta, roadSegments);
 
         window->clear();
         window->draw(*background);
@@ -106,7 +106,7 @@ void setup() {
     window = new sf::RenderWindow(*videoMode, windowTitle);
 
     /* Map Setup */
-    loadBoundaries();
+    // loadBoundaries();
     placeRoadSegments();
 }
 
@@ -151,6 +151,8 @@ void placeRoadSegments() {
         roadSegments.push_back(*rs);
     }
     ifs.close();
+
+    Test::printRoadSegments(roadSegments);
 }
 
 
