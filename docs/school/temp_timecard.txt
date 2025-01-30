@@ -23,3 +23,5 @@
     12:10 - 12:40 (Meeting with Dr. Wilson)
 01/24/25:
     22:00 - 22:30 (Moving car with RoadSegment vectors)
+01/30/25:
+    10:45 - 00:00 ()
