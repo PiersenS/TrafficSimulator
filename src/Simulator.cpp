@@ -51,6 +51,7 @@ int main() {
     
     bool turn = false;
     
+    std::cout << "Starting loop . . . " << std::endl;
     sf::Event event;
     while (window->isOpen()) {
         window->pollEvent(event);
