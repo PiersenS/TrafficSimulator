@@ -1,6 +1,7 @@
 /* C++ includes */
 #include <random>
 #include <cmath>
+#include <iostream>
 /* Simulator includes */
 #include "ts_utils.h"
 
@@ -16,7 +17,9 @@ int ts::random(int min, int max) {
 sf::Vector2f ts::normalize(sf::Vector2f source) {
     float length = sqrt((source.x * source.x) + (source.y * source.y));
     if (length != 0) {
-        return sf::Vector2f(source.x / length, source.y / length); // normalized vector
+        float norm_x = source.x / length;
+        float norm_y = source.y / length;
+        return sf::Vector2f(norm_x, norm_y); // normalized vector
     }
-    return source;
+    return source; // source already normalized
 }

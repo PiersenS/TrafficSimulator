@@ -1,11 +1,14 @@
 /*
 *   Implementation of Test.h functions
 */
-
-#include "Test.h"
-#include <SFML/Graphics.hpp>
+/* C++ */
 #include <cmath>
 #include <iostream>
+/* TS */
+#include "Test.h"
+#include "ts_utils.h"
+/* SFML*/
+#include <SFML/Graphics.hpp>
 
 int Test::frameCounter = 0;
 
@@ -46,25 +49,23 @@ void Test::orbit(Car& car, float& delta, std::map<string,sf::RectangleShape>& bo
 }
 
 void Test::orbitWithVectors(Car& car, float& delta, std::vector<ts::RoadSegment>& roadSegments) {
-    ts::RoadSegment current;
+    ts::RoadSegment* current = NULL;
     sf::FloatRect carBounds = car.getGlobalBounds();
-    current = roadSegments.at(0);
-    printVector(*current.getIncoming());
-    printVector(*current.getOutgoing());
 
-    
+    for (ts::RoadSegment rs : roadSegments) {
+        if (carBounds.intersects(rs.getBoundary()->getGlobalBounds())) {
+            current = &rs;
+            break;
+        }
+    }
+    if (current == NULL) {
+        // Ran off the road
+        return;
+    }
+    printVector(*current->getOutgoing());
 
-    // sf::Vector2f carMvmt = 
-
-
-    //for (ts::RoadSegment rs : roadSegments) {
-    //    if (carBounds.intersects(rs.getBoundary()->getGlobalBounds())) {
-    //        current = rs;
-    //        break;
-    //    }
-    //}
-    // std::cout << "Selected vector: (" << current.getIncoming()->x << ", " << current.getIncoming()->y << ")" << std::endl;
-    // car.move(*current.getIncoming() * car.getSpeed() * delta);
+    sf::Vector2f norm = ts::normalize(*current->getOutgoing());
+    car.move(norm * car.getSpeed() * delta);
 }
 
 

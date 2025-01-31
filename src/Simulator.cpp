@@ -3,17 +3,17 @@
 *  and acts as the driver for the graph
 */
 
-// I/O
+/* C++ includes */
 #include <iostream>
 #include <fstream> // filestream
 #include <sstream> // string stream
 #include <string>
-// Custom header files
+/* Custom header files */
 #include "Graph.h"
 #include "Car.h"
 #include "RoadSegment.h"
 #include "Test.h"
-// SFML
+/* SFML */
 #include <SFML/Graphics.hpp>
 
 using namespace std;

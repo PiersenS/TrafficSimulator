@@ -4,8 +4,8 @@
 #include <SFML/Graphics.hpp>
 
 namespace ts {
-    static int random(int min, int max);
-    static sf::Vector2f normalize(sf::Vector2f v);
+    int random(int min, int max);
+    sf::Vector2f normalize(sf::Vector2f source);
 }
 
 #endif
