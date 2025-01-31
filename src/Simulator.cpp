@@ -119,9 +119,10 @@ void placeRoadSegments() {
     ifs.open(path);
 
     int x, y, height, width, oneWay;
-    ts::RoadSegment* rs;
-    sf::Vector2f* in; 
-    sf::Vector2f* out;
+    ts::RoadSegment* rs = NULL;
+    sf::Vector2f* in = NULL; 
+    sf::Vector2f* out = NULL;
+    int count = 1;
     while (!ifs.eof()) {
         ifs >> x >> y >> height >> width >> oneWay;
         rs = new ts::RoadSegment(sf::Vector2f(x, y), height, width);
@@ -129,19 +130,21 @@ void placeRoadSegments() {
         if (oneWay) {
             // idk
         }
-        else {
-            int start; 
+        else { // biway
             if (height > width) {
+                std::cout << "Height > Width" << std::endl;
                 in = new sf::Vector2f(0, height);
                 out = new sf::Vector2f(0, -height);
             }
             else { 
+                std::cout << "Width > Height" << std::endl;
                 in = new sf::Vector2f(width, 0);
                 out = new sf::Vector2f(-width, 0);
             }
 
-            rs->setIncoming(*in);
-            rs->setOutgoing(*out);
+            rs->setIncoming(in);
+            rs->setOutgoing(out);
+
             /* Unhandled Edge Case: x = y */
             /* Unhandled situation: diagonal roads
             *       - just rotate vector and include rotation in txt file 
@@ -150,10 +153,12 @@ void placeRoadSegments() {
         }
 
         roadSegments.push_back(*rs);
+        count++;
     }
     ifs.close();
 
     Test::printRoadSegments(roadSegments);
+    // Test::printRoadSegmentVectors(roadSegments);
 }
 
 

@@ -42,6 +42,6 @@ float RoadSegment::getHeight()                  { return height; }
 float RoadSegment::getWidth()                   { return width; }
 
 /********************* Mutators *********************/
-void RoadSegment::setIncoming(sf::Vector2f in)         { incoming = &in; }
-void RoadSegment::setOutgoing(sf::Vector2f out)        { outgoing = &out; }
-void RoadSegment::setBoundary(sf::RectangleShape rect) { boundary = &rect; }
+void RoadSegment::setIncoming(sf::Vector2f* in)         { incoming = in; }
+void RoadSegment::setOutgoing(sf::Vector2f* out)        { outgoing = out; }
+void RoadSegment::setBoundary(sf::RectangleShape* rect) { boundary = rect; }

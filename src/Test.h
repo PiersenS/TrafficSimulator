@@ -26,6 +26,8 @@ public:
     static void drawRoadSegments(sf::RenderWindow& window, std::vector<ts::RoadSegment>& roadSegments);
     /* Print */
     static void printRoadSegments(std::vector<ts::RoadSegment>& roadSegments);
+    static void printRoadSegmentVectors(std::vector<ts::RoadSegment>& roadSegments);
+    static void printVector(sf::Vector2f v);
 };
 
 #endif

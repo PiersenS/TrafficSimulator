@@ -9,6 +9,7 @@
 
 int Test::frameCounter = 0;
 
+/* Car Movement Functions */
 void Test::moveCar(Car& car, float& delta) {
     car.move(car.getDirection() * car.getSpeed() * delta);
 }
@@ -47,14 +48,23 @@ void Test::orbit(Car& car, float& delta, std::map<string,sf::RectangleShape>& bo
 void Test::orbitWithVectors(Car& car, float& delta, std::vector<ts::RoadSegment>& roadSegments) {
     ts::RoadSegment current;
     sf::FloatRect carBounds = car.getGlobalBounds();
-    for (ts::RoadSegment rs : roadSegments) {
-        if (carBounds.intersects(rs.getBoundary()->getGlobalBounds())) {
-            current = rs;
-            break;
-        }
-    }
+    current = roadSegments.at(0);
+    printVector(*current.getIncoming());
+    printVector(*current.getOutgoing());
+
+    
+
+    // sf::Vector2f carMvmt = 
+
+
+    //for (ts::RoadSegment rs : roadSegments) {
+    //    if (carBounds.intersects(rs.getBoundary()->getGlobalBounds())) {
+    //        current = rs;
+    //        break;
+    //    }
+    //}
     // std::cout << "Selected vector: (" << current.getIncoming()->x << ", " << current.getIncoming()->y << ")" << std::endl;
-    car.move(*current.getIncoming());
+    // car.move(*current.getIncoming() * car.getSpeed() * delta);
 }
 
 
@@ -87,6 +97,7 @@ void Test::moveWithKeyboard(sf::Event::EventType et, Car& car, float& delta) {
     }
 }
 
+/* Draw Functions */
 void Test::drawBoundaries(sf::RenderWindow& window, std::map<string,sf::RectangleShape>& boundaries) {
     map<string, sf::RectangleShape>::iterator iter = boundaries.begin();
     while (iter != boundaries.end()) {
@@ -101,6 +112,7 @@ void Test::drawRoadSegments(sf::RenderWindow& window, std::vector<ts::RoadSegmen
     }
 }
 
+/* Print Functions */
 void Test::printRoadSegments(std::vector<ts::RoadSegment>& roadSegments) {
     using namespace std;
     int h, w;
@@ -127,4 +139,16 @@ void Test::printRoadSegments(std::vector<ts::RoadSegment>& roadSegments) {
                out.x, out.y);
         cout << endl;
     }
+}
+
+void Test::printRoadSegmentVectors(std::vector<ts::RoadSegment>& roadSegments) {
+    std::cout << "Printing all RoadSegment vectors: " << std::endl;
+    for (ts::RoadSegment rs : roadSegments) {
+        std::cout << "\t(" << rs.getIncoming()->x << ", " << rs.getIncoming()->y << ")" << std::endl;
+    }
+}
+
+void Test::printVector(sf::Vector2f v) {
+    using namespace std;
+    cout << "(" << v.x << ", " << v.y << ")" << endl;
 }

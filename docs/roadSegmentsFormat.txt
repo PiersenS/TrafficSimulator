@@ -30,3 +30,5 @@ Order of current RoadSegments in file:
     - Left vertical
     - Middle vertical
     - Right vertical
+
+**Make sure there is not an empty line at EOF
