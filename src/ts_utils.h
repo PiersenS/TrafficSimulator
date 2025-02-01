@@ -6,6 +6,7 @@
 namespace ts {
     int random(int min, int max);
     sf::Vector2f normalize(sf::Vector2f source);
+    void restartDelta(float& delta, sf::Clock& clock);
 }
 
 #endif

@@ -8,11 +8,13 @@
 #include <fstream> // filestream
 #include <sstream> // string stream
 #include <string>
+#include <typeinfo>
 /* Custom header files */
 #include "Graph.h"
 #include "Car.h"
 #include "RoadSegment.h"
 #include "Test.h"
+#include "ts_utils.h"
 /* SFML */
 #include <SFML/Graphics.hpp>
 
@@ -26,15 +28,23 @@ sf::RenderWindow* window;
 sf::Sprite* background;
 sf::Texture* backgroundTexture;
 
+sf::Thread* thread;
+
 void updateDelta();
+void handleEvent(sf::Event event);
+/* Simulator setup */
 void setup(); // initializes simulator values
 void loadBoundaries();
 void placeRoadSegments();
+/* MovableEntity functions*/
+void addCar();
+void drive(MovableEntity* entity);
 
 sf::Clock deltaClock;
 sf::Vector2f startingPosition;
 std::map<string,sf::RectangleShape> boundaries;
 std::vector<ts::RoadSegment> roadSegments;
+std::vector<Car*> cars;
 float delta;
 float laneWidth, roadWidth;
 
@@ -46,8 +56,7 @@ int main() {
 
     setup();
 
-    Car car;
-    car.setScaleFactor(laneWidth / car.getLocalBounds().width);
+    // addCar();
     
     bool turn = false;
     
@@ -55,21 +64,21 @@ int main() {
     sf::Event event;
     while (window->isOpen()) {
         window->pollEvent(event);
-        if (event.type == sf::Event::Closed) {
-            cout << "Traffic Simulator ending . . ." << endl;
-            window->close();
-            return 0;
-        }
+        handleEvent(event);
+        
         updateDelta();
 
-        // Test::orbit(car, delta, boundaries);
-        Test::orbitWithVectors(car, delta, roadSegments);
+        // Test::orbitWithVectors(car, delta, roadSegments); // doesn't orbit yet :( -- need more direction from Car, graph, etc.
 
         window->clear();
         window->draw(*background);
-        window->draw(car);
-        // Test::drawBoundaries(*window, boundaries);
-        Test::drawRoadSegments(*window, roadSegments);
+        // window->draw(car);
+        Test::drawCars(*window, cars);
+        for (Car* c : cars) {
+            window->draw(*c);
+        }
+        Test::drawBoundaries(*window, boundaries);
+        // Test::drawRoadSegments(*window, roadSegments);
         window->display();
     }
     
@@ -78,6 +87,19 @@ int main() {
 
 void updateDelta() {
     delta = deltaClock.restart().asSeconds();
+}
+
+void handleEvent(sf::Event event) {
+    if (event.type == sf::Event::Closed) {
+        cout << "Traffic Simulator ending . . ." << endl;
+        window->close();
+        exit(0);
+    }
+    if (event.type == sf::Event::KeyPressed) {
+        if (event.key.code == sf::Keyboard::Space) {
+            addCar();
+        }
+    }
 }
 
 void setup() {
@@ -107,8 +129,8 @@ void setup() {
     window = new sf::RenderWindow(*videoMode, windowTitle);
 
     /* Map Setup */
-    // loadBoundaries();
-    placeRoadSegments();
+    loadBoundaries();
+    // placeRoadSegments();
 }
 
 void placeRoadSegments() {
@@ -122,7 +144,6 @@ void placeRoadSegments() {
     ts::RoadSegment* rs = NULL;
     sf::Vector2f* in = NULL; 
     sf::Vector2f* out = NULL;
-    int count = 1;
     while (!ifs.eof()) {
         ifs >> x >> y >> height >> width >> oneWay;
         rs = new ts::RoadSegment(sf::Vector2f(x, y), height, width);
@@ -153,14 +174,44 @@ void placeRoadSegments() {
         }
 
         roadSegments.push_back(*rs);
-        count++;
     }
     ifs.close();
 
-    Test::printRoadSegments(roadSegments);
-    // Test::printRoadSegmentVectors(roadSegments);
+    // Test::printRoadSegments(roadSegments);
 }
 
+void addCar() {
+    /** Steps:
+     * Init car
+     * pick spawn?
+     * create thread - call drive()
+     */
+    Car* car = new Car();
+    car->setScaleFactor(laneWidth / car->getLocalBounds().width);
+
+    car->start();
+    cars.push_back(car);
+
+    thread = new sf::Thread(*drive, car);
+    thread->launch();
+
+    std::cout << cars.size() << " cars have been added." << std::endl;
+}
+
+void drive(MovableEntity* entity) {
+    if (typeid(*entity) == typeid(Car)) {
+        Car* car = dynamic_cast<Car*>(entity);
+        float carDelta;
+        sf::Clock carClock;
+        while (car->isAlive()) {
+            ts::restartDelta(carDelta, carClock);
+            Test::orbit(*car, carDelta, boundaries);
+        }
+    }
+    else {
+        std::cout << "entity is not a car" << std::endl;
+    }
+}
 
 /* loadBoundaries() will eventually be deleted */
 void loadBoundaries() {

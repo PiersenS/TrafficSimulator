@@ -24,6 +24,7 @@ public:
     /* Draw */
     static void drawBoundaries(sf::RenderWindow& window, std::map<string,sf::RectangleShape>& boundaries);
     static void drawRoadSegments(sf::RenderWindow& window, std::vector<ts::RoadSegment>& roadSegments);
+    static void drawCars(sf::RenderWindow& window, std::vector<Car*>& cars);
     /* Print */
     static void printRoadSegments(std::vector<ts::RoadSegment>& roadSegments);
     static void printRoadSegmentVectors(std::vector<ts::RoadSegment>& roadSegments);

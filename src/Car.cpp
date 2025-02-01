@@ -17,12 +17,13 @@ int PRECISION = 1000;
 const std::string Car::textures[6] = {"black","blue","green","yellow"};
 
 Car::Car() {
-    // speed = 100;
+    // speed = 100; --> REAL VALUE
     speed = 200;
     rotation = 0.0;
     direction = sf::Vector2f(0, -1);
     position = sf::Vector2f(620, 388);
     texture = randomCar();
+    alive = false;
 
     setTexture(texture);
     setOrigin(getLocalBounds().width / 2, getLocalBounds().height / 2); // set origin of sprite to middle
@@ -36,6 +37,7 @@ Car::Car(sf::Texture t, sf::Vector2f pos, float dir) {
     rotation = dir;
     position = pos;
     texture = t;
+    alive = false;
 
     setTexture(texture);
     setOrigin(getLocalBounds().width / 2, getLocalBounds().height / 2);
@@ -70,9 +72,14 @@ ts::Vertex& Car::getCurrentVertex()     { return *currentVertex; }
 ts::Vertex& Car::getDestination()       { return *destVertex; }
 sf::Vector2f Car::getDirection()        { return direction; }
 
+bool Car::isAlive()                          { return alive; }
+
 /********************* Mutators *********************/
-void Car::setCurrentVertex(ts::Vertex& v) { currentVertex = &v; }
-void Car::setDirection(sf::Vector2f dir) { direction = dir; }
+void Car::setCurrentVertex(ts::Vertex& v)   { currentVertex = &v; }
+void Car::setDirection(sf::Vector2f dir)    { direction = dir; }
+
+void Car::start()                           { alive = true; }
+void Car::kill()                            { alive = false; }
 
 /********************* Overloaded sf::Sprite functions *********************/
 void Car::move(float x, float y) {
@@ -103,8 +110,4 @@ void Car::rotate(float deg) {
     // direction = Vector2f(x, y);
     this->setDirection(Vector2f(x, y));
     sf::Sprite::rotate(deg);
-
-    cout << "Direction: (" << direction.x << ", " << direction.y << ")" << endl;
-    cout << "Rotation: " << this->getRotation() << " degrees" << endl;
-    cout << endl;
 }

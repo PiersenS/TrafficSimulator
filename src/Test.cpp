@@ -112,6 +112,11 @@ void Test::drawRoadSegments(sf::RenderWindow& window, std::vector<ts::RoadSegmen
         window.draw(*rs.getBoundary());
     }
 }
+void Test::drawCars(sf::RenderWindow& window, std::vector<Car*>& cars) {
+    for (Car* c : cars) {
+        window.draw(*c);
+    }
+}
 
 /* Print Functions */
 void Test::printRoadSegments(std::vector<ts::RoadSegment>& roadSegments) {

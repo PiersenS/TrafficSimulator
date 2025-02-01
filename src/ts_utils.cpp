@@ -23,3 +23,7 @@ sf::Vector2f ts::normalize(sf::Vector2f source) {
     }
     return source; // source already normalized
 }
+
+void ts::restartDelta(float& delta, sf::Clock& clock) {
+    delta = clock.restart().asSeconds();
+}

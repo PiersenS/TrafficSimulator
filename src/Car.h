@@ -10,6 +10,7 @@
 
 class Car : public MovableEntity {
 private:
+    bool alive;
     static const std::string textures[6];
     static sf::Texture randomCar();
     /*
@@ -29,19 +30,23 @@ public:
     Car();
     Car(sf::Texture texture, sf::Vector2f pos, float dir);
     void setScaleFactor(float factor);
+
+    /* Accessors */
     sf::Vector2f getPosition();
     float getSpeed();
-
+    sf::Vector2f getDirection();
     ts::Edge& getCurrentEdge();
     ts::Vertex& getCurrentVertex();
     ts::Vertex& getDestination();
+    bool isAlive();
 
+    /* Mutators */
     void setDirection(sf::Vector2f dir);
-    sf::Vector2f getDirection();
-
     void setCurrentEdge(ts::Edge* e);
     void setCurrentVertex(ts::Vertex& v);
     void setDestination(ts::Vertex& v);
+    void start();
+    void kill();
 
     // ts::Vertex generateDestination(ts::Vertex current);
 
