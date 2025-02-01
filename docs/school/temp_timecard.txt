@@ -3,4 +3,4 @@
     19:30 - 21:00 (Implementing threads to drive cars)
 
 02/01/25:
-    14:15 - 00:00
+    14:15 - 15:30 (Implemented car manager thread)
