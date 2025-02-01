@@ -1,32 +1,6 @@
-10/22/24:
-    18:45 - 19:00
-
-10/29/24:
-    12:00 - 12:40 (Meeting)
-
-11/12/24:
-    15:30 - 17:00 (System Reqs Document)
-    18:15 - 18:30 (System Reqs Document)
-
-01/10/25:
-    21:30 - 22:45 (RoadSegment txt file - format and reading as input)
-01/11/25:
-    12:30 - 13:30 (RoadSegment txt file - format and reading as input)
-01/13/25:
-    18:00 - 19:30 (RoadSegment txt file - defining road segments)
-
-01/18/25:
-    16:45 - 17:45 (Generating RoadSegment vectors)
-01/19/25:
-    12:00 - 13:15 (Car movement with RoadSegment vectors)
-01/23/25:
-    12:10 - 12:40 (Meeting with Dr. Wilson)
-01/24/25:
-    22:00 - 22:30 (Moving car with RoadSegment vectors)
-01/30/25:
-    10:45 - 12:00 (Fixing RoadSegment vector generation)
-    16:30 - 17:00 (Fixing RoadSegment vector generation)
-    17:45 - 19:00 (Moving car with RoadSegment vectors)
 01/31/25:
     16:45 - 18:45 (Normalize vectors for car movement and implementing threads)
     19:30 - 21:00 (Implementing threads to drive cars)
+
+02/01/25:
+    14:15 - 00:00

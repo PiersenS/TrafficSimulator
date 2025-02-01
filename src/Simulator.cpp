@@ -28,7 +28,10 @@ sf::RenderWindow* window;
 sf::Sprite* background;
 sf::Texture* backgroundTexture;
 
-sf::Thread* thread;
+sf::Thread* driver;
+sf::Thread* car_manager;
+
+const int MAX_CARS = 10;
 
 void updateDelta();
 void handleEvent(sf::Event event);
@@ -38,6 +41,7 @@ void loadBoundaries();
 void placeRoadSegments();
 /* MovableEntity functions*/
 void addCar();
+void manageCars();
 void drive(MovableEntity* entity);
 
 sf::Clock deltaClock;
@@ -55,12 +59,10 @@ int main() {
     // Graph graph("k4");
 
     setup();
+    
+    car_manager = new sf::Thread(*manageCars); // good luck
+    car_manager->launch();
 
-    // addCar();
-    
-    bool turn = false;
-    
-    std::cout << "Starting loop . . . " << std::endl;
     sf::Event event;
     while (window->isOpen()) {
         window->pollEvent(event);
@@ -95,11 +97,11 @@ void handleEvent(sf::Event event) {
         window->close();
         exit(0);
     }
-    if (event.type == sf::Event::KeyPressed) {
-        if (event.key.code == sf::Keyboard::Space) {
-            addCar();
-        }
-    }
+    // if (event.type == sf::Event::KeyPressed) {
+    //     if (event.key.code == sf::Keyboard::Space) {
+    //         addCar();
+    //     }
+    // }
 }
 
 void setup() {
@@ -192,10 +194,34 @@ void addCar() {
     car->start();
     cars.push_back(car);
 
-    thread = new sf::Thread(*drive, car);
-    thread->launch();
+    driver = new sf::Thread(*drive, car);
+    driver->launch();
 
     std::cout << cars.size() << " cars have been added." << std::endl;
+}
+
+/**
+ * Keep MAX_CARS cars on the map
+ */
+void manageCars() {
+    std::cout << "car_manager started! " << std::endl;
+    sf::Clock clock;
+    sf::Time time;
+    int carsAlive;
+
+    clock.restart();    
+    while(true) {
+        carsAlive = cars.size();
+        if (carsAlive < MAX_CARS) {
+            // add car at random time interval: 3-5 seconds
+            int rand_seconds = ts::random(3, 5);
+            sf::Time seconds = sf::seconds(rand_seconds);
+            sf::sleep(seconds);
+
+            addCar();
+        }
+
+    }
 }
 
 void drive(MovableEntity* entity) {

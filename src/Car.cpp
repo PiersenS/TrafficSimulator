@@ -17,8 +17,7 @@ int PRECISION = 1000;
 const std::string Car::textures[6] = {"black","blue","green","yellow"};
 
 Car::Car() {
-    // speed = 100; --> REAL VALUE
-    speed = 200;
+    speed = 100;
     rotation = 0.0;
     direction = sf::Vector2f(0, -1);
     position = sf::Vector2f(620, 388);
