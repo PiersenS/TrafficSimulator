@@ -2,7 +2,7 @@
 #include <vector>
 /* Simulator includes */
 #include "MovableEntity.h"
-#include "ts_utils.h"
+#include "../Utils/ts_utils.h"
 
 ts::Vertex MovableEntity::generateDestination(ts::Vertex* current) {
     /**
@@ -26,3 +26,10 @@ ts::Vertex MovableEntity::generateDestination(ts::Vertex* current) {
     ts::Vertex v;
     return v;
 }
+
+/* Accessors */
+bool MovableEntity::isAlive() { return alive; }
+
+/* Mutators */
+void MovableEntity::start()     { alive = true; }
+void MovableEntity::kill()      { alive = false; }

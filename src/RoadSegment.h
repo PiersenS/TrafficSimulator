@@ -9,7 +9,7 @@
 #define ROAD_SEGMENT_H
 
 // TS includes
-#include "Edge.h"
+#include "Graph/Edge.h"
 // SFML includes
 #include <SFML/Graphics.hpp>
 

@@ -6,9 +6,9 @@
 #ifndef Test_H
 #define Test_H
 
-#include "Car.h"
-#include "Graph.h"
-#include "RoadSegment.h"
+#include "../Entities/Car.h"
+#include "../Graph/Graph.h"
+#include "../RoadSegment.h"
 #include <SFML/Graphics.hpp>
 
 class Test {
@@ -20,6 +20,7 @@ public:
     static void moveWithKeyboard(sf::Event::EventType et, Car& car, float& delta);
     /* Orbit */
     static void orbit(Car& car, float& delta, std::map<string,sf::RectangleShape>& boundaries);
+    static void exitOrbit(Car& car, float& delta);
     static void orbitWithVectors(Car& car, float& delta, std::vector<ts::RoadSegment>& roadSegments);
     /* Draw */
     static void drawBoundaries(sf::RenderWindow& window, std::map<string,sf::RectangleShape>& boundaries);

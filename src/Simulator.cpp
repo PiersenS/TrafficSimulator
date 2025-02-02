@@ -10,11 +10,11 @@
 #include <string>
 #include <typeinfo>
 /* Custom header files */
-#include "Graph.h"
-#include "Car.h"
+#include "Graph/Graph.h"
+#include "Entities/Car.h"
 #include "RoadSegment.h"
-#include "Test.h"
-#include "ts_utils.h"
+#include "Utils/Test.h"
+#include "Utils/ts_utils.h"
 /* SFML */
 #include <SFML/Graphics.hpp>
 
@@ -197,7 +197,20 @@ void addCar() {
     driver = new sf::Thread(*drive, car);
     driver->launch();
 
-    std::cout << cars.size() << " cars have been added." << std::endl;
+    std::cout << "Car added. Total: " << cars.size() << std::endl;
+}
+
+void removeCar(Car* car) {
+    vector<Car*>::iterator it;
+    for (it = cars.begin(); it != cars.end(); it++) {
+        if (*it == car) {
+            car->kill();
+            cars.erase(it);
+            break;
+        }
+    }
+
+    std::cout << "Car removed. Total: " << cars.size() << std::endl;
 }
 
 /**
@@ -213,8 +226,8 @@ void manageCars() {
     while(true) {
         carsAlive = cars.size();
         if (carsAlive < MAX_CARS) {
-            // add car at random time interval: 3-5 seconds
-            int rand_seconds = ts::random(3, 5);
+            // add car at random time intervalh
+            int rand_seconds = ts::random(1, 6);
             sf::Time seconds = sf::seconds(rand_seconds);
             sf::sleep(seconds);
 
@@ -229,14 +242,21 @@ void drive(MovableEntity* entity) {
         Car* car = dynamic_cast<Car*>(entity);
         float carDelta;
         sf::Clock carClock;
-        while (car->isAlive()) {
+
+        car->setDriving();
+        while (car->getState() == Car::State::DRIVING) {
             ts::restartDelta(carDelta, carClock);
             Test::orbit(*car, carDelta, boundaries);
         }
+        while(car->getState() == Car::State::PARKING) {
+            // park car
+            ts::restartDelta(carDelta, carClock);
+            Test::exitOrbit(*car, carDelta);
+        }
+        // car is parked
+        removeCar(car);
     }
-    else {
-        std::cout << "entity is not a car" << std::endl;
-    }
+    // else -> pedestrian
 }
 
 /* loadBoundaries() will eventually be deleted */

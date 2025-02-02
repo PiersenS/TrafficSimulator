@@ -14,7 +14,8 @@ LIBS = ../lib
 EXEC = Simulator
 
 # Find all .cpp files and generate .o file names
-SRCS = $(wildcard *.cpp)
+# SRCS = $(wildcard /*.cpp)
+SRCS = $(wildcard ./*.cpp) $(wildcard ./*/*.cpp)
 OBJS = $(SRCS:.cpp=.o)
 
 # Default target

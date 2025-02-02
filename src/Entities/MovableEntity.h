@@ -2,12 +2,13 @@
 #define MOVABLE_ENTITY_H
 
 /* Simulator includes */
-#include "Vertex.h"
+#include "../Graph/Vertex.h"
 /* SFML includes */
 #include <SFML/Graphics.hpp>
 
 class MovableEntity : public sf::Sprite {
 protected:
+    bool alive;
     float speed;
     float rotation; // angle of rotation
     float scaleFactor;
@@ -21,6 +22,13 @@ protected:
 
 public:
     ts::Vertex generateDestination(ts::Vertex* current);
+
+    /* Accessors */
+    bool isAlive();
+
+    /* Mutators */
+    void start();
+    void kill();
 };
 
 #endif

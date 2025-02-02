@@ -5,8 +5,8 @@
  * 
  */
 
-#include "RoadSegment.h"
 #include <iostream>
+#include "RoadSegment.h"
 
 using namespace ts;
 

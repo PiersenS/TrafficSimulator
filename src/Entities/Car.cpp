@@ -20,9 +20,9 @@ Car::Car() {
     speed = 100;
     rotation = 0.0;
     direction = sf::Vector2f(0, -1);
-    position = sf::Vector2f(620, 388);
+    position = sf::Vector2f(620, 300);
     texture = randomCar();
-    alive = false;
+    state = PARKED;
 
     setTexture(texture);
     setOrigin(getLocalBounds().width / 2, getLocalBounds().height / 2); // set origin of sprite to middle
@@ -36,7 +36,7 @@ Car::Car(sf::Texture t, sf::Vector2f pos, float dir) {
     rotation = dir;
     position = pos;
     texture = t;
-    alive = false;
+    state = PARKED;
 
     setTexture(texture);
     setOrigin(getLocalBounds().width / 2, getLocalBounds().height / 2);
@@ -71,14 +71,19 @@ ts::Vertex& Car::getCurrentVertex()     { return *currentVertex; }
 ts::Vertex& Car::getDestination()       { return *destVertex; }
 sf::Vector2f Car::getDirection()        { return direction; }
 
-bool Car::isAlive()                          { return alive; }
+Car::State Car::getState()                          { return state; }
 
 /********************* Mutators *********************/
 void Car::setCurrentVertex(ts::Vertex& v)   { currentVertex = &v; }
 void Car::setDirection(sf::Vector2f dir)    { direction = dir; }
-
-void Car::start()                           { alive = true; }
+void Car::start() { 
+    alive = true;
+    state = PARKED;
+}
 void Car::kill()                            { alive = false; }
+void Car::setDriving()                      { state = DRIVING;}
+void Car::setParking()                      { state = PARKING;}
+void Car::setParked()                       { state = PARKED;}
 
 /********************* Overloaded sf::Sprite functions *********************/
 void Car::move(float x, float y) {

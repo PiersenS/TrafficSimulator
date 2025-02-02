@@ -7,8 +7,6 @@
 /* TS */
 #include "Test.h"
 #include "ts_utils.h"
-/* SFML*/
-#include <SFML/Graphics.hpp>
 
 int Test::frameCounter = 0;
 
@@ -26,26 +24,38 @@ void Test::moveBtoA(Car& car, float& delta, std::map<string,sf::RectangleShape>&
 
 void Test::orbit(Car& car, float& delta, std::map<string,sf::RectangleShape>& boundaries) {
     float rotation = -90;
-    //if (frameCounter == 0) {
 
-        if (car.getGlobalBounds().intersects(boundaries["BA"].getGlobalBounds())) {
-            car.rotate(rotation);
-            //frameCounter = 10;
-        }
-        if (car.getGlobalBounds().intersects(boundaries["AD"].getGlobalBounds())) {
-            car.rotate(rotation);
-            //frameCounter = 10;
-        }
-        if (car.getGlobalBounds().intersects(boundaries["DC"].getGlobalBounds())) {
-            car.rotate(rotation);
-            //frameCounter = 10;
-        }
-        if (car.getGlobalBounds().intersects(boundaries["CB"].getGlobalBounds())) {
-            car.rotate(rotation);
-            //frameCounter = 10;
-        }
-    //}
+    if (car.getGlobalBounds().intersects(boundaries["BA"].getGlobalBounds())) {
+        car.rotate(rotation);
+    }
+    if (car.getGlobalBounds().intersects(boundaries["AD"].getGlobalBounds())) {
+        car.rotate(rotation);
+    }
+    if (car.getGlobalBounds().intersects(boundaries["DC"].getGlobalBounds())) {
+        car.rotate(rotation);
+    }
+    if (car.getGlobalBounds().intersects(boundaries["CB"].getGlobalBounds())) {
+        car.rotate(rotation);
+    }
+    if (car.getGlobalBounds().intersects(boundaries["B"].getGlobalBounds())) {
+        car.setParking();
+    }
     moveCar(car, delta);
+}
+
+void Test::exitOrbit(Car& car, float& delta) {
+    // travel a few more pixels, turn right, kill when off screen
+
+    if (car.getRotation() != 90) {
+        float turnPosY = 372;
+        if (car.getPosition().y <= turnPosY) {
+            car.rotate(90);
+        }
+    }
+    moveCar(car, delta);
+    if (car.getPosition().x > 750) {
+        car.setParked();
+    }
 }
 
 void Test::orbitWithVectors(Car& car, float& delta, std::vector<ts::RoadSegment>& roadSegments) {
