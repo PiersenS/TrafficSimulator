@@ -115,7 +115,7 @@ void setup() {
 
     /* Rendering */
     backgroundTexture = new sf::Texture();
-    string path = "../maps/" + sim_map + "/" + sim_map + ".png";
+    string path = "maps/" + sim_map + "/" + sim_map + ".png";
     if (backgroundTexture->loadFromFile(path)) {
         std::cout << "Background Texture Loaded." << std::endl;
     }
@@ -139,7 +139,7 @@ void placeRoadSegments() {
     using namespace std;
     cout << "Creating RoadSegments . . . " << endl;
     ifstream ifs;
-    string path = "../maps/" + sim_map + "/roadSegments.txt";
+    string path = "maps/" + sim_map + "/roadSegments.txt";
     ifs.open(path);
 
     int x, y, height, width, oneWay;
@@ -262,7 +262,7 @@ void drive(MovableEntity* entity) {
 /* loadBoundaries() will eventually be deleted */
 void loadBoundaries() {
     ifstream ifs;
-    ifs.open("../maps/" + sim_map + "/boundaries.txt");
+    ifs.open("maps/" + sim_map + "/boundaries.txt");
 
     // vars for processing each line
     vector<string> segments;

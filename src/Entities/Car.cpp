@@ -55,7 +55,7 @@ Texture Car::randomCar() {
     int numChoice = carNumberDist(rand_dev);
 
     Texture t;
-    t.loadFromFile("../assets/Cars/car_" + colorChoice + "_small_" + to_string(numChoice) + ".png");
+    t.loadFromFile("assets/Cars/car_" + colorChoice + "_small_" + to_string(numChoice) + ".png");
     return t;
 }
 
@@ -71,7 +71,7 @@ ts::Vertex& Car::getCurrentVertex()     { return *currentVertex; }
 ts::Vertex& Car::getDestination()       { return *destVertex; }
 sf::Vector2f Car::getDirection()        { return direction; }
 
-Car::State Car::getState()                          { return state; }
+Car::State Car::getState()              { return state; }
 
 /********************* Mutators *********************/
 void Car::setCurrentVertex(ts::Vertex& v)   { currentVertex = &v; }

@@ -8,14 +8,14 @@ CFLAGS = -g -std=c++11 -I$(LIBS)
 LDFLAGS = -lsfml-graphics -lsfml-window -lsfml-system
 
 # Include directory
-LIBS = ../lib
+LIBS = ./lib
 
 # Executable name
 EXEC = Simulator
 
 # Find all .cpp files and generate .o file names
 # SRCS = $(wildcard /*.cpp)
-SRCS = $(wildcard ./*.cpp) $(wildcard ./*/*.cpp)
+SRCS = $(wildcard src/*.cpp) $(wildcard src/*/*.cpp)
 OBJS = $(SRCS:.cpp=.o)
 
 # Default target
