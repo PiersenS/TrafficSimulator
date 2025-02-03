@@ -206,6 +206,7 @@ void removeCar(Car* car) {
         if (*it == car) {
             car->kill();
             cars.erase(it);
+            delete car;
             break;
         }
     }
