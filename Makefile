@@ -2,7 +2,7 @@
 CC = g++
 
 # Compiler flags
-CFLAGS = -g -std=c++11 -I$(LIBS)
+CFLAGS = -g -std=c++17 -I$(LIBS)
 
 # Linker flags
 LDFLAGS = -lsfml-graphics -lsfml-window -lsfml-system
@@ -14,9 +14,9 @@ LIBS = ./lib
 EXEC = Simulator
 
 # Find all .cpp files and generate .o file names
-# SRCS = $(wildcard /*.cpp)
 SRCS = $(wildcard src/*.cpp) $(wildcard src/*/*.cpp)
-OBJS = $(SRCS:.cpp=.o)
+OBJS = $(patsubst src/%.cpp,build/%.o,$(SRCS))
+# OBJS = $(SRCS:.cpp=.o)
 
 # Default target
 all: $(EXEC)
@@ -26,7 +26,12 @@ $(EXEC): $(OBJS)
 	$(CC) -o $@ $^ $(LDFLAGS)
 
 # Compile .cpp files to .o files
-%.o: %.cpp
+# %.o: %.cpp
+#	$(CC) $(CFLAGS) -c $< -o $@
+
+# Compile .cpp files to .o files in the build directory
+build/%.o: src/%.cpp
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # Clean up object files and the executable
