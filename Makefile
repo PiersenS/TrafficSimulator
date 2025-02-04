@@ -36,6 +36,7 @@ build/%.o: src/%.cpp
 
 # Clean up object files and the executable
 clean:
-	rm -f $(OBJS) $(EXEC)
+# 	rm -f $(OBJS) $(EXEC)
+	rm -rf build $(EXEC)
 
 .PHONY: all clean

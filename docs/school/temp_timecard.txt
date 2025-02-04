@@ -6,3 +6,5 @@
     14:15 - 15:30 (Implemented car manager thread)
     17:00 - 18:45 (Implemented car States)
     19:15 - 20:30 (Reworked file structure)
+02/03/25:
+    16:45 - 00:00 ()
