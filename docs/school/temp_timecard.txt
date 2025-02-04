@@ -7,4 +7,4 @@
     17:00 - 18:45 (Implemented car States)
     19:15 - 20:30 (Reworked file structure)
 02/03/25:
-    16:45 - 00:00 ()
+    16:45 - 17:00 (Changed Makefile to put .o files in build directory)
