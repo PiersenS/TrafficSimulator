@@ -74,8 +74,6 @@ int main() {
 
         window->clear();
         window->draw(*background);
-        // window->draw(car);
-        Test::drawCars(*window, cars);
         for (Car* c : cars) {
             window->draw(*c);
         }
