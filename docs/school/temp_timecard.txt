@@ -11,4 +11,5 @@
 02/05/25:
     19:30 - 20:15 (Implementing movement with RoadSegment vectors)
 02/06/25:
-    13:00 - 00:00 ()
+    13:00 - 14:45 (Generating random vertex in Graph - for car destinations)
+    15:15 - 00:00 ()

@@ -79,8 +79,8 @@ bool Edge::isDirected()             { return this->directed; }
 // sf::Vector2f Edge::getDirection()   { return this->dirVector; }
 
 /* -------------------- Mutators -------------------- */
-void Edge::setOrigin(const Vertex& origin)  { *this->origin = origin; }
-void Edge::setDest(const Vertex& dest)      { *this->dest = dest; }
+void Edge::setOrigin(Vertex* origin)  { this->origin = origin; }
+void Edge::setDest(Vertex* dest)      { this->dest = dest; }
 void Edge::setName(std::string name)        { this->name = name; }
 void Edge::setLength(double length)         { this->length = length; }
 void Edge::setSpeedLimit(int sl)            { speedLimit = sl; }

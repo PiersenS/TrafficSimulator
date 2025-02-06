@@ -8,7 +8,7 @@
 #include <cmath>
 /* Simulator includes */
 #include "Car.h"
-
+#include "../Utils/ts_utils.h"
 
 using namespace sf;
 
@@ -47,12 +47,8 @@ Car::Car(sf::Texture t, sf::Vector2f pos, float dir) {
 Texture Car::randomCar() {
     using namespace std;
 
-    // apply random texture - random car color
-    random_device rand_dev;
-    uniform_int_distribution<int> carColorDist(0,3);
-    uniform_int_distribution<int> carNumberDist(1,5);
-    string colorChoice = textures[carColorDist(rand_dev)];
-    int numChoice = carNumberDist(rand_dev);
+    string colorChoice = textures[ts::random(0, 3)];
+    int numChoice = ts::random(1, 5);
 
     Texture t;
     t.loadFromFile("assets/Cars/car_" + colorChoice + "_small_" + to_string(numChoice) + ".png");

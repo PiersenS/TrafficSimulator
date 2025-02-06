@@ -25,7 +25,7 @@ namespace ts {
         Vertex(std::string name, int junction);
         int operator*();                // returns element associated with vertex - idk about return type yet
         bool operator==(Vertex v);
-        std::vector<ts::Edge> incidentEdges();   // returns edge list of vertex
+        std::vector<ts::Edge> incidentEdges();   // returns edge list of incident edges
         bool isAdjacentTo(Vertex v);    // true if Vertex is adjacent to v
         void setJunction(int num);
         int addJunction();

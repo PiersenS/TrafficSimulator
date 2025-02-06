@@ -56,10 +56,10 @@ int main() {
     cout << "Traffic Simulator started!" << endl;
     vector<Vertex> vertices;
     vector<Edge> edges;
-    // Graph graph("k4");
+    Graph graph("k4");
 
     setup();
-    
+   
     car_manager = new sf::Thread(*manageCars); // good luck
     car_manager->launch();
 
@@ -131,7 +131,7 @@ void setup() {
     window = new sf::RenderWindow(*videoMode, windowTitle);
 
     /* Map Setup */
-    loadBoundaries();
+    // loadBoundaries();
     placeRoadSegments();
 }
 

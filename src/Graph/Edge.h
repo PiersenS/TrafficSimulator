@@ -52,8 +52,8 @@ namespace ts {
         // sf::Vector2f getDirection();
 
         /* Mutators */
-        void setOrigin(const Vertex& origin);
-        void setDest(const Vertex& dest);
+        void setOrigin(Vertex* origin);
+        void setDest(Vertex* dest);
         void setName(std::string name);
         void setLength(double length);
         void setSpeedLimit(int sl);

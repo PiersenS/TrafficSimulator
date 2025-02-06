@@ -21,8 +21,6 @@ protected:
     ts::Vertex* destVertex;
 
 public:
-    ts::Vertex generateDestination(ts::Vertex* current);
-
     /* Accessors */
     bool isAlive();
 

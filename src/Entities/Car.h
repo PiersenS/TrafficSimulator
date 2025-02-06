@@ -40,8 +40,6 @@ public:
     void setParking();
     void setParked();
 
-    // ts::Vertex generateDestination(ts::Vertex current);
-
     // Overloaded sf::Sprite functions
     void move(float x, float y);
     void move(sf::Vector2f v);

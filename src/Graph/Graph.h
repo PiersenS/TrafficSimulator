@@ -33,7 +33,6 @@ namespace ts {
     public:
         Graph(string map);
         Graph(vector<vector<int>> matrix);
-        void loadMap(string map);
         vector<Vertex> getVertices();
         vector<Edge> getEdges();
 
@@ -44,6 +43,10 @@ namespace ts {
         bool insertEdge(Edge e, Vertex origin, Vertex dest);
         bool removeVertex(Vertex v);
         bool removeEdge(Edge e);
+
+        /* Simulator Functions */
+        void loadMap(string map);
+        ts::Vertex* randAdjVertex(ts::Vertex* current);
 
         /* Static Functions */
         static void addJunction();

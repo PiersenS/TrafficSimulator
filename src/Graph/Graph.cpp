@@ -7,8 +7,9 @@
 #include <fstream>
 #include <sstream>
 #include <algorithm>
-// Custom header files
+// Simulator includes
 #include "Graph.h"
+#include "../Utils/ts_utils.h"
 
 using namespace ts;
 
@@ -107,6 +108,21 @@ void Graph::updateJunctions(int n) {
     }
 }
 
+/* Simulator Functions */
+ts::Vertex* Graph::randAdjVertex(ts::Vertex* current) {
+    using namespace ts;
+    std::vector<Edge> incident = current->incidentEdges();
+    std::vector<Vertex*> adj;
+    Vertex* v;
+    for (Edge e : incident) {
+        *v = e.opposite(*current);
+        adj.push_back(v);
+    }
+
+    int choice = ts::random(0, adj.size());
+    return adj.at(choice);
+}
+
 void Graph::addJunction() {
     numJunctions++;
 }
@@ -122,14 +138,22 @@ int Graph::getNumJunctions() {
 void Graph::loadMap(string map) {
     using namespace std;
     ifstream ifs;
-    ifs.open("../maps/" + map + "/graphData.txt");
+    string path = "maps/" + map + "/graphData.txt";
+    ifs.open(path);
+
+    if (!ifs.is_open()) {
+        cerr << "Unable to open graphData file: " << path << endl;
+        exit(1);
+    }
 
     int vertices, edges;
     ifs >> vertices >> edges;
+    cout << vertices << " vertices. " << edges << " edges" << endl;
 
     string vertexName;
     for (int i = 0; i < vertices; i++) {    // process vertices
         ifs >> vertexName;
+        cout << "Creating Vertex: " << vertexName << endl;
         Vertex v(vertexName, i); // name and junction number
         vertexList.push_back(v);
     }
@@ -140,20 +164,27 @@ void Graph::loadMap(string map) {
     bool directed;
     for (int i = 0; i < edges; i++) {       // process edges
         // take input
-        cin >> edgeName >> originName >> destName;
-        cin >> length >> speedLimit >> isDirected;
+        ifs >> edgeName >> originName >> destName;
+        ifs >> length >> speedLimit >> isDirected;
+        cout << edgeName << " " << originName << " " << destName << " ";
+        cout << length << " " << speedLimit << " " << isDirected << endl;
         directed = (bool) isDirected;
 
         // Create Edge and Vertices
-        Edge e(edgeName, length, speedLimit, directed);
-        Vertex origin(originName);
-        Vertex destination(destName);
+        Edge* e = new Edge(edgeName, length, speedLimit, directed);
+        Vertex* origin = new Vertex(originName);
+        Vertex* destination = new Vertex(destName);
+
+        cout << "Edge, origin, and destination created." << endl;
         
-        e.setOrigin(origin);
-        e.setDest(destination);
+        e->setOrigin(origin);
+        e->setDest(destination);
+
+        cout << "Edge's origin and destination have been set." << endl;
 
         // insert Edge/Vertices in Graph
-        insertEdge(e, origin, destination); // inserts Edge, origin, & destination
+        insertEdge(*e, *origin, *destination); // inserts Edge, origin, & destination
+        cout << "Edge inserted!" << endl;
     }
 }
 
