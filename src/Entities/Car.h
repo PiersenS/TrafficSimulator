@@ -15,6 +15,9 @@ public:
     /* Constructors */
     Car();
     Car(sf::Texture texture, sf::Vector2f pos, float dir);
+    
+    /* Destructor */
+    ~Car() {}
 
     /* Accessors */
     sf::Vector2f getPosition();

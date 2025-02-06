@@ -8,3 +8,5 @@
     19:15 - 20:30 (Reworked file structure)
 02/03/25:
     16:45 - 17:00 (Changed Makefile to put .o files in build directory)
+02/05/25:
+    19:30 - 20:15 (Implementing movement with RoadSegment vectors)

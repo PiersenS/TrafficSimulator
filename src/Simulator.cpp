@@ -132,7 +132,7 @@ void setup() {
 
     /* Map Setup */
     loadBoundaries();
-    // placeRoadSegments();
+    placeRoadSegments();
 }
 
 void placeRoadSegments() {
@@ -247,7 +247,14 @@ void drive(MovableEntity* entity) {
         car->setDriving();
         while (car->getState() == Car::State::DRIVING) {
             ts::restartDelta(carDelta, carClock);
-            Test::orbit(*car, carDelta, boundaries);
+            // Test::orbit(*car, carDelta, boundaries);
+
+            /* Cars need to have intention on where they're going. 
+            how to do this? idk :(   */
+
+            
+
+            
         }
         while(car->getState() == Car::State::PARKING) {
             // park car
