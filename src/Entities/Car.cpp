@@ -63,14 +63,11 @@ void Car::setScaleFactor(float factor) {
 /********************* Accessors *********************/
 Vector2f Car::getPosition()             { return position; }
 float Car::getSpeed()                   { return speed; }
-ts::Vertex& Car::getCurrentVertex()     { return *currentVertex; }
-ts::Vertex& Car::getDestination()       { return *destVertex; }
 sf::Vector2f Car::getDirection()        { return direction; }
 
 Car::State Car::getState()              { return state; }
 
 /********************* Mutators *********************/
-void Car::setCurrentVertex(ts::Vertex& v)   { currentVertex = &v; }
 void Car::setDirection(sf::Vector2f dir)    { direction = dir; }
 void Car::start() { 
     alive = true;

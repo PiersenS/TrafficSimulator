@@ -30,6 +30,20 @@ vector<Edge> Graph::getEdges() {
     return this->edgeList;
 }
 
+Vertex* Graph::getStartingVertex() {
+    // TODO: pick random vertex from startingVertices vector
+
+    Vertex* start = NULL;
+    /* Return Vertex B */
+    for (Vertex v : vertexList) {
+        if (v.getName() == "B") {
+            start = &v;
+            return start;
+        }
+    }
+    return NULL;
+}
+
 void Graph::setMatrix(vector<vector<int>> matrix) {
     this->adjMatrix = matrix;
 }

@@ -21,6 +21,8 @@
 using namespace std;
 using namespace ts;
 
+Graph* graph;
+
 string sim_map;
 string windowTitle;
 sf::VideoMode* videoMode;
@@ -56,7 +58,6 @@ int main() {
     cout << "Traffic Simulator started!" << endl;
     vector<Vertex> vertices;
     vector<Edge> edges;
-    Graph graph("k4");
 
     setup();
    
@@ -66,19 +67,16 @@ int main() {
     sf::Event event;
     while (window->isOpen()) {
         window->pollEvent(event);
-        handleEvent(event);
-        
+        // handleEvent(event);
         updateDelta();
-
-        // Test::orbitWithVectors(car, delta, roadSegments); // doesn't orbit yet :( -- need more direction from Car, graph, etc.
 
         window->clear();
         window->draw(*background);
         for (Car* c : cars) {
             window->draw(*c);
         }
-        Test::drawBoundaries(*window, boundaries);
-        // Test::drawRoadSegments(*window, roadSegments);
+        // Test::drawBoundaries(*window, boundaries);
+        Test::drawRoadSegments(*window, roadSegments);
         window->display();
     }
     
@@ -107,6 +105,7 @@ void setup() {
 
     /* Simulation */
     sim_map = "k4";
+    graph = new Graph(sim_map);
     startingPosition = sf::Vector2f(612, 80);
     laneWidth = 15.0;
     roadWidth = laneWidth * 2;
@@ -186,12 +185,17 @@ void addCar() {
      * pick spawn?
      * create thread - call drive()
      */
+    /* Initialize Car object */
     Car* car = new Car();
     car->setScaleFactor(laneWidth / car->getLocalBounds().width);
 
     car->start();
     cars.push_back(car);
-
+    
+    Vertex* v = graph->getStartingVertex();
+    car->setCurrentVertex(v);
+    
+    /* Create Thread */
     driver = new sf::Thread(*drive, car);
     driver->launch();
 

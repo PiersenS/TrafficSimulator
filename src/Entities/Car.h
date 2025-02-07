@@ -23,17 +23,12 @@ public:
     sf::Vector2f getPosition();
     float getSpeed();
     sf::Vector2f getDirection();
-    ts::Edge& getCurrentEdge();
-    ts::Vertex& getCurrentVertex();
     ts::Vertex& getDestination();
     State getState();
 
     /* Mutators */
     void setScaleFactor(float factor);
     void setDirection(sf::Vector2f dir);
-    void setCurrentEdge(ts::Edge* e);
-    void setCurrentVertex(ts::Vertex& v);
-    void setDestination(ts::Vertex& v);
     void start();
     void kill();
     void setDriving();

@@ -23,10 +23,13 @@ protected:
 public:
     /* Accessors */
     bool isAlive();
+    ts::Edge* getCurrentEdge();
+    ts::Vertex* getCurrentVertex();
 
     /* Mutators */
-    void start();
-    void kill();
+    virtual void setCurrentEdge(ts::Edge* e);
+    virtual void setCurrentVertex(ts::Vertex* v);
+    virtual void setDestinationVertex(ts::Vertex* v);
 };
 
 #endif

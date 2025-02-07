@@ -29,6 +29,9 @@ namespace ts {
         bool isAdjacentTo(Vertex v);    // true if Vertex is adjacent to v
         void setJunction(int num);
         int addJunction();
+
+        /* Accessors */
+        std::string getName();
         sf::FloatRect getBoundaries();
     };
 

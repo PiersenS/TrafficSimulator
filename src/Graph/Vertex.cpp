@@ -70,6 +70,8 @@ int Vertex::addJunction() {
     return Graph::getNumJunctions();
 }
 
+string ts::Vertex::getName() { return name; }
+
 sf::FloatRect ts::Vertex::getBoundaries() {
     return boundaryRect.getGlobalBounds();
 }

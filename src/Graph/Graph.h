@@ -13,6 +13,7 @@ namespace ts {
         vector<Vertex> vertexList;
         vector<Edge> edgeList;
         vector<vector<int>> adjMatrix;
+        vector<Vertex*> startingVertices;
 
         static int numJunctions;
         /* For adjMatrix:
@@ -33,9 +34,13 @@ namespace ts {
     public:
         Graph(string map);
         Graph(vector<vector<int>> matrix);
+
+        /* Accessors */
         vector<Vertex> getVertices();
         vector<Edge> getEdges();
+        Vertex* getStartingVertex();
 
+        /* Graph Functions */
         void setMatrix(vector<vector<int>> matrix);
         void addAdjacency(int originJunct, int destJunct, int edgeLength);
 
