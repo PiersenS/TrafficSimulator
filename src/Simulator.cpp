@@ -61,7 +61,7 @@ int main() {
 
     setup();
    
-    car_manager = new sf::Thread(*manageCars); // good luck
+    car_manager = new sf::Thread(*manageCars);
     car_manager->launch();
 
     sf::Event event;
@@ -75,8 +75,8 @@ int main() {
         for (Car* c : cars) {
             window->draw(*c);
         }
-        // Test::drawBoundaries(*window, boundaries);
-        Test::drawRoadSegments(*window, roadSegments);
+        Test::drawBoundaries(*window, boundaries);
+        // Test::drawRoadSegments(*window, roadSegments);
         window->display();
     }
     
@@ -128,7 +128,7 @@ void setup() {
     window = new sf::RenderWindow(*videoMode, windowTitle);
 
     /* Map Setup */
-    // loadBoundaries();
+    loadBoundaries();
     placeRoadSegments();
 }
 
@@ -203,6 +203,7 @@ void addCar() {
 }
 
 void removeCar(Car* car) {
+    // might have to exit thread
     vector<Car*>::iterator it;
     for (it = cars.begin(); it != cars.end(); it++) {
         if (*it == car) {
@@ -249,7 +250,7 @@ void drive(MovableEntity* entity) {
         car->setDriving();
         while (car->getState() == Car::State::DRIVING) {
             ts::restartDelta(carDelta, carClock);
-            // Test::orbit(*car, carDelta, boundaries);
+            Test::orbit(*car, carDelta, boundaries);
 
             /* Cars need to have intention on where they're going. 
             how to do this? idk :(   */
