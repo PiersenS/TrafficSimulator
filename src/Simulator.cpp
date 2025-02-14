@@ -18,7 +18,6 @@
 /* SFML */
 #include <SFML/Graphics.hpp>
 
-using namespace std;
 using namespace ts;
 
 Graph* graph;
