@@ -4,3 +4,9 @@ Use XML file to represent steps;
 Search for XML tag of current intersection
     - under that tag, find tag for destination intersection
     - read instructions
+
+
+
+Each Car object will decide its own destination. 
+Do do this, the car will "ask" the Graph for its destination or directions
+to the decided destination. 

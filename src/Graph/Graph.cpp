@@ -34,7 +34,7 @@ Vertex* Graph::getStartingVertex() {
     // TODO: pick random vertex from startingVertices vector
 
     Vertex* start = NULL;
-    /* Return Vertex B */
+    // Return Vertex B -- for now
     for (Vertex v : vertexList) {
         if (v.getName() == "B") {
             start = &v;

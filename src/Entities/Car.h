@@ -3,6 +3,7 @@
 
 /* Simulator includes */
 #include "MovableEntity.h"
+#include "../Graph/Graph.h"
 /* SFML includes */
 #include <SFML/Graphics.hpp>
 
@@ -23,12 +24,14 @@ public:
     sf::Vector2f getPosition();
     float getSpeed();
     sf::Vector2f getDirection();
-    ts::Vertex& getDestination();
+    ts::Vertex* getDestination();
+    ts::Vertex* getCurrentVertex();
     State getState();
 
     /* Mutators */
     void setScaleFactor(float factor);
     void setDirection(sf::Vector2f dir);
+    void setRandomDestination(ts::Graph* graph);
     void start();
     void kill();
     void setDriving();
@@ -40,9 +43,13 @@ public:
     void move(sf::Vector2f v);
     void rotate(float deg);
 
+    /* Behavioral Functions */
+
 private:
     Car::State state;
     static const std::string textures[6];
     static sf::Texture randomCar();
+    ts::Vertex* destVertex;
+    ts::Vertex* currentVertex;
 };
 #endif

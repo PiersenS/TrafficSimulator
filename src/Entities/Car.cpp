@@ -12,7 +12,7 @@
 
 using namespace sf;
 
-int PRECISION = 1000;
+const int PRECISION = 1000;
 
 const std::string Car::textures[6] = {"black","blue","green","yellow"};
 
@@ -64,7 +64,8 @@ void Car::setScaleFactor(float factor) {
 Vector2f Car::getPosition()             { return position; }
 float Car::getSpeed()                   { return speed; }
 sf::Vector2f Car::getDirection()        { return direction; }
-
+ts::Vertex* Car::getDestination()       { return destVertex; }
+ts::Vertex* Car::getCurrentVertex()     { return currentVertex; }
 Car::State Car::getState()              { return state; }
 
 /********************* Mutators *********************/
@@ -72,6 +73,9 @@ void Car::setDirection(sf::Vector2f dir)    { direction = dir; }
 void Car::start() { 
     alive = true;
     state = PARKED;
+}
+void Car::setRandomDestination(ts::Graph* graph) {
+    destVertex = graph->randAdjVertex(currentVertex);
 }
 void Car::kill()                            { alive = false; }
 void Car::setDriving()                      { state = DRIVING;}

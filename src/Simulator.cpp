@@ -127,7 +127,7 @@ void setup() {
     window = new sf::RenderWindow(*videoMode, windowTitle);
 
     /* Map Setup */
-    loadBoundaries();
+    // loadBoundaries();
     placeRoadSegments();
 }
 
@@ -212,7 +212,6 @@ void removeCar(Car* car) {
             break;
         }
     }
-
     std::cout << "Car removed. Total: " << cars.size() << std::endl;
 }
 
@@ -236,7 +235,6 @@ void manageCars() {
 
             addCar();
         }
-
     }
 }
 
@@ -246,14 +244,15 @@ void drive(MovableEntity* entity) {
         float carDelta;
         sf::Clock carClock;
 
+        car->setCurrentVertex(graph->getStartingVertex());
         car->setDriving();
         while (car->getState() == Car::State::DRIVING) {
             ts::restartDelta(carDelta, carClock);
-            Test::orbit(*car, carDelta, boundaries);
+            // Test::orbit(*car, carDelta, boundaries);
 
             /* Cars need to have intention on where they're going. 
             how to do this? idk :(   */
-
+            
             
 
             
