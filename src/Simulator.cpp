@@ -245,6 +245,7 @@ void drive(MovableEntity* entity) {
         sf::Clock carClock;
 
         car->setCurrentVertex(graph->getStartingVertex());
+        car->setRandomDestination(graph);   // adjacent vertex
         car->setDriving();
         while (car->getState() == Car::State::DRIVING) {
             ts::restartDelta(carDelta, carClock);
@@ -253,7 +254,8 @@ void drive(MovableEntity* entity) {
             /* Cars need to have intention on where they're going. 
             how to do this? idk :(   */
             
-            
+            // how to relate edge to roadSegment?
+            // choose incoming or outgoing?
 
             
         }

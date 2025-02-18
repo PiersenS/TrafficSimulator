@@ -13,3 +13,8 @@
 02/06/25:
     13:00 - 14:45 (Generating random vertex in Graph - for car destinations)
     15:15 - 16:45 (Fixing graph - loadMap function)
+
+02/16/25:
+    19:45 - 20:30 (Implementing Car's ability to get random desination)
+02/17/25:
+    21:30 - 00:00 ()

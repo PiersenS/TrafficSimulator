@@ -2,7 +2,7 @@
 | Format for roadSegments.txt Input File |
 '----------------------------------------'
 
-EdgeName LeftCornerX LeftCornerY Height Width isOneWay
+EdgeName LeftCornerX LeftCornerY Height Width isOneWay IncomingDestVertexName OutgoingDestVertexName
 
 
 
@@ -15,6 +15,9 @@ Information Needed:
     - where to place vectors
         - if it's a one-way, only need one vector in the middle 
             - direction? (idk yet)
+    - incoming destination and outgoing destination
+        - decided to implement this as a list of vertices that the RoadSegment covers
+        - this also means destination/origin vertices, even if not directly connected
 
 
 How to handle shared roadSegments?

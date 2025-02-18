@@ -8,9 +8,11 @@
 #ifndef ROAD_SEGMENT_H
 #define ROAD_SEGMENT_H
 
-// TS includes
+/* C++ includes */
+#include <vector>
+/* TS includes */
 #include "Graph/Edge.h"
-// SFML includes
+/* SFML includes */
 #include <SFML/Graphics.hpp>
 
 namespace ts {
@@ -25,6 +27,8 @@ namespace ts {
         sf::Vector2f position;   // location on map - top left corner of RoadSegement (bounding box)
         float height, width;
 
+        std::vector<ts::Vertex*> vertices;
+
     public:
         /* Constructors */
         RoadSegment();
@@ -33,6 +37,7 @@ namespace ts {
         /* Accessors */
         sf::Vector2f* getIncoming();
         sf::Vector2f* getOutgoing();
+        std::vector<Vertex*> getVertices();
         sf::Vector2f getPosition();
         sf::RectangleShape* getBoundary();
         float getHeight();
@@ -41,6 +46,7 @@ namespace ts {
         /* Mutators */
         void setIncoming(sf::Vector2f* in);
         void setOutgoing(sf::Vector2f* out);
+        void setVertices(std::vector<Vertex*> v);
         void setBoundary(sf::RectangleShape* rect);
     };
 }
