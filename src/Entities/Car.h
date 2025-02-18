@@ -27,13 +27,15 @@ public:
     ts::Vertex* getDestination();
     ts::Vertex* getCurrentVertex();
     State getState();
+    bool isRunning();
 
     /* Mutators */
     void setScaleFactor(float factor);
     void setDirection(sf::Vector2f dir);
     void setRandomDestination(ts::Graph* graph);
     void start();
-    void kill();
+    void stop();
+    // void kill();
     void setDriving();
     void setParking();
     void setParked();
@@ -47,6 +49,7 @@ public:
 
 private:
     Car::State state;
+    bool running;
     static const std::string textures[6];
     static sf::Texture randomCar();
     ts::Vertex* destVertex;

@@ -17,4 +17,5 @@
 02/16/25:
     19:45 - 20:30 (Implementing Car's ability to get random desination)
 02/17/25:
-    21:30 - 00:00 ()
+    21:30 - 22:30 (Added vertices to RoadSegment objects)
+    22:50 - 23:15 (Established drive() FSM structure)

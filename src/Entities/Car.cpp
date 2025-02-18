@@ -67,17 +67,20 @@ sf::Vector2f Car::getDirection()        { return direction; }
 ts::Vertex* Car::getDestination()       { return destVertex; }
 ts::Vertex* Car::getCurrentVertex()     { return currentVertex; }
 Car::State Car::getState()              { return state; }
+bool Car::isRunning()                   { return running; }
 
 /********************* Mutators *********************/
 void Car::setDirection(sf::Vector2f dir)    { direction = dir; }
 void Car::start() { 
-    alive = true;
+    // alive = true;
+    running = true;
     state = PARKED;
 }
+void Car::stop() {  running = false; }
 void Car::setRandomDestination(ts::Graph* graph) {
     destVertex = graph->randAdjVertex(currentVertex);
 }
-void Car::kill()                            { alive = false; }
+// void Car::kill()                            { alive = false; }
 void Car::setDriving()                      { state = DRIVING;}
 void Car::setParking()                      { state = PARKING;}
 void Car::setParked()                       { state = PARKED;}

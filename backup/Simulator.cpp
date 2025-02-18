@@ -206,7 +206,7 @@ void removeCar(Car* car) {
     vector<Car*>::iterator it;
     for (it = cars.begin(); it != cars.end(); it++) {
         if (*it == car) {
-            car->stop();
+            car->kill();
             cars.erase(it);
             delete car;
             break;
@@ -247,26 +247,6 @@ void drive(MovableEntity* entity) {
         car->setCurrentVertex(graph->getStartingVertex());
         car->setRandomDestination(graph);   // adjacent vertex
         car->setDriving();
-        while(car->isRunning()) {
-            ts::restartDelta(carDelta, carClock);
-            Car::State state = car->getState();
-            switch(state) {
-                case Car::State::DRIVING:
-                    // add logic here to drive!
-                    /* Cars need to have intention on where they're going. 
-                    how to do this? idk :(   */
-            
-                    // how to relate edge to roadSegment?
-                    // choose incoming or outgoing?
-                    
-
-                    break;
-                case Car::State::PARKING:
-                    break;
-                case Car::State::PARKED:
-                    break;
-            }
-        }
         while (car->getState() == Car::State::DRIVING) {
             ts::restartDelta(carDelta, carClock);
             // Test::orbit(*car, carDelta, boundaries);

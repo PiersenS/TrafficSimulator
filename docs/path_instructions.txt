@@ -10,3 +10,21 @@ Search for XML tag of current intersection
 Each Car object will decide its own destination. 
 Do do this, the car will "ask" the Graph for its destination or directions
 to the decided destination. 
+
+
+
+VERY IMPORTANT:
+Imagine a linked list for path-finding with RoadSegments:
+A <-> B <-> C
+
+If the car is on C and the destination is A, simply follow the linked structure to A.
+I guess this is the premise of an adjacency matrix. In the case of the K4 map, A and C would be corners, not vertices. 
+How to handle this?
+The above linked list may represent the vertices that a given RoadSegment spans.
+(1) Check the list (which doesn't have to be linked, could be a vector -- probably want to use an iterator)
+(2) If Destination vertex not found (ex. D), check the adjacency matrix. 
+    - If I'm on B and need to get to D...does A or C connect to D?
+    - Since both connect to D, use past vertices to determine direction
+        - just came from C, so I must go A -> D
+        - this is unnecessary for K4, but will be necesary for larger maps
+        - okay....might be necessary for intersections on K4 and all other maps...idk
