@@ -135,6 +135,8 @@ void placeRoadSegments() {
     using namespace std;
     cout << "Creating RoadSegments . . . " << endl;
     ifstream ifs;
+    stringstream ss;
+    string line;
     string path = "maps/" + sim_map + "/roadSegments.txt";
     ifs.open(path);
 
@@ -142,8 +144,14 @@ void placeRoadSegments() {
     ts::RoadSegment* rs = NULL;
     sf::Vector2f* in = NULL; 
     sf::Vector2f* out = NULL;
-    while (!ifs.eof()) {
-        ifs >> x >> y >> height >> width >> oneWay;
+    while (getline(ifs, line)) {
+        ss.str(line);
+        ss >> x >> y >> height >> width >> oneWay;
+        vector<ts::Vertex*> vertices;
+        string vertexName;
+        while (ss >> vertexName) {
+            
+        }
         rs = new ts::RoadSegment(sf::Vector2f(x, y), height, width);
         // generate vectors
         if (oneWay) {
