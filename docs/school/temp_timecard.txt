@@ -19,3 +19,9 @@
 02/17/25:
     21:30 - 22:30 (Added vertices to RoadSegment objects)
     22:50 - 23:20 (Established drive() FSM structure)
+
+03/07/25:
+    18:00 - 19:00 (Breadth-First Search)
+
+03/14/25:
+    20:00-22:00 (Diagrams)
