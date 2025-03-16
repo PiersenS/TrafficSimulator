@@ -127,7 +127,7 @@ void setup() {
     window = new sf::RenderWindow(*videoMode, windowTitle);
 
     /* Map Setup */
-    // loadBoundaries();
+    loadBoundaries();
     placeRoadSegments();
 }
 
@@ -266,27 +266,29 @@ void drive(MovableEntity* entity) {
             
                     // how to relate edge to roadSegment?
                     // choose incoming or outgoing?
+                    Test::orbit(*car, carDelta, boundaries);
                     
 
                     break;
                 case Car::State::PARKING:
+                    // Test::exitOrbit(*car, carDelta);
                     break;
                 case Car::State::PARKED:
                     break;
             }
         }
-        while (car->getState() == Car::State::DRIVING) {
-            ts::restartDelta(carDelta, carClock);
-            // Test::orbit(*car, carDelta, boundaries);
+        // while (car->getState() == Car::State::DRIVING) {
+        //     ts::restartDelta(carDelta, carClock);
+        //     // Test::orbit(*car, carDelta, boundaries);
 
-            /* Cars need to have intention on where they're going. 
-            how to do this? idk :(   */
-            
-            // how to relate edge to roadSegment?
-            // choose incoming or outgoing?
+        //     /* Cars need to have intention on where they're going. 
+        //     how to do this? idk :(   */
+        //     
+        //     // how to relate edge to roadSegment?
+        //     // choose incoming or outgoing?
 
-            
-        }
+        //     
+        // }
         while(car->getState() == Car::State::PARKING) {
             // park car
             ts::restartDelta(carDelta, carClock);

@@ -49,9 +49,12 @@ namespace ts {
         bool removeVertex(Vertex v);
         bool removeEdge(Edge e);
 
+        vector<Vertex*> bfs(Vertex* current, Vertex* dest);
+
         /* Simulator Functions */
         void loadMap(string map);
         ts::Vertex* randAdjVertex(ts::Vertex* current);
+        ts::Vertex* randVertex(ts::Vertex* current);
 
         /* Static Functions */
         static void addJunction();

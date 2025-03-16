@@ -106,6 +106,23 @@ bool Graph::removeEdge(Edge e) {
 }
 
 
+vector<Vertex*> bfs(Vertex* current, Vertex* dest) {
+    vector<vector<Vertex*>> levels;
+    levels.push_back(vector<Vertex*>(1, current)); // levels[0] holds a vector containing just current
+
+    int lvl = 0;
+    while(!levels.at[lvl].empty()) {
+        
+    }
+
+
+
+
+
+    return vector<Vertex*>();
+}
+
+
 // TODO:
 // I wrote updateJunctions when I was tired. 
 // pls re-check logic
@@ -135,6 +152,18 @@ ts::Vertex* Graph::randAdjVertex(ts::Vertex* current) {
 
     int choice = ts::random(0, adj.size());
     return adj.at(choice);
+}
+
+ts::Vertex* Graph::randVertex(ts::Vertex* current) {
+    using namespace ts;
+    Vertex* randVert = current;
+
+    while(randVert == current) {
+        // pick new choice
+        int choice = random(0, vertexList.size());
+        randVert = &vertexList.at(choice);
+    }
+    return randVert;
 }
 
 void Graph::addJunction() {

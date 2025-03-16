@@ -78,7 +78,7 @@ void Car::start() {
 }
 void Car::stop() {  running = false; }
 void Car::setRandomDestination(ts::Graph* graph) {
-    destVertex = graph->randAdjVertex(currentVertex);
+    destVertex = graph->randVertex(currentVertex);
 }
 // void Car::kill()                            { alive = false; }
 void Car::setDriving()                      { state = DRIVING;}
