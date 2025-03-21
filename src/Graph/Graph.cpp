@@ -105,14 +105,28 @@ bool Graph::removeEdge(Edge e) {
     return true; // always returns true
 }
 
-
-vector<Vertex*> bfs(Vertex* current, Vertex* dest) {
-    vector<vector<Vertex*>> levels;
-    levels.push_back(vector<Vertex*>(1, current)); // levels[0] holds a vector containing just current
+/*
+ * How to prevent threads from writing over each other?
+ *      - how to allow vertices/edges to be marked as visited without disturbing other ongoing searches
+ * 
+ * (1) Semaphores - pretty much all of bfs being the critical region
+ * (2) Ensure that each instance of bfs that is running receives a copy of all vertices/edges,
+ *     not the objects themselves
+ *          - could this be done with a separate graph object that's a copy of the original?
+ *          - is that space-efficient?
+ * 
+ * For now...just write the function as if not being used by threads
+ */
+vector<Vertex*> bfs(Vertex* current, Vertex* dest) { vector<vector<Vertex*>> levels; levels.push_back(vector<Vertex*>(1, current)); // levels[0] holds a vector containing just current
 
     int lvl = 0;
-    while(!levels.at[lvl].empty()) {
-        
+    while(!levels.at(lvl).empty()) {
+        levels.push_back(vector<Vertex*>());
+        for (Vertex* v : levels.at(lvl)) {
+            for (Edge e : v->incidentEdges()) {
+
+            }
+        }
     }
 
 
