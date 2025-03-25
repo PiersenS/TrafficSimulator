@@ -117,25 +117,26 @@ bool Graph::removeEdge(Edge e) {
  * 
  * For now...just write the function as if not being used by threads
  */
-vector<Vertex*> bfs(Vertex* current, Vertex* dest) { 
-    vector<vector<Vertex*>> levels; 
-    levels.push_back(vector<Vertex*>(1, current)); // levels[0] holds a vector containing just current
+vector<Vertex> bfs(Vertex current, Vertex dest) { 
+    vector<vector<Vertex>> levels; 
+    levels.push_back(vector<Vertex>(1, current)); // levels[0] holds a vector containing just current
 
     int lvl = 0;
     while(!levels.at(lvl).empty()) {
-        levels.push_back(vector<Vertex*>());
-        for (Vertex* v : levels.at(lvl)) {
-            for (Edge* e : v->incidentEdges()) {
-                if (e->getState() == Edge::State::UNEXPLORED) {
-                    Vertex* opposite = e->opposite(v);
-                    if (opposite->getState() == Vertex::State::UNEXPLORED) {
+        levels.push_back(vector<Vertex>());
+        for (Vertex v : levels.at(lvl)) {
+            for (Edge* e_ptr : v.incidentEdges()) {
+                Edge e = *e_ptr;
+                if (e.getState() == Edge::State::UNEXPLORED) {
+                    Vertex opposite = *e.opposite(&v);
+                    if (opposite.getState() == Vertex::State::UNEXPLORED) {
                         // label e as a discovery edge
-                        e->setState(Edge::State::DISCOVERED);
+                        e.setState(Edge::State::DISCOVERED);
                         levels.at(lvl+1).push_back(opposite);
                     }
                     else {
                         // label e as a cross edge
-                        e->setState(Edge::State::CROSS);
+                        e.setState(Edge::State::CROSS);
                     }
                 }
             }
@@ -147,7 +148,7 @@ vector<Vertex*> bfs(Vertex* current, Vertex* dest) {
      * determine return value
      */
 
-    return vector<Vertex*>();
+    return vector<Vertex>();
 }
 
 
