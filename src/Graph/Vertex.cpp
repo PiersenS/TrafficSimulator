@@ -14,11 +14,13 @@ Vertex::Vertex() {
     */
     this->junction = addJunction();
     boundaryRect.setSize(sf::Vector2f(120,120));
+
 }
 
 Vertex::Vertex(std::string name) {
     this->name = name;
     this->junction = addJunction();
+    state = State::UNEXPLORED;
 }
 
 Vertex::Vertex(std::string name, int junction) {
@@ -36,7 +38,7 @@ bool Vertex::operator==(Vertex v) {
     return this->junction == v.junction;
 }
 
-vector<Edge> Vertex::incidentEdges() {
+vector<Edge*> Vertex::incidentEdges() {
     return edges;
 }
 
@@ -46,8 +48,8 @@ bool Vertex::isAdjacentTo(Vertex v){
     * return true if found in Vertex v's incident edges
     *   else return false
     */
-    vector<Edge>::iterator iter;
-    for (Edge e : edges) {
+    vector<Edge*>::iterator iter;
+    for (Edge* e : edges) {
         iter = find(v.edges.begin(), v.edges.end(), e);
         if (iter != v.edges.end()) {
             return true;
@@ -65,13 +67,13 @@ void Vertex::setJunction(int num) {
    this->junction = num;
 }
 
+void Vertex::setState(Vertex::State s) { this->state = s; }
+
 int Vertex::addJunction() {
     Graph::addJunction();
     return Graph::getNumJunctions();
 }
 
-string ts::Vertex::getName() { return name; }
-
-sf::FloatRect ts::Vertex::getBoundaries() {
-    return boundaryRect.getGlobalBounds();
-}
+string ts::Vertex::getName()                { return name; }
+sf::FloatRect ts::Vertex::getBoundaries()   { return boundaryRect.getGlobalBounds(); }
+ts::Vertex::State ts::Vertex::getState()    { return state; }

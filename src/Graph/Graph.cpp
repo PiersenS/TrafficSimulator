@@ -117,21 +117,35 @@ bool Graph::removeEdge(Edge e) {
  * 
  * For now...just write the function as if not being used by threads
  */
-vector<Vertex*> bfs(Vertex* current, Vertex* dest) { vector<vector<Vertex*>> levels; levels.push_back(vector<Vertex*>(1, current)); // levels[0] holds a vector containing just current
+vector<Vertex*> bfs(Vertex* current, Vertex* dest) { 
+    vector<vector<Vertex*>> levels; 
+    levels.push_back(vector<Vertex*>(1, current)); // levels[0] holds a vector containing just current
 
     int lvl = 0;
     while(!levels.at(lvl).empty()) {
         levels.push_back(vector<Vertex*>());
         for (Vertex* v : levels.at(lvl)) {
-            for (Edge e : v->incidentEdges()) {
-
+            for (Edge* e : v->incidentEdges()) {
+                if (e->getState() == Edge::State::UNEXPLORED) {
+                    Vertex* opposite = e->opposite(v);
+                    if (opposite->getState() == Vertex::State::UNEXPLORED) {
+                        // label e as a discovery edge
+                        e->setState(Edge::State::DISCOVERED);
+                        levels.at(lvl+1).push_back(opposite);
+                    }
+                    else {
+                        // label e as a cross edge
+                        e->setState(Edge::State::CROSS);
+                    }
+                }
             }
         }
+        lvl++;
     }
 
-
-
-
+    /* TODO: stop when destination is DISCOVERED
+     * determine return value
+     */
 
     return vector<Vertex*>();
 }
@@ -156,11 +170,11 @@ void Graph::updateJunctions(int n) {
 /* Simulator Functions */
 ts::Vertex* Graph::randAdjVertex(ts::Vertex* current) {
     using namespace ts;
-    std::vector<Edge> incident = current->incidentEdges();
+    std::vector<Edge*> incident = current->incidentEdges();
     std::vector<Vertex*> adj;
     Vertex* v;
-    for (Edge e : incident) {
-        *v = e.opposite(*current);
+    for (Edge* e : incident) {
+        v = e->opposite(current);
         adj.push_back(v);
     }
 

@@ -18,6 +18,7 @@ Edge::Edge(std::string name, double length, int speedLimit, bool directed) {
     this->length = length;
     this->speedLimit = speedLimit;
     this->directed = directed;
+    this->state = State::UNEXPLORED;
 }
 
 std::string Edge::operator*() {
@@ -32,18 +33,18 @@ vector<Vertex> Edge::endVertices() {
     return {origin, dest};
 }
 
-Vertex Edge::opposite(Vertex v) {
+Vertex* Edge::opposite(Vertex* v) {
     // returns Vertex on opposite end of v
-    if (isIncidentOn(v)) {
+    if (isIncidentOn(*v)) {
         // compare junctions, not objects
-        if (v == *origin) {
-            return *dest;
+        if (**v == **origin) {
+            return dest;
         }
         else {
-            return *origin;
+            return origin;
         }
     }
-    return Vertex();
+    return NULL;
 }
 
 bool Edge::isAdjacentTo(Edge e) {
@@ -61,9 +62,9 @@ bool Edge::isAdjacentTo(Edge e) {
 
 bool Edge::isIncidentOn(Vertex v) {
     // true if v == origin or dest
-    vector<Edge> ie = v.incidentEdges();
-    for (Edge e : ie) {
-        if (v == *e.origin || v == *e.dest)
+    vector<Edge*> ie = v.incidentEdges();
+    for (Edge* e : ie) {
+        if (v == *e->origin || v == *e->dest)
         return true;
     }
     return false;
@@ -76,6 +77,7 @@ string Edge::getName()              { return this->name; }
 double Edge::getLength()            { return this->length; }
 int Edge::getSpeedLimit()           { return this->speedLimit; }
 bool Edge::isDirected()             { return this->directed; }
+Edge::State Edge::getState()        { return this->state; }
 // sf::Vector2f Edge::getDirection()   { return this->dirVector; }
 
 /* -------------------- Mutators -------------------- */
@@ -85,4 +87,5 @@ void Edge::setName(std::string name)        { this->name = name; }
 void Edge::setLength(double length)         { this->length = length; }
 void Edge::setSpeedLimit(int sl)            { speedLimit = sl; }
 void Edge::setDirected(bool directed)       { this->directed = directed; }
+void Edge::setState(Edge::State s)  { this->state = s; }
 // void Edge::setDirection(float x, float y)   { dirVector = sf::Vector2f(x, y); }
