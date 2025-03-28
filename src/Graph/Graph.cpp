@@ -133,6 +133,9 @@ vector<Vertex> bfs(Vertex current, Vertex dest) {
                         // label e as a discovery edge
                         e.setState(Edge::State::DISCOVERED);
                         levels.at(lvl+1).push_back(opposite);
+                        if (*e == *dest) {
+                            return levels.at(lvl+1); // not sure about this
+                        }
                     }
                     else {
                         // label e as a cross edge

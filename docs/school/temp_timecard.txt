@@ -30,3 +30,5 @@
 
 03/24/25:
     20:00 - 21:00 (bfs and converting Edge/Vector functions to use pointers)
+03/25/25:
+    08:35 - 08:45 (reverted bfs to use copies of vertices/edges)
