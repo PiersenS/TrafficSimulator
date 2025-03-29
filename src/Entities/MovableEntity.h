@@ -19,17 +19,21 @@ protected:
     ts::Edge* currentEdge;
     ts::Vertex* currentVertex;
     ts::Vertex* destVertex;
+    ts::Vertex* nextDestVertex;
 
 public:
     /* Accessors */
     bool isAlive();
     ts::Edge* getCurrentEdge();
     ts::Vertex* getCurrentVertex();
+    ts::Vertex* getDestinationVertex();
+    ts::Vertex* getNextDestination();
 
     /* Mutators */
-    virtual void setCurrentEdge(ts::Edge* e);
-    virtual void setCurrentVertex(ts::Vertex* v);
-    virtual void setDestinationVertex(ts::Vertex* v);
+    /* virtual */ void setCurrentEdge(ts::Edge* e);
+    /* virtual */ void setCurrentVertex(ts::Vertex* v);
+    /* virtual */ void setDestinationVertex(ts::Vertex* v);
+    /* virtual */ void setNextDestination(ts::Vertex* v);
 };
 
 #endif

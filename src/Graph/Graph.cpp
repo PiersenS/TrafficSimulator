@@ -119,6 +119,7 @@ bool Graph::removeEdge(Edge e) {
  */
 vector<Vertex> bfs(Vertex current, Vertex dest) { 
     vector<vector<Vertex>> levels; 
+    current.setState(Vertex::State::DISCOVERED);
     levels.push_back(vector<Vertex>(1, current)); // levels[0] holds a vector containing just current
 
     int lvl = 0;
@@ -133,7 +134,7 @@ vector<Vertex> bfs(Vertex current, Vertex dest) {
                         // label e as a discovery edge
                         e.setState(Edge::State::DISCOVERED);
                         levels.at(lvl+1).push_back(opposite);
-                        if (*e == *dest) {
+                        if (opposite == dest) {
                             return levels.at(lvl+1); // not sure about this
                         }
                     }

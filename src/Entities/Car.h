@@ -51,9 +51,7 @@ private:
     Car::State state;
     bool running;
     static const std::string textures[6];
-    ts::Vertex* destVertex;
-    ts::Vertex* currentVertex;
-    
+        
     static sf::Texture randomCar();
 };
 #endif
