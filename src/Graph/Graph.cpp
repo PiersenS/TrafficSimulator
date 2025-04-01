@@ -117,7 +117,7 @@ bool Graph::removeEdge(Edge e) {
  * 
  * For now...just write the function as if not being used by threads
  */
-vector<Vertex> bfs(Vertex current, Vertex dest) { 
+vector<Vertex> Graph::bfs(ts::Vertex current, ts::Vertex dest) { 
     vector<vector<Vertex>> levels; 
     current.setState(Vertex::State::DISCOVERED);
     levels.push_back(vector<Vertex>(1, current)); // levels[0] holds a vector containing just current
@@ -187,11 +187,11 @@ ts::Vertex* Graph::randAdjVertex(ts::Vertex* current) {
     return adj.at(choice);
 }
 
-ts::Vertex* Graph::randVertex(ts::Vertex* current) {
+ts::Vertex* Graph::getRandomVertex(ts::Vertex* current) {
     using namespace ts;
     Vertex* randVert = current;
 
-    while(randVert == current) {
+    while(randVert == current) { // pick a choice that's not the current vertex
         // pick new choice
         int choice = random(0, vertexList.size());
         randVert = &vertexList.at(choice);

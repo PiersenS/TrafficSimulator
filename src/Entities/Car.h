@@ -32,7 +32,7 @@ public:
     /* Mutators */
     void setScaleFactor(float factor);
     void setDirection(sf::Vector2f dir);
-    void setRandomDestination(ts::Graph* graph);
+    // void setRandomDestination(ts::Graph* graph);
     void start();
     void stop();
     // void kill();

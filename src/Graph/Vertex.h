@@ -15,7 +15,7 @@ namespace ts {
 
     class Vertex {
     public:
-        enum State { UNEXPLORED, EXPLORED };
+        enum State { UNEXPLORED, DISCOVERED, CROSS };
 
         Vertex();                       // constructor
         Vertex(std::string name);

@@ -32,7 +32,7 @@ sf::Texture* backgroundTexture;
 sf::Thread* driver;
 sf::Thread* car_manager;
 
-const int MAX_CARS = 10;
+const int MAX_CARS = 1; // normally 10
 
 void updateDelta();
 void handleEvent(sf::Event event);
@@ -44,6 +44,7 @@ void placeRoadSegments();
 void addCar();
 void manageCars();
 void drive(MovableEntity* entity);
+void findPath(Car* car, std::vector<ts::Vertex>& nextPath);
 
 sf::Clock deltaClock;
 sf::Vector2f startingPosition;
@@ -236,7 +237,7 @@ void manageCars() {
     while(true) {
         carsAlive = cars.size();
         if (carsAlive < MAX_CARS) {
-            // add car at random time intervalh
+            // add car at random time interval
             int rand_seconds = ts::random(1, 6);
             sf::Time seconds = sf::seconds(rand_seconds);
             sf::sleep(seconds);
@@ -252,26 +253,34 @@ void drive(MovableEntity* entity) {
         float carDelta;
         sf::Clock carClock;
 
-        car->setCurrentVertex(graph->getStartingVertex());
-        car->setRandomDestination(graph);   // adjacent vertex
+        Graph g = *graph;
+        std::vector<ts::Vertex> path;
+
+        car->setCurrentVertex(g.getStartingVertex());
+        car->setDestinationVertex(g.getRandomVertex(car->getCurrentVertex()));
         car->setDriving();
         while(car->isRunning()) {
             ts::restartDelta(carDelta, carClock);
             Car::State state = car->getState();
             switch(state) {
-                case Car::State::DRIVING:
+                case Car::State::DRIVING: { // need to define a scope to declare variables
                     // add logic here to drive!
                     /* Cars need to have intention on where they're going. 
                     how to do this? idk :(   */
             
                     // how to relate edge to roadSegment?
                     // choose incoming or outgoing?
-                    Test::orbit(*car, carDelta, boundaries);
+                    // Test::orbit(*car, carDelta, boundaries);
                     
-
+                    vector<Vertex> nextPath;
+                    // sf::Thread* pathFinder = new sf::Thread(*findPath, car, nextPath);
+                    // pathFinder->launch();
+                    // std::vector<ts::Vertex> nextPath = g.bfs(*car->getCurrentVertex(), *car->getDestinationVertex());
+                    
                     break;
+                }
                 case Car::State::PARKING:
-                    // Test::exitOrbit(*car, carDelta);
+                    Test::exitOrbit(*car, carDelta);
                     break;
                 case Car::State::PARKED:
                     break;
@@ -298,6 +307,10 @@ void drive(MovableEntity* entity) {
         removeCar(car);
     }
     // else -> pedestrian
+}
+
+void findPath(Car* car, std::vector<ts::Vertex>& nextPath) {
+
 }
 
 /* loadBoundaries() will eventually be deleted */
