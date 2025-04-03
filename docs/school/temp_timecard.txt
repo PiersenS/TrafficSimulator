@@ -14,3 +14,6 @@
     10:20 - 11:00 (setting up car to incorporate BFS)
 04/02/25:
     21:00 - 22:30 (correcting findPath function for threads and fixing SFML dependencies)
+
+04/03/25:
+    11:40 - 12:00 (Fixing issues with struct and Graph class)
