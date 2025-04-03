@@ -260,7 +260,7 @@ void drive(MovableEntity* entity) {
         float carDelta;
         sf::Clock carClock;
 
-        std::vector<sf::Vertex> path;
+        std::vector<ts::Vertex> path;
         sf::Thread* pathFinder;
 
         car->setCurrentVertex(graph->getStartingVertex());

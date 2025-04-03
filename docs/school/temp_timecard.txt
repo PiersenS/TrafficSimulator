@@ -16,4 +16,4 @@
     21:00 - 22:30 (correcting findPath function for threads and fixing SFML dependencies)
 
 04/03/25:
-    11:40 - 12:00 (Fixing issues with struct and Graph class)
+    11:20 - 12:00 (Fixing issues with struct and Graph class)

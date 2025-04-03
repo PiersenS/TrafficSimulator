@@ -15,6 +15,9 @@ using namespace ts;
 
 int Graph::numJunctions = 0;
 
+
+Graph::Graph() {} // needed for struct
+
 Graph::Graph(string map) {
     loadMap(map);
 }

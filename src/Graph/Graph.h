@@ -32,6 +32,7 @@ namespace ts {
 
         void updateJunctions(int n);
     public:
+        Graph();
         Graph(string map);
         Graph(vector<vector<int>> matrix);
 
