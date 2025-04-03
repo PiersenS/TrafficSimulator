@@ -13,4 +13,4 @@
 04/02/25:
     10:20 - 11:00 (setting up car to incorporate BFS)
 04/02/25:
-    21:00 - 00:00 ()
+    21:00 - 22:30 (correcting findPath function for threads and fixing SFML dependencies)
