@@ -20,7 +20,14 @@
 
 using namespace ts;
 
-Graph* graph;
+/* struct needed for findPath function */
+struct PathFindingInfo {
+    ts::Graph graph;
+    Car* car;
+    std::vector<ts::Vertex>* path;
+};
+
+ts::Graph* graph;
 
 string sim_map;
 string windowTitle;
@@ -44,7 +51,7 @@ void placeRoadSegments();
 void addCar();
 void manageCars();
 void drive(MovableEntity* entity);
-void findPath(Car* car, std::vector<ts::Vertex>& nextPath);
+void findPath(PathFindingInfo pfi);
 
 sf::Clock deltaClock;
 sf::Vector2f startingPosition;
@@ -253,14 +260,13 @@ void drive(MovableEntity* entity) {
         float carDelta;
         sf::Clock carClock;
 
-        Graph g = *graph;
-        std::vector<ts::Vertex> path;
+        std::vector<sf::Vertex> path;
         sf::Thread* pathFinder;
 
-        car->setCurrentVertex(g.getStartingVertex());
-        car->setDestinationVertex(g.getRandomVertex(car->getCurrentVertex()));
+        car->setCurrentVertex(graph->getStartingVertex());
+        car->setDestinationVertex(graph->getRandomVertex(car->getCurrentVertex()));
         car->setNextDestination(NULL);
-        car->setDriving();
+        car->setState(Car::State::DRIVING);
         while(car->isRunning()) {
             ts::restartDelta(carDelta, carClock);
             Car::State state = car->getState();
@@ -279,7 +285,12 @@ void drive(MovableEntity* entity) {
                         // create thread to:
                         //      set nextDestination
                         //      bfs path
-                        pathFinder = new sf::Thread(*findPath, car, path);
+                        PathFindingInfo info;
+                        info.graph = *graph;
+                        info.car = car;
+                        info.path = &path;
+
+                        pathFinder = new sf::Thread(*findPath, info);
                         pathFinder->launch();
                         
                     }
@@ -290,7 +301,7 @@ void drive(MovableEntity* entity) {
                     break;
                 }
                 case Car::State::ARRIVED:
-                    car->setDestination(car->getNextDestination());
+                    car->setDestinationVertex(car->getNextDestination());
                     car->setNextDestination(NULL);
                     car->setState(Car::State::DRIVING);
                     break;
@@ -324,9 +335,10 @@ void drive(MovableEntity* entity) {
     // else -> pedestrian
 }
 
-void findPath(Car* car, std::vector<ts::Vertex>& path) {
+void findPath(PathFindingInfo pfi) {
     // find path
     // append new path to the end of original path
+
 }
 
 /* loadBoundaries() will eventually be deleted */

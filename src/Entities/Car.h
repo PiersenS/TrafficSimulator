@@ -36,9 +36,7 @@ public:
     void start();
     void stop();
     // void kill();
-    void setDriving();
-    void setParking();
-    void setParked();
+    void setState(Car::State state);
 
     // Overloaded sf::Sprite functions
     void move(float x, float y);

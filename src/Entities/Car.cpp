@@ -81,9 +81,7 @@ void Car::stop() {  running = false; }
 //     destVertex = graph->randVertex(currentVertex);
 // }
 // void Car::kill()                            { alive = false; }
-void Car::setDriving()                      { state = DRIVING;}
-void Car::setParking()                      { state = PARKING;}
-void Car::setParked()                       { state = PARKED;}
+void Car::setState(Car::State state) { this->state = state; }
 
 /********************* Overloaded sf::Sprite functions *********************/
 void Car::move(float x, float y) {

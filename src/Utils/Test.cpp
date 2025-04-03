@@ -38,7 +38,7 @@ void Test::orbit(Car& car, float& delta, std::map<string,sf::RectangleShape>& bo
         car.rotate(rotation);
     }
     if (car.getGlobalBounds().intersects(boundaries["B"].getGlobalBounds())) {
-        car.setParking();
+        car.setState(Car::State::PARKING);
     }
     moveCar(car, delta);
 }
@@ -54,7 +54,7 @@ void Test::exitOrbit(Car& car, float& delta) {
     }
     moveCar(car, delta);
     if (car.getPosition().x > 750) {
-        car.setParked();
+        car.setState(Car::State::PARKED);
     }
 }
 
@@ -106,6 +106,11 @@ void Test::moveWithKeyboard(sf::Event::EventType et, Car& car, float& delta) {
             moveCar(car, delta);
         }
     }
+}
+
+/* Movement with Graph */
+void Test::followPath(Car& car, float& delta) {
+    
 }
 
 /* Draw Functions */
