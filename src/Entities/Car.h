@@ -11,7 +11,7 @@
 class Car : public MovableEntity {
 
 public:
-    enum State { DRIVING, PARKING, PARKED};
+    enum State { DRIVING, ARRIVED, PARKING, PARKED};
 
     /* Constructors */
     Car();

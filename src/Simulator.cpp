@@ -255,9 +255,11 @@ void drive(MovableEntity* entity) {
 
         Graph g = *graph;
         std::vector<ts::Vertex> path;
+        sf::Thread* pathFinder;
 
         car->setCurrentVertex(g.getStartingVertex());
         car->setDestinationVertex(g.getRandomVertex(car->getCurrentVertex()));
+        car->setNextDestination(NULL);
         car->setDriving();
         while(car->isRunning()) {
             ts::restartDelta(carDelta, carClock);
@@ -273,12 +275,25 @@ void drive(MovableEntity* entity) {
                     // Test::orbit(*car, carDelta, boundaries);
                     
                     vector<Vertex> nextPath;
+                    if (car->getNextDestination() == NULL) {
+                        // create thread to:
+                        //      set nextDestination
+                        //      bfs path
+                        pathFinder = new sf::Thread(*findPath, car, path);
+                        pathFinder->launch();
+                        
+                    }
                     // sf::Thread* pathFinder = new sf::Thread(*findPath, car, nextPath);
                     // pathFinder->launch();
                     // std::vector<ts::Vertex> nextPath = g.bfs(*car->getCurrentVertex(), *car->getDestinationVertex());
                     
                     break;
                 }
+                case Car::State::ARRIVED:
+                    car->setDestination(car->getNextDestination());
+                    car->setNextDestination(NULL);
+                    car->setState(Car::State::DRIVING);
+                    break;
                 case Car::State::PARKING:
                     Test::exitOrbit(*car, carDelta);
                     break;
@@ -309,8 +324,9 @@ void drive(MovableEntity* entity) {
     // else -> pedestrian
 }
 
-void findPath(Car* car, std::vector<ts::Vertex>& nextPath) {
-
+void findPath(Car* car, std::vector<ts::Vertex>& path) {
+    // find path
+    // append new path to the end of original path
 }
 
 /* loadBoundaries() will eventually be deleted */

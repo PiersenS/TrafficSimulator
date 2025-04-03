@@ -10,3 +10,5 @@
 
 03/31/25:
     20:00 - 21:30 (Adding pathfinding to cars (Simulator.cpp))
+04/02/25:
+    10:20 - 11:00 (setting up car to incorporate BFS)
