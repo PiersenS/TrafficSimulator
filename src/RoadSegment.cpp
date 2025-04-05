@@ -40,6 +40,7 @@ sf::Vector2f RoadSegment::getPosition()         { return position; }
 sf::RectangleShape* RoadSegment::getBoundary()  { return boundary; }
 float RoadSegment::getHeight()                  { return height; }
 float RoadSegment::getWidth()                   { return width; }
+ts::Edge RoadSegment::getEdge()                 { return *edge; }
 
 /********************* Mutators *********************/
 void RoadSegment::setIncoming(sf::Vector2f* in)         { incoming = in; }

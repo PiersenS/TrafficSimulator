@@ -109,8 +109,29 @@ void Test::moveWithKeyboard(sf::Event::EventType et, Car& car, float& delta) {
 }
 
 /* Movement with Graph */
-void Test::followPath(Car& car, float& delta) {
-    
+void Test::followPath(Car& car, float& delta, std::vector<ts::RoadSegment>& roadSegments, std::vector<ts::Vertex>& path) {
+    /* Read path from beginning to end. path[0] will be the Vertex the car should be traveling to.
+     * path[0] is reached, erase path[0] to begin traveling to the next vertex
+     */
+    ts::RoadSegment* current = NULL;
+    ts::Vertex dest = path[0];
+    sf::FloatRect carBounds = car.getGlobalBounds();
+
+    for (ts::RoadSegment rs : roadSegments) {
+        if (carBounds.intersects(rs.getBoundary()->getGlobalBounds())) {
+            current = &rs;
+            break;
+        }
+    }
+    // should now have the current RoadSegment
+    if (current == NULL) {
+        // Ran off the road
+        return;
+    }
+
+    // get edge - determine which way to go
+    ts::Edge edge = current->getEdge();
+
 }
 
 /* Draw Functions */

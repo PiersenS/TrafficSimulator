@@ -42,6 +42,7 @@ namespace ts {
         sf::RectangleShape* getBoundary();
         float getHeight();
         float getWidth();
+        ts::Edge getEdge();
 
         /* Mutators */
         void setIncoming(sf::Vector2f* in);

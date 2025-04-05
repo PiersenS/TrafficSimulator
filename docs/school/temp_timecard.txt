@@ -17,3 +17,12 @@
 
 04/03/25:
     11:20 - 12:00 (Fixing issues with struct and Graph class)
+
+04/04/25:
+    16:30 - 18:00 (Testing plan document)
+04/04/25:
+    22:15 - 10:45 (Testing plan document)
+
+04/05/25:
+    14:00 - 14:30 ()
+    16:00 - 00:00 ()

@@ -338,7 +338,7 @@ void drive(MovableEntity* entity) {
 void findPath(PathFindingInfo pfi) {
     // find path
     // append new path to the end of original path
-
+    
 }
 
 /* loadBoundaries() will eventually be deleted */

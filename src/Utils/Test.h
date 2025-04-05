@@ -23,7 +23,7 @@ public:
     static void exitOrbit(Car& car, float& delta);
     static void orbitWithVectors(Car& car, float& delta, std::vector<ts::RoadSegment>& roadSegments);
     /* Movement with Graph */
-    static void followPath(Car& car, float& delta);
+    static void followPath(Car& car, float& delta, std::vector<ts::RoadSegment>& roadSegments, std::vector<ts::Vertex>& path);
     /* Draw */
     static void drawBoundaries(sf::RenderWindow& window, std::map<string,sf::RectangleShape>& boundaries);
     static void drawRoadSegments(sf::RenderWindow& window, std::vector<ts::RoadSegment>& roadSegments);
