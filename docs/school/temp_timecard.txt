@@ -24,5 +24,5 @@
     22:15 - 10:45 (Testing plan document)
 
 04/05/25:
-    14:00 - 14:30 ()
-    16:00 - 00:00 ()
+    14:00 - 14:30 (began implementing Test::followPath)
+    16:00 - 17:00 (Implementing Test::followPath)

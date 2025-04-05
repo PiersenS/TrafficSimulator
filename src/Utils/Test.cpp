@@ -110,27 +110,46 @@ void Test::moveWithKeyboard(sf::Event::EventType et, Car& car, float& delta) {
 
 /* Movement with Graph */
 void Test::followPath(Car& car, float& delta, std::vector<ts::RoadSegment>& roadSegments, std::vector<ts::Vertex>& path) {
+    std::cout << "followPath entered." << std::endl;
     /* Read path from beginning to end. path[0] will be the Vertex the car should be traveling to.
      * path[0] is reached, erase path[0] to begin traveling to the next vertex
      */
-    ts::RoadSegment* current = NULL;
+    ts::RoadSegment* segment = NULL;
     ts::Vertex dest = path[0];
     sf::FloatRect carBounds = car.getGlobalBounds();
 
     for (ts::RoadSegment rs : roadSegments) {
         if (carBounds.intersects(rs.getBoundary()->getGlobalBounds())) {
-            current = &rs;
+            segment = &rs;
             break;
         }
     }
     // should now have the current RoadSegment
-    if (current == NULL) {
+    if (segment == NULL) {
         // Ran off the road
         return;
     }
 
     // get edge - determine which way to go
-    ts::Edge edge = current->getEdge();
+    ts::Edge edge = segment->getEdge();
+    sf::Vector2f* direction;
+    if (dest == *edge.getOrigin()) {
+        direction = segment->getIncoming();
+    }
+    else if (dest == *edge.getDest()) {
+        direction = segment->getOutgoing();
+    }
+    else {
+        // something went wrong
+        std::cout << "path[0] was neither the current edge's origin or destination vertex." << std::endl;
+        std::cout << "returning from Test::followPath." << std::endl;
+        return;
+    }
+
+    // TODO: figure out what happens when the end of the vector is reached.
+    
+    sf::Vector2f norm = ts::normalize(*direction);
+    car.move(norm * car.getSpeed() * delta);
 
 }
 

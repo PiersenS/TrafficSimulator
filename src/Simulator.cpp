@@ -298,6 +298,11 @@ void drive(MovableEntity* entity) {
                     // pathFinder->launch();
                     // std::vector<ts::Vertex> nextPath = g.bfs(*car->getCurrentVertex(), *car->getDestinationVertex());
                     
+                    /*
+                    void Test::followPath(Car& car, float& delta, std::vector<ts::RoadSegment>& roadSegments, std::vector<ts::Vertex>& path)
+                    */
+                    Test::followPath(*car, carDelta, roadSegments, path);
+                    
                     break;
                 }
                 case Car::State::ARRIVED:
