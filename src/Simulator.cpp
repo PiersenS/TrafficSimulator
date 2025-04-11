@@ -29,8 +29,8 @@ struct PathFindingInfo {
 
 ts::Graph* graph;
 
-string sim_map;
-string windowTitle;
+std::string sim_map;
+std::string windowTitle;
 sf::VideoMode* videoMode;
 sf::RenderWindow* window;
 sf::Sprite* background;
@@ -55,16 +55,16 @@ void findPath(PathFindingInfo pfi);
 
 sf::Clock deltaClock;
 sf::Vector2f startingPosition;
-std::map<string,sf::RectangleShape> boundaries;
+std::map<std::string,sf::RectangleShape> boundaries;
 std::vector<ts::RoadSegment> roadSegments;
 std::vector<Car*> cars;
 float delta;
 float laneWidth, roadWidth;
 
 int main() {
-    cout << "Traffic Simulator started!" << endl;
-    vector<Vertex> vertices;
-    vector<Edge> edges;
+    std::cout << "Traffic Simulator started!" << std::endl;
+    std::vector<Vertex> vertices;
+    std::vector<Edge> edges;
 
     setup();
    
@@ -82,8 +82,8 @@ int main() {
         for (Car* c : cars) {
             window->draw(*c);
         }
-        Test::drawBoundaries(*window, boundaries);
-        // Test::drawRoadSegments(*window, roadSegments);
+        // Test::drawBoundaries(*window, boundaries);
+        Test::drawRoadSegments(*window, roadSegments);
         window->display();
     }
     
@@ -96,7 +96,7 @@ void updateDelta() {
 
 void handleEvent(sf::Event event) {
     if (event.type == sf::Event::Closed) {
-        cout << "Traffic Simulator ending . . ." << endl;
+        std::cout << "Traffic Simulator ending . . ." << std::endl;
         window->close();
         exit(0);
     }
@@ -119,7 +119,7 @@ void setup() {
 
     /* Rendering */
     backgroundTexture = new sf::Texture();
-    string path = "maps/" + sim_map + "/" + sim_map + ".png";
+    std::string path = "maps/" + sim_map + "/" + sim_map + ".png";
     if (backgroundTexture->loadFromFile(path)) {
         std::cout << "Background Texture Loaded." << std::endl;
     }
@@ -135,32 +135,46 @@ void setup() {
     window = new sf::RenderWindow(*videoMode, windowTitle);
 
     /* Map Setup */
-    loadBoundaries();
+    // loadBoundaries();
     placeRoadSegments();
 }
 
 void placeRoadSegments() {
     using namespace std;
     cout << "Creating RoadSegments . . . " << endl;
+
+    /* setup file stream */
     ifstream ifs;
     stringstream ss;
     string line;
     string path = "maps/" + sim_map + "/roadSegments.txt";
     ifs.open(path);
+    std::cout << "\tPath: " << path << std::endl;
 
+    /* loop variables */
     int x, y, height, width, oneWay;
     ts::RoadSegment* rs = NULL;
     sf::Vector2f* in = NULL; 
     sf::Vector2f* out = NULL;
+
+    /* Read from file and create objects */
     while (getline(ifs, line)) {
+        ss.clear();
         ss.str(line);
         ss >> x >> y >> height >> width >> oneWay;
+
+        // TODO: add edge to txt file and set RoadSegment.edge variable
+
         vector<ts::Vertex*> vertices;
-        string vertexName;
-        while (ss >> vertexName) {
-            
-        }
+        vector<ts::Edge*> rsEdges;
+
         rs = new ts::RoadSegment(sf::Vector2f(x, y), height, width);
+        string edgeName;
+        ts::Edge* cur;
+        while (ss >> edgeName) {
+            rsEdges.push_back(graph->getEdge(edgeName));
+        }
+        rs->setEdges(rsEdges);
         // generate vectors
         if (oneWay) {
             // idk
@@ -186,6 +200,8 @@ void placeRoadSegments() {
             *       - reference Car.cpp for vector rotations
             */
         }
+
+        std::cout << "RS position:\n\t(" << rs->getPosition().x << ", " << rs->getPosition().y << ")\n";
 
         roadSegments.push_back(*rs);
     }
@@ -219,7 +235,7 @@ void addCar() {
 
 void removeCar(Car* car) {
     // might have to exit thread
-    vector<Car*>::iterator it;
+    std::vector<Car*>::iterator it;
     for (it = cars.begin(); it != cars.end(); it++) {
         if (*it == car) {
             car->stop();
@@ -264,7 +280,11 @@ void drive(MovableEntity* entity) {
         sf::Thread* pathFinder;
 
         car->setCurrentVertex(graph->getStartingVertex());
-        car->setDestinationVertex(graph->getRandomVertex(car->getCurrentVertex()));
+
+        ts::Vertex* randomVertex = graph->getRandomVertex(car->getCurrentVertex());
+        car->setDestinationVertex(randomVertex);
+        path.push_back(*randomVertex);
+
         car->setNextDestination(NULL);
         car->setState(Car::State::DRIVING);
         while(car->isRunning()) {
@@ -280,15 +300,14 @@ void drive(MovableEntity* entity) {
                     // choose incoming or outgoing?
                     // Test::orbit(*car, carDelta, boundaries);
                     
-                    vector<Vertex> nextPath;
                     if (car->getNextDestination() == NULL) {
                         // create thread to:
                         //      set nextDestination
                         //      bfs path
                         PathFindingInfo info;
-                        info.graph = *graph;
-                        info.car = car;
-                        info.path = &path;
+                        info.graph = *graph;    // copy of graph
+                        info.car = car;         // car pointer
+                        info.path = &path;      // pointer to path - so path can be modified
 
                         pathFinder = new sf::Thread(*findPath, info);
                         pathFinder->launch();
@@ -348,6 +367,7 @@ void findPath(PathFindingInfo pfi) {
 
 /* loadBoundaries() will eventually be deleted */
 void loadBoundaries() {
+    using namespace std; // mostly reading from file
     ifstream ifs;
     ifs.open("maps/" + sim_map + "/boundaries.txt");
 

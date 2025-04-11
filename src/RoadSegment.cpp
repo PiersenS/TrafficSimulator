@@ -40,9 +40,10 @@ sf::Vector2f RoadSegment::getPosition()         { return position; }
 sf::RectangleShape* RoadSegment::getBoundary()  { return boundary; }
 float RoadSegment::getHeight()                  { return height; }
 float RoadSegment::getWidth()                   { return width; }
-ts::Edge RoadSegment::getEdge()                 { return *edge; }
+std::vector<ts::Edge*> RoadSegment::getEdges()  { return edges; }
 
 /********************* Mutators *********************/
 void RoadSegment::setIncoming(sf::Vector2f* in)         { incoming = in; }
 void RoadSegment::setOutgoing(sf::Vector2f* out)        { outgoing = out; }
 void RoadSegment::setBoundary(sf::RectangleShape* rect) { boundary = rect; }
+void RoadSegment::setEdges(std::vector<ts::Edge*> v)    { edges = v; }

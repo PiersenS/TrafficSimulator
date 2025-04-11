@@ -15,14 +15,14 @@ void Test::moveCar(Car& car, float& delta) {
     car.move(car.getDirection() * car.getSpeed() * delta);
 }
 
-void Test::moveBtoA(Car& car, float& delta, std::map<string,sf::RectangleShape>& boundaries) {
+void Test::moveBtoA(Car& car, float& delta, std::map<std::string,sf::RectangleShape>& boundaries) {
     if (car.getGlobalBounds().intersects(boundaries["BA"].getGlobalBounds())) {
         car.rotate(-90);
     }
     moveCar(car, delta);
 }
 
-void Test::orbit(Car& car, float& delta, std::map<string,sf::RectangleShape>& boundaries) {
+void Test::orbit(Car& car, float& delta, std::map<std::string,sf::RectangleShape>& boundaries) {
     float rotation = -90;
 
     if (car.getGlobalBounds().intersects(boundaries["BA"].getGlobalBounds())) {
@@ -114,11 +114,21 @@ void Test::followPath(Car& car, float& delta, std::vector<ts::RoadSegment>& road
     /* Read path from beginning to end. path[0] will be the Vertex the car should be traveling to.
      * path[0] is reached, erase path[0] to begin traveling to the next vertex
      */
+    if (path.empty()) {
+        std::cout << "Empty path, unable to set a destination." << std::endl;
+        return;
+    }
+
     ts::RoadSegment* segment = NULL;
-    ts::Vertex dest = path[0];
+    ts::Vertex dest = path.at(0);
     sf::FloatRect carBounds = car.getGlobalBounds();
+    std::cout << "init done\n";
+
+    ts::RoadSegment r = roadSegments.at(0);
+    std::cout << "Accessed first RoadSegment\n";
 
     for (ts::RoadSegment rs : roadSegments) {
+        std::cout << "Testing segment = (" << rs.getPosition().x << ", " << rs.getPosition().y << ")" << std::endl;
         if (carBounds.intersects(rs.getBoundary()->getGlobalBounds())) {
             segment = &rs;
             break;
@@ -130,8 +140,14 @@ void Test::followPath(Car& car, float& delta, std::vector<ts::RoadSegment>& road
         return;
     }
 
+    std::cout << "Segment = (" << segment->getPosition().x << ", " << segment->getPosition().y << ")" << std::endl;
+
     // get edge - determine which way to go
-    ts::Edge edge = segment->getEdge();
+    std::vector<ts::Edge*> edges = segment->getEdges();
+    ts::Edge edge;
+    for (ts::Edge* e : edges) {
+        if ()
+    }
     sf::Vector2f* direction;
     if (dest == *edge.getOrigin()) {
         direction = segment->getIncoming();
@@ -154,8 +170,8 @@ void Test::followPath(Car& car, float& delta, std::vector<ts::RoadSegment>& road
 }
 
 /* Draw Functions */
-void Test::drawBoundaries(sf::RenderWindow& window, std::map<string,sf::RectangleShape>& boundaries) {
-    map<string, sf::RectangleShape>::iterator iter = boundaries.begin();
+void Test::drawBoundaries(sf::RenderWindow& window, std::map<std::string,sf::RectangleShape>& boundaries) {
+    std::map<std::string, sf::RectangleShape>::iterator iter = boundaries.begin();
     while (iter != boundaries.end()) {
         window.draw(iter->second);
         iter++;

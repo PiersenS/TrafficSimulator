@@ -26,3 +26,6 @@
 04/05/25:
     14:00 - 14:30 (began implementing Test::followPath)
     16:00 - 17:00 (Implementing Test::followPath)
+04/11/25:
+    06:30 - 07:45 (Implementing Test::followPath)
+    18:15 - 19:30 (Adding list of edges to road segments)

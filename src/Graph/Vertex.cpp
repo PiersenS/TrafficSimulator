@@ -38,7 +38,7 @@ bool Vertex::operator==(Vertex v) {
     return this->junction == v.junction;
 }
 
-vector<Edge*> Vertex::incidentEdges() {
+std::vector<Edge*> Vertex::incidentEdges() {
     return edges;
 }
 
@@ -48,7 +48,7 @@ bool Vertex::isAdjacentTo(Vertex v){
     * return true if found in Vertex v's incident edges
     *   else return false
     */
-    vector<Edge*>::iterator iter;
+    std::vector<Edge*>::iterator iter;
     for (Edge* e : edges) {
         iter = find(v.edges.begin(), v.edges.end(), e);
         if (iter != v.edges.end()) {
@@ -74,6 +74,6 @@ int Vertex::addJunction() {
     return Graph::getNumJunctions();
 }
 
-string ts::Vertex::getName()                { return name; }
+std::string ts::Vertex::getName()           { return name; }
 sf::FloatRect ts::Vertex::getBoundaries()   { return boundaryRect.getGlobalBounds(); }
 ts::Vertex::State ts::Vertex::getState()    { return state; }

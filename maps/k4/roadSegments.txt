@@ -1,6 +1,6 @@
-64 64 64 576 0 
-64 320 64 576 0 
-64 576 64 576 0 
-64 64 576 64 0
-320 64 576 64 0
-576 64 576 64 0
+64 64 64 576 0 Alpha Delta
+64 320 64 576 0 Alpha Bravo Charlie Delta Foxtrot
+64 576 64 576 0 Bravo Charlie
+64 64 576 64 0 Charlie Delta
+320 64 576 64 0 Alpha Bravo Charlie Delta Echo
+576 64 576 64 0 Alpha Bravo

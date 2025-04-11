@@ -19,7 +19,7 @@ namespace ts {
     
     class RoadSegment {
     private:
-        ts::Edge* edge;
+        std::vector<ts::Edge*> edges;
         sf::Vector2f* incoming;
         sf::Vector2f* outgoing;
         sf::RectangleShape* boundary;
@@ -42,13 +42,14 @@ namespace ts {
         sf::RectangleShape* getBoundary();
         float getHeight();
         float getWidth();
-        ts::Edge getEdge();
+        std::vector<ts::Edge*> getEdges();
 
         /* Mutators */
         void setIncoming(sf::Vector2f* in);
         void setOutgoing(sf::Vector2f* out);
         void setVertices(std::vector<Vertex*> v);
         void setBoundary(sf::RectangleShape* rect);
+        void setEdges(std::vector<ts::Edge*> v);
     };
 }
 

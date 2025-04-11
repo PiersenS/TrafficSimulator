@@ -3,23 +3,23 @@
 
 #include "Vertex.h"
 #include "Edge.h"
-#include <string>
+// #include <string>
 #include <vector>
 
 namespace ts {
 
     class Graph {
     private:
-        vector<Vertex> vertexList;
-        vector<Edge> edgeList;
-        vector<vector<int>> adjMatrix;
-        vector<Vertex*> startingVertices;
+        std::vector<Vertex*> vertexList;
+        std::vector<Edge*> edgeList;
+        std::vector<std::vector<int>> adjMatrix;
+        std::vector<Vertex*> startingVertices;
 
         static int numJunctions;
         /* For adjMatrix:
-        *   I think 2D vector of Vertex objects would 
+        *   I think 2D std::vector of Vertex objects would 
         *   allow for easy indexing
-        *   BUT: each vector would need a member variable to keep track of it's position in matrix
+        *   BUT: each std::vector would need a member variable to keep track of it's position in matrix
         *       - basically row header
         */
         /* 
@@ -33,27 +33,28 @@ namespace ts {
         void updateJunctions(int n);
     public:
         Graph();
-        Graph(string map);
-        Graph(vector<vector<int>> matrix);
+        Graph(std::string map);
+        Graph(std::vector<std::vector<int>> matrix);
 
         /* Accessors */
-        vector<Vertex> getVertices();
-        vector<Edge> getEdges();
-        Vertex* getStartingVertex();
+        std::vector<ts::Vertex*> getVertices();
+        std::vector<ts::Edge*> getEdges();
+        ts::Edge* getEdge(std::string name);
+        ts::Vertex* getStartingVertex();
 
         /* Graph Functions */
-        void setMatrix(vector<vector<int>> matrix);
+        void setMatrix(std::vector<std::vector<int>> matrix);
         void addAdjacency(int originJunct, int destJunct, int edgeLength);
 
-        bool insertVertex(Vertex v);
-        bool insertEdge(Edge e, Vertex origin, Vertex dest);
-        bool removeVertex(Vertex v);
-        bool removeEdge(Edge e);
+        bool insertVertex(Vertex* v);
+        bool insertEdge(Edge* e, Vertex* origin, Vertex* dest);
+        bool removeVertex(Vertex* v);
+        bool removeEdge(Edge* e);
 
-        vector<Vertex> bfs(Vertex current, Vertex dest);
+        std::vector<Vertex> bfs(Vertex current, Vertex dest);
 
         /* Simulator Functions */
-        void loadMap(string map);
+        void loadMap(std::string map);
         ts::Vertex* randAdjVertex(ts::Vertex* current);
         ts::Vertex* getRandomVertex(ts::Vertex* current);
 

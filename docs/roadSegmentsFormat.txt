@@ -2,7 +2,7 @@
 | Format for roadSegments.txt Input File |
 '----------------------------------------'
 
-EdgeName LeftCornerX LeftCornerY Height Width isOneWay VertexNames...
+LeftCornerX LeftCornerY Height Width isOneWay Edge1 Edge2...EdgeN
 
 
 

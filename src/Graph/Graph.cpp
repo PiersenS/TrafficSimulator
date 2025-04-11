@@ -18,36 +18,43 @@ int Graph::numJunctions = 0;
 
 Graph::Graph() {} // needed for struct
 
-Graph::Graph(string map) {
+Graph::Graph(std::string map) {
     loadMap(map);
 }
 
-Graph::Graph(vector<vector<int>> matrix) {
+Graph::Graph(std::vector<std::vector<int>> matrix) {
     this->adjMatrix = matrix;
 }
 
-vector<Vertex> Graph::getVertices() {
+std::vector<Vertex*> Graph::getVertices() {
     return this->vertexList;
 }
-vector<Edge> Graph::getEdges() {
+std::vector<Edge*> Graph::getEdges() {
     return this->edgeList;
 }
 
-Vertex* Graph::getStartingVertex() {
-    // TODO: pick random vertex from startingVertices vector
-
-    Vertex* start = NULL;
-    // Return Vertex B -- for now
-    for (Vertex v : vertexList) {
-        if (v.getName() == "B") {
-            start = &v;
-            return start;
+ts::Edge* Graph::getEdge(std::string name) {
+    for (Edge* e : edgeList) {
+        if (e->getName() == name) {
+            return e;
         }
     }
     return NULL;
 }
 
-void Graph::setMatrix(vector<vector<int>> matrix) {
+Vertex* Graph::getStartingVertex() {
+    // TODO: pick random vertex from startingVertices vector
+
+    // Return Vertex B -- for now
+    for (Vertex* v : vertexList) {
+        if (v->getName() == "B") {
+            return v;
+        }
+    }
+    return NULL;
+}
+
+void Graph::setMatrix(std::vector<std::vector<int>> matrix) {
     this->adjMatrix = matrix;
 }
 
@@ -56,7 +63,7 @@ void Graph::addAdjacency(int originJunct, int destJunct, int edgeLength) {
     
 }
     
-bool Graph::insertVertex(Vertex v) {
+bool Graph::insertVertex(Vertex* v) {
     if (find(vertexList.begin(), vertexList.end(), v) != vertexList.end()) {    // if already in Vertex List
         return false;
     }
@@ -65,7 +72,7 @@ bool Graph::insertVertex(Vertex v) {
 
     return true;
 }
-bool Graph::insertEdge(Edge e, Vertex origin, Vertex dest) {
+bool Graph::insertEdge(Edge* e, Vertex* origin, Vertex* dest) {
     /* Maybe do some error checking
     *  see if origin and dest are in vertexList
     */
@@ -83,25 +90,25 @@ bool Graph::insertEdge(Edge e, Vertex origin, Vertex dest) {
     insertVertex(dest);
 
     // update adjacency matrix
-    addAdjacency(*origin, *dest, e.getLength());
+    addAdjacency(**origin, **dest, e->getLength());
 
    return true;
 }
 
-bool Graph::removeVertex(Vertex v) {
-    vector<Vertex>::iterator pos = find(vertexList.begin(), vertexList.end(), v);
+bool Graph::removeVertex(Vertex* v) {
+    std::vector<Vertex*>::iterator pos = find(vertexList.begin(), vertexList.end(), v);
     vertexList.erase(pos);
     // udpate adjacency matrix
     // (1) erase vertexNum from adj. matrix.
 
     // (2) update all higher vertices with setJunction
-    updateJunctions(*v);
+    updateJunctions(**v);
     
     return true; // always returns true
 }
 
-bool Graph::removeEdge(Edge e) {
-    vector<Edge>::iterator pos = find(edgeList.begin(), edgeList.end(), e);
+bool Graph::removeEdge(Edge* e) {
+    std::vector<Edge*>::iterator pos = find(edgeList.begin(), edgeList.end(), e);
     edgeList.erase(pos);
     // update adjacency matrix
 
@@ -120,14 +127,14 @@ bool Graph::removeEdge(Edge e) {
  * 
  * For now...just write the function as if not being used by threads
  */
-vector<Vertex> Graph::bfs(ts::Vertex current, ts::Vertex dest) { 
-    vector<vector<Vertex>> levels; 
+std::vector<Vertex> Graph::bfs(ts::Vertex current, ts::Vertex dest) { 
+    std::vector<std::vector<Vertex>> levels; 
     current.setState(Vertex::State::DISCOVERED);
-    levels.push_back(vector<Vertex>(1, current)); // levels[0] holds a vector containing just current
+    levels.push_back(std::vector<Vertex>(1, current)); // levels[0] holds a vector containing just current
 
     int lvl = 0;
     while(!levels.at(lvl).empty()) {
-        levels.push_back(vector<Vertex>());
+        levels.push_back(std::vector<Vertex>());
         for (Vertex v : levels.at(lvl)) {
             for (Edge* e_ptr : v.incidentEdges()) {
                 Edge e = *e_ptr;
@@ -155,7 +162,7 @@ vector<Vertex> Graph::bfs(ts::Vertex current, ts::Vertex dest) {
      * determine return value
      */
 
-    return vector<Vertex>();
+    return std::vector<Vertex>();
 }
 
 
@@ -197,7 +204,7 @@ ts::Vertex* Graph::getRandomVertex(ts::Vertex* current) {
     while(randVert == current) { // pick a choice that's not the current vertex
         // pick new choice
         int choice = random(0, vertexList.size());
-        randVert = &vertexList.at(choice);
+        randVert = vertexList.at(choice);
     }
     return randVert;
 }
@@ -214,7 +221,7 @@ int Graph::getNumJunctions() {
     return numJunctions;
 }
 
-void Graph::loadMap(string map) {
+void Graph::loadMap(std::string map) {
     using namespace std;
     ifstream ifs;
     string path = "maps/" + map + "/graphData.txt";
@@ -233,7 +240,7 @@ void Graph::loadMap(string map) {
     for (int i = 0; i < vertices; i++) {    // process vertices
         ifs >> vertexName;
         cout << "Creating Vertex: " << vertexName << endl;
-        Vertex v(vertexName, i); // name and junction number
+        Vertex* v = new Vertex(vertexName, i); // name and junction number
         vertexList.push_back(v);
     }
     
@@ -262,7 +269,7 @@ void Graph::loadMap(string map) {
         cout << "Edge's origin and destination have been set." << endl;
 
         // insert Edge/Vertices in Graph
-        insertEdge(*e, *origin, *destination); // inserts Edge, origin, & destination
+        insertEdge(e, origin, destination); // inserts Edge, origin, & destination
         cout << "Edge inserted!" << endl;
     }
 }

@@ -29,7 +29,7 @@ bool Edge::operator==(const Edge e) {
     return this->name == e.name;
 }
 
-vector<Vertex> Edge::endVertices() {
+std::vector<Vertex> Edge::endVertices() {
     return {origin, dest};
 }
 
@@ -51,7 +51,7 @@ bool Edge::isAdjacentTo(Edge e) {
     /* two edges are adjacent when they share a vertex */
     // (1) get end vertices for this edge and e
     // (2) see if they have one of the same end vertices
-    vector<Vertex> otherEnds = e.endVertices();
+    std::vector<Vertex> otherEnds = e.endVertices();
     for (Vertex v : otherEnds) {
         if (v == *origin || v == *dest) {
             return true;
@@ -62,7 +62,7 @@ bool Edge::isAdjacentTo(Edge e) {
 
 bool Edge::isIncidentOn(Vertex v) {
     // true if v == origin or dest
-    vector<Edge*> ie = v.incidentEdges();
+    std::vector<Edge*> ie = v.incidentEdges();
     for (Edge* e : ie) {
         if (v == *e->origin || v == *e->dest)
         return true;
@@ -73,7 +73,7 @@ bool Edge::isIncidentOn(Vertex v) {
 /* -------------------- Accessors -------------------- */
 Vertex* Edge::getOrigin()           { return this->origin; }
 Vertex* Edge::getDest()             { return this->dest; }
-string Edge::getName()              { return this->name; }
+std::string Edge::getName()         { return this->name; }
 double Edge::getLength()            { return this->length; }
 int Edge::getSpeedLimit()           { return this->speedLimit; }
 bool Edge::isDirected()             { return this->directed; }
