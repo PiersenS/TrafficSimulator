@@ -148,7 +148,6 @@ void Test::followPath(Car& car, float& delta, std::vector<ts::RoadSegment>& road
     for (ts::Edge* e : edges) {
         if (*e == *car.getCurrentEdge()) {
             // then this is the edge I need and my edge is on this road segment
-            // honestly.....I don't know.
         }
     }
     sf::Vector2f* direction;
