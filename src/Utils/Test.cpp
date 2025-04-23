@@ -114,6 +114,9 @@ void Test::followPath(Car& car, float& delta, std::vector<ts::RoadSegment>& road
     /* Read path from beginning to end. path[0] will be the Vertex the car should be traveling to.
      * path[0] is reached, erase path[0] to begin traveling to the next vertex
      */
+
+    Test::printRoadSegments(roadSegments);
+
     if (path.empty()) {
         std::cout << "Empty path, unable to set a destination." << std::endl;
         return;
@@ -122,13 +125,10 @@ void Test::followPath(Car& car, float& delta, std::vector<ts::RoadSegment>& road
     ts::RoadSegment* segment = NULL;
     ts::Vertex dest = path.at(0);
     sf::FloatRect carBounds = car.getGlobalBounds();
-    std::cout << "init done\n";
 
     ts::RoadSegment r = roadSegments.at(0);
-    std::cout << "Accessed first RoadSegment\n";
 
     for (ts::RoadSegment rs : roadSegments) {
-        std::cout << "Testing segment = (" << rs.getPosition().x << ", " << rs.getPosition().y << ")" << std::endl;
         if (carBounds.intersects(rs.getBoundary()->getGlobalBounds())) {
             segment = &rs;
             break;
@@ -143,18 +143,23 @@ void Test::followPath(Car& car, float& delta, std::vector<ts::RoadSegment>& road
     std::cout << "Segment = (" << segment->getPosition().x << ", " << segment->getPosition().y << ")" << std::endl;
 
     // get edge - determine which way to go
-    std::vector<ts::Edge*> edges = segment->getEdges();
-    ts::Edge edge;
+    std::cout << segment->getEdges().size() << " edges for Segment\n";
+    std::vector<ts::Edge*> edges = segment->getEdges(); // NOTE: edges has 0 edges (idk why) - seg fault in for each loop
+    ts::Edge* edge;
     for (ts::Edge* e : edges) {
+        std::cout << "In foreach loop\n";
         if (*e == *car.getCurrentEdge()) {
             // then this is the edge I need and my edge is on this road segment
+            std::cout << "Edge found - trying to assign it to variable." << std::endl;
+            edge = e;
+            std::cout << "Edge found!" << std::endl;
         }
     }
     sf::Vector2f* direction;
-    if (dest == *edge.getOrigin()) {
+    if (dest == *edge->getOrigin()) {
         direction = segment->getIncoming();
     }
-    else if (dest == *edge.getDest()) {
+    else if (dest == *edge->getDest()) {
         direction = segment->getOutgoing();
     }
     else {
@@ -216,6 +221,12 @@ void Test::printRoadSegments(std::vector<ts::RoadSegment>& roadSegments) {
                h, w,
                in.x, in.y,
                out.x, out.y);
+
+        cout << "Edges: [ ";
+        for (ts::Edge* e : rs.getEdges()) {
+            cout << e->getName() << " ";
+        }
+        cout << "]" << endl;
         cout << endl;
     }
 }

@@ -175,6 +175,7 @@ void placeRoadSegments() {
             rsEdges.push_back(graph->getEdge(edgeName));
         }
         rs->setEdges(rsEdges);
+
         // generate vectors
         if (oneWay) {
             // idk
@@ -207,7 +208,7 @@ void placeRoadSegments() {
     }
     ifs.close();
 
-    // Test::printRoadSegments(roadSegments);
+    Test::printRoadSegments(roadSegments);
 }
 
 void addCar() {
