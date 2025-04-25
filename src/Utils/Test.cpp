@@ -115,7 +115,7 @@ void Test::followPath(Car& car, float& delta, std::vector<ts::RoadSegment>& road
      * path[0] is reached, erase path[0] to begin traveling to the next vertex
      */
 
-    Test::printRoadSegments(roadSegments);
+    // Test::printRoadSegments(roadSegments);
 
     if (path.empty()) {
         std::cout << "Empty path, unable to set a destination." << std::endl;
