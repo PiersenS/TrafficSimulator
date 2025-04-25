@@ -122,15 +122,13 @@ void Test::followPath(Car& car, float& delta, std::vector<ts::RoadSegment>& road
         return;
     }
 
-    ts::RoadSegment* segment = NULL;
+    ts::RoadSegment* segment;
     ts::Vertex dest = path.at(0);
     sf::FloatRect carBounds = car.getGlobalBounds();
 
-    ts::RoadSegment r = roadSegments.at(0);
-
-    for (ts::RoadSegment rs : roadSegments) {
-        if (carBounds.intersects(rs.getBoundary()->getGlobalBounds())) {
-            segment = &rs;
+    for (int i = 0; i < roadSegments.size(); i++) {
+        if (carBounds.intersects(roadSegments.at(i).getBoundary()->getGlobalBounds())) {
+            segment = &roadSegments.at(i);
             break;
         }
     }
@@ -155,6 +153,7 @@ void Test::followPath(Car& car, float& delta, std::vector<ts::RoadSegment>& road
             std::cout << "Edge found!" << std::endl;
         }
     }
+    // for loop skips and seg fault occurs here
     sf::Vector2f* direction;
     if (dest == *edge->getOrigin()) {
         direction = segment->getIncoming();
