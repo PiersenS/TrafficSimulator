@@ -27,6 +27,7 @@ namespace ts {
 
         std::string operator*();                // returns element associated with edge - idk about return type yet
         bool operator==(const Edge e);
+        bool operator==(const Edge* e);
         std::vector<Vertex> endVertices();   // returns end vertices
         Vertex* opposite(Vertex* v);      // returns vertex on opposite end of v
         bool isAdjacentTo(Edge e);      // true if Edge is adjacent to e

@@ -41,6 +41,7 @@ namespace ts {
         std::vector<ts::Edge*> getEdges();
         ts::Edge* getEdge(std::string name);
         ts::Vertex* getStartingVertex();
+        ts::Edge* getStartingEdge();
 
         /* Graph Functions */
         void setMatrix(std::vector<std::vector<int>> matrix);

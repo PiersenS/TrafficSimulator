@@ -141,19 +141,28 @@ void Test::followPath(Car& car, float& delta, std::vector<ts::RoadSegment>& road
     std::cout << "Segment = (" << segment->getPosition().x << ", " << segment->getPosition().y << ")" << std::endl;
 
     // get edge - determine which way to go
-    std::cout << segment->getEdges().size() << " edges for Segment\n";
     std::vector<ts::Edge*> edges = segment->getEdges(); // NOTE: edges has 0 edges (idk why) - seg fault in for each loop
-    ts::Edge* edge;
     for (ts::Edge* e : edges) {
+        std::cout << e->getName() << " ";
+    }
+    std::cout << std::endl;
+
+    ts::Edge* edge = NULL;
+    for (int i = 0; i < edges.size(); i++) {
         std::cout << "In foreach loop\n";
-        if (*e == *car.getCurrentEdge()) {
+        std::cout << "car.getCurrentEdge() name = " << car.getCurrentEdge()->getName() << std::endl;
+        if (*edges.at(i) == car.getCurrentEdge() && edges.at(i)->isIncidentOn(dest)) {
             // then this is the edge I need and my edge is on this road segment
-            std::cout << "Edge found - trying to assign it to variable." << std::endl;
-            edge = e;
-            std::cout << "Edge found!" << std::endl;
+            edge = edges.at(i);
+            break;
         }
     }
-    // for loop skips and seg fault occurs here
+
+    if (edge == NULL) {
+        printf("No edge found. Exiting program.\n");
+        exit(1);
+    }
+
     sf::Vector2f* direction;
     if (dest == *edge->getOrigin()) {
         direction = segment->getIncoming();
@@ -172,7 +181,6 @@ void Test::followPath(Car& car, float& delta, std::vector<ts::RoadSegment>& road
     
     sf::Vector2f norm = ts::normalize(*direction);
     car.move(norm * car.getSpeed() * delta);
-
 }
 
 /* Draw Functions */

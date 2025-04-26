@@ -29,6 +29,10 @@ bool Edge::operator==(const Edge e) {
     return this->name == e.name;
 }
 
+bool Edge::operator==(const Edge* e) {
+    return this->name == e->name;
+}
+
 std::vector<Vertex> Edge::endVertices() {
     return {origin, dest};
 }

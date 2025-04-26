@@ -33,6 +33,8 @@ namespace ts {
         State getState();
 
         /* Mutators */
+        void setIncidentEdges(std::vector<ts::Edge*> e);
+        void addIncidentEdge(Edge* e);
         void setState(Vertex::State s);
 
     private:

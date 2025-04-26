@@ -35,7 +35,8 @@ int Vertex::operator*() {
 }
 
 bool Vertex::operator==(Vertex v) {
-    return this->junction == v.junction;
+    // return this->junction == v.junction;
+    return this->name == v.name;
 }
 
 std::vector<Edge*> Vertex::incidentEdges() {
@@ -65,6 +66,19 @@ void Vertex::setJunction(int num) {
     *   for all vertices with junct nums higher than the one being removed.
     */
    this->junction = num;
+}
+void Vertex::setIncidentEdges(std::vector<ts::Edge*> e) {
+
+}
+
+void Vertex::addIncidentEdge(Edge* e) {
+    // if not in incident edges
+    std::vector<Edge*>::iterator iter;
+    iter = find(edges.begin(), edges.end(), e);
+    if (iter != edges.end()) {
+        // edge e is not already in incident edges
+        edges.push_back(e);
+    }
 }
 
 void Vertex::setState(Vertex::State s) { this->state = s; }

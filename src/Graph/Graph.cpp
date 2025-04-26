@@ -54,6 +54,17 @@ Vertex* Graph::getStartingVertex() {
     return NULL;
 }
 
+ts::Edge* Graph::getStartingEdge() {
+    // just return a set starting edge for now
+
+    for (ts::Edge* e : edgeList) {
+        if (e->getName() == "Alpha") {
+            return e;
+        }
+    }
+    return NULL;
+}
+
 void Graph::setMatrix(std::vector<std::vector<int>> matrix) {
     this->adjMatrix = matrix;
 }
@@ -81,6 +92,8 @@ bool Graph::insertEdge(Edge* e, Vertex* origin, Vertex* dest) {
         return false;
     }
 
+    origin->addIncidentEdge(e);
+    dest->addIncidentEdge(e);
     edgeList.push_back(e);
 
     // do I care if these return false? 

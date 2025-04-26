@@ -32,3 +32,8 @@
 
 04/22/25:
     21:00 - 22:00 (Finding seg fault in Test::followPath)
+
+04/25/25:
+    15:00 - 17:00 (Configuring project for Windows)
+    19:00 - 19:45 (finding seg fault in Test::followPath)
+    21:00 - 22:30 (correcting incident edges to detect proper edge and road segment in Test::followPath)

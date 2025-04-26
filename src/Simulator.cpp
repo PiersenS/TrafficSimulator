@@ -281,6 +281,14 @@ void drive(MovableEntity* entity) {
         sf::Thread* pathFinder;
 
         car->setCurrentVertex(graph->getStartingVertex());
+        car->setCurrentEdge(graph->getStartingEdge());
+
+        if (!car->getCurrentEdge()->isIncidentOn(*car->getCurrentVertex())) {
+            std::cout << "Somehow...the current edge is NOT incident on the current vertex." << std::endl;
+            exit(0);
+        }
+
+        path.push_back(*car->getCurrentVertex()); // apparently this is needed
 
         ts::Vertex* randomVertex = graph->getRandomVertex(car->getCurrentVertex());
         car->setDestinationVertex(randomVertex);
@@ -321,6 +329,14 @@ void drive(MovableEntity* entity) {
                     /*
                     void Test::followPath(Car& car, float& delta, std::vector<ts::RoadSegment>& roadSegments, std::vector<ts::Vertex>& path)
                     */
+
+                    // print path vertices
+                    std::cout << "path: [";
+                    for (ts::Vertex v : path) {
+                        std::cout << " " << v.getName();
+                    }
+                    std::cout << " ]" << std::endl;
+
                     Test::followPath(*car, carDelta, roadSegments, path);
                     
                     break;
