@@ -39,7 +39,7 @@ sf::Texture* backgroundTexture;
 sf::Thread* driver;
 sf::Thread* car_manager;
 
-const int MAX_CARS = 1; // normally 10
+const int MAX_CARS = 50;
 
 void updateDelta();
 void handleEvent(sf::Event event);
@@ -74,7 +74,7 @@ int main() {
     sf::Event event;
     while (window->isOpen()) {
         window->pollEvent(event);
-        // handleEvent(event);
+        handleEvent(event);
         updateDelta();
 
         window->clear();
@@ -83,7 +83,7 @@ int main() {
             window->draw(*c);
         }
         // Test::drawBoundaries(*window, boundaries);
-        Test::drawRoadSegments(*window, roadSegments);
+        // Test::drawRoadSegments(*window, roadSegments);
         window->display();
     }
     
@@ -135,7 +135,7 @@ void setup() {
     window = new sf::RenderWindow(*videoMode, windowTitle);
 
     /* Map Setup */
-    // loadBoundaries();
+    loadBoundaries();
     placeRoadSegments();
 }
 
@@ -277,38 +277,42 @@ void drive(MovableEntity* entity) {
         float carDelta;
         sf::Clock carClock;
 
-        std::vector<ts::Vertex> path;
-        sf::Thread* pathFinder;
+        // std::vector<ts::Vertex> path;
+        // sf::Thread* pathFinder;
 
-        car->setCurrentVertex(graph->getStartingVertex());
-        car->setCurrentEdge(graph->getStartingEdge());
-
+        // car->setCurrentVertex(graph->getStartingVertex());
+        // car->setCurrentEdge(graph->getStartingEdge());
+        
+        /* For debugging purposes
         if (!car->getCurrentEdge()->isIncidentOn(*car->getCurrentVertex())) {
             std::cout << "Somehow...the current edge is NOT incident on the current vertex." << std::endl;
             exit(0);
         }
+        */
 
-        path.push_back(*car->getCurrentVertex()); // apparently this is needed
-
+        // path.push_back(*car->getCurrentVertex()); // apparently this is needed
+        
+        /* Set up path-finding info */
+        /*
         ts::Vertex* randomVertex = graph->getRandomVertex(car->getCurrentVertex());
         car->setDestinationVertex(randomVertex);
-        path.push_back(*randomVertex);
+        // path.push_back(*randomVertex);
 
         car->setNextDestination(NULL);
+        */
+
         car->setState(Car::State::DRIVING);
         while(car->isRunning()) {
             ts::restartDelta(carDelta, carClock);
             Car::State state = car->getState();
             switch(state) {
                 case Car::State::DRIVING: { // need to define a scope to declare variables
-                    // add logic here to drive!
-                    /* Cars need to have intention on where they're going. 
-                    how to do this? idk :(   */
-            
-                    // how to relate edge to roadSegment?
-                    // choose incoming or outgoing?
-                    // Test::orbit(*car, carDelta, boundaries);
+                    Test::orbit(*car, carDelta, boundaries);
                     
+                    /* The following code is commented since it handles the path-finding.
+                     * To demonstrate the remaining components, a movement system using collision boundaries is used.
+                     */
+                    /*
                     if (car->getNextDestination() == NULL) {
                         // create thread to:
                         //      set nextDestination
@@ -322,13 +326,6 @@ void drive(MovableEntity* entity) {
                         pathFinder->launch();
                         
                     }
-                    // sf::Thread* pathFinder = new sf::Thread(*findPath, car, nextPath);
-                    // pathFinder->launch();
-                    // std::vector<ts::Vertex> nextPath = g.bfs(*car->getCurrentVertex(), *car->getDestinationVertex());
-                    
-                    /*
-                    void Test::followPath(Car& car, float& delta, std::vector<ts::RoadSegment>& roadSegments, std::vector<ts::Vertex>& path)
-                    */
 
                     // print path vertices
                     std::cout << "path: [";
@@ -338,6 +335,7 @@ void drive(MovableEntity* entity) {
                     std::cout << " ]" << std::endl;
 
                     Test::followPath(*car, carDelta, roadSegments, path);
+                    */
                     
                     break;
                 }
@@ -350,6 +348,7 @@ void drive(MovableEntity* entity) {
                     Test::exitOrbit(*car, carDelta);
                     break;
                 case Car::State::PARKED:
+                    removeCar(car);
                     break;
             }
         }
@@ -365,6 +364,7 @@ void drive(MovableEntity* entity) {
 
         //     
         // }
+        /*
         while(car->getState() == Car::State::PARKING) {
             // park car
             ts::restartDelta(carDelta, carClock);
@@ -372,6 +372,7 @@ void drive(MovableEntity* entity) {
         }
         // car is parked
         removeCar(car);
+        */
     }
     // else -> pedestrian
 }
