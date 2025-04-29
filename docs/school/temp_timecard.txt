@@ -37,3 +37,7 @@
     15:00 - 17:00 (Configuring project for Windows)
     19:00 - 19:45 (finding seg fault in Test::followPath)
     21:00 - 22:30 (correcting incident edges to detect proper edge and road segment in Test::followPath)
+
+04/28/25:
+    18:00 - 20:00 (Finishing final tests and filling out Testing Results Document)
+    21:00 - 23:15 (Finishing Testing Document, User Documentation, and remaining final submissions)
