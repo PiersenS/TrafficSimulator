@@ -99,7 +99,7 @@ void Car::move(sf::Vector2f v) {
 void Car::rotate(float deg) {
     // update direction vector
     
-    // to rotate 90 degrees: flip sin or cos (depending on virtical/horizontal)
+    // to rotate 90 degrees: flip sin or cos (depending on vertical/horizontal)
     // Try rotating 90 degrees to the left (-90)
     // - flip sin?
     float degree = this->getRotation() + deg;
@@ -113,3 +113,6 @@ void Car::rotate(float deg) {
     this->setDirection(Vector2f(x, y));
     sf::Sprite::rotate(deg);
 }
+
+
+
