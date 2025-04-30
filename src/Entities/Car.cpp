@@ -113,6 +113,3 @@ void Car::rotate(float deg) {
     this->setDirection(Vector2f(x, y));
     sf::Sprite::rotate(deg);
 }
-
-
-
