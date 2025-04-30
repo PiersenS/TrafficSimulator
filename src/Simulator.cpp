@@ -39,7 +39,7 @@ sf::Texture* backgroundTexture;
 sf::Thread* driver;
 sf::Thread* car_manager;
 
-const int MAX_CARS = 1000;
+const int MAX_CARS = 10;
 
 void updateDelta();
 void handleEvent(sf::Event event);
@@ -263,7 +263,7 @@ void manageCars() {
         if (carsAlive < MAX_CARS) {
             // add car at random time interval
             int rand_seconds = ts::random(1, 6);
-            sf::Time seconds = sf::seconds(0.1);
+            sf::Time seconds = sf::seconds(rand_seconds);
             sf::sleep(seconds);
 
             addCar();
